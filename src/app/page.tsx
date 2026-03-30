@@ -181,7 +181,7 @@ function Navbar() {
           {/* Logo */}
           <button onClick={() => scrollTo('#home')} className="flex items-center gap-2 group">
             <Image
-              src="/assets/SM_Logo.jpg"
+              src="/assets/logo.jpg"
               alt="Logo Softmaint"
               width={170}
               height={50}
@@ -303,7 +303,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <Badge className="mb-6 bg-blue-500/20 text-white border-blue-400/30 hover:bg-blue-500/30 text-sm px-4 py-1.5 backdrop-blur-sm">
+          <Badge className="mb-6 bg-blue-500/20 text-white border-blue-400/30 hover:bg-blue-500/30 text-sm px-4 py-1.5 ">
             <Star className="w-3.5 h-3.5 mr-1.5" />
             Software House Italiana
           </Badge>
