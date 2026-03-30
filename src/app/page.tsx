@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -419,7 +420,7 @@ function ServiziSection() {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {servizi.map((s, i) => (
+          {servizi.map((s) => (
             <motion.div
               key={s.id}
               variants={cardVariant}
@@ -434,13 +435,23 @@ function ServiziSection() {
               <h3 className="text-xl font-bold text-gray-900 mb-1">{s.title}</h3>
               <p className="text-sm text-blue-600 font-medium mb-3">{s.subtitle}</p>
               <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
-              <button
-                onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
-                className="mt-5 flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
-              >
-                Richiedi info
-                <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-              </button>
+              {s.title === 'Web Application' ? (
+                <Link
+                  href="/webapp"
+                  className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
+                >
+                  Scopri le soluzioni web
+                  <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              ) : (
+                <button
+                  onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="mt-5 flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
+                >
+                  Richiedi info
+                  <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                </button>
+              )}
             </motion.div>
           ))}
 
@@ -473,6 +484,25 @@ function ServiziSection() {
 
 // ─── Sezione Chi Siamo ────────────────────────────────────────────────────────
 function ChiSiamoSection() {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (!isImageModalOpen) return
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsImageModalOpen(false)
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isImageModalOpen])
+
   return (
     <section id="chi-siamo" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -507,16 +537,24 @@ function ChiSiamoSection() {
           </AnimatedSection>
 
           {/* Immagine / Visual */}
-          <AnimatedSection variants={fadeInRight}>
+          <AnimatedSection variants={fadeInRight} className="w-full">
             <div className="relative">
-            <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.pexels.com/photos/8386437/pexels-photo-8386437.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt="Team Softmaint al lavoro"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-blue-900/40 to-transparent" />
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsImageModalOpen(true)}
+                className="relative block w-full aspect-20/9 rounded-2xl overflow-hidden shadow-2xl cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                aria-label="Apri immagine in modale"
+              >
+                <Image
+                  src="/assets/softmaint_info.png"
+                  alt="Team Softmaint al lavoro"
+                  width={1000}
+                  height={450}
+                  priority
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-blue-900/40 to-transparent" />
+              </button>
               {/* Floating card */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
@@ -543,6 +581,45 @@ function ChiSiamoSection() {
                 <div className="text-sm font-bold">Industry 4.0</div>
               </motion.div>
             </div>
+            <AnimatePresence>
+              {isImageModalOpen && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsImageModalOpen(false)}
+                  className="fixed inset-0 z-120 bg-slate-950/85 backdrop-blur-sm p-4 sm:p-8 flex items-center justify-center"
+                >
+                  <motion.div
+                    initial={{ scale: 0.96, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.96, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={(event) => event.stopPropagation()}
+                    className="relative w-full max-w-6xl"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setIsImageModalOpen(false)}
+                      aria-label="Chiudi modale"
+                      className="absolute -top-12 right-0 text-white/90 hover:text-white transition-colors"
+                    >
+                      <X className="w-7 h-7" />
+                    </button>
+
+                    <div className="rounded-2xl overflow-hidden shadow-2xl bg-slate-900">
+                      <Image
+                        src="/assets/softmaint_info.png"
+                        alt="Team Softmaint al lavoro - ingrandita"
+                        width={1600}
+                        height={720}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </AnimatedSection>
         </div>
       </div>
@@ -821,7 +898,7 @@ function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <Image
-                src="/assets/SM_Logo.jpg"
+                src="/assets/logo.jpg"
                 alt="Logo Softmaint"
                 width={170}
                 height={50}
