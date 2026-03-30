@@ -364,8 +364,8 @@ function HeroSection() {
         >
           {[
             { value: '20+', label: 'Anni di Esperienza' },
-            { value: '100+', label: 'Clienti Soddisfatti' },
-            { value: '5', label: 'Soluzioni Software' },
+            { value: '200+', label: 'Clienti Soddisfatti' },
+            { value: '10+', label: 'Soluzioni Software' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl sm:text-4xl font-bold text-white">{stat.value}</div>

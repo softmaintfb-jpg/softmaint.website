@@ -9,6 +9,7 @@ const webApps = [
 	{
 		id: 'smart-logistica',
 		name: 'Smart Logistica',
+		route: '/smartlogistica',
 		subtitle: 'Gestione evoluta del magazzino e dei flussi logistici',
 		image: '/assets/logistica.png',
 		alt: 'Panoramica Smart Logistica con flussi OVC OAF, LP LPF e DDT RCF',
@@ -23,7 +24,8 @@ const webApps = [
 	{
 		id: 'smart-agenti',
 		name: 'Smart Agenti',
-		subtitle: 'L ufficio commerciale in tasca per rete vendita e agenti',
+		route: '/smartagenti',
+		subtitle: 'L\'ufficio commerciale in tasca per rete vendita e agenti',
 		image: '/assets/agenti.png',
 		alt: 'Schermata Smart Agenti con ordini, CRM, storico e monitoraggio credito',
 		description:
@@ -37,6 +39,7 @@ const webApps = [
 	{
 		id: 'smart-mail',
 		name: 'Smart Mail',
+		route: '/smartmail',
 		subtitle: 'Automazione comunicazioni amministrative e solleciti',
 		image: '/assets/smartmail.png',
 		alt: 'Panoramica Smart Mail con regole automatiche, trigger e comunicazioni personalizzate',
@@ -141,7 +144,7 @@ export default function WebAppPageContent() {
 
 								<div className="mt-8">
 									<Link
-										href="/#contatti"
+										href={app.route}
 										className="inline-flex items-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-800"
 									>
 										Effettua richiesta di preventivo
