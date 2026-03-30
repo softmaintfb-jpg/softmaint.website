@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -10,7 +11,7 @@ import {
   Menu, X, ChevronRight, ArrowRight, Phone, Mail, MapPin,
   Database, Globe, Leaf, Factory, DollarSign, Shield,
   Zap, Users, Award, HeadphonesIcon, CheckCircle, Star,
-  BarChart3, Truck, Cpu, Send, ExternalLink
+  BarChart3, Truck, Send, ExternalLink
 } from 'lucide-react'
 
 // ─── Varianti Animazioni ─────────────────────────────────────────────────────
@@ -179,11 +180,16 @@ function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <button onClick={() => scrollTo('#home')} className="flex items-center gap-2 group">
-            <div className={`flex items-center justify-center w-9 h-9 rounded-lg ${
-              scrolled ? 'bg-blue-900' : 'bg-white/20 border border-white/40'
-            } transition-all duration-300`}>
-              <Cpu className={`w-5 h-5 ${scrolled ? 'text-white' : 'text-white'}`} />
-            </div>
+            <Image
+              src="/assets/SM_Logo.jpg"
+              alt="Logo Softmaint"
+              width={170}
+              height={50}
+              priority
+              className={`h-9 w-auto rounded-md transition-all duration-300 ${
+                scrolled ? 'bg-white p-0' : 'bg-white/95 p-1'
+              }`}
+            />
             <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
               scrolled ? 'text-blue-900' : 'text-white'
             }`}>
@@ -814,9 +820,13 @@ function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center">
-                <Cpu className="w-5 h-5 text-white" />
-              </div>
+              <Image
+                src="/assets/SM_Logo.jpg"
+                alt="Logo Softmaint"
+                width={170}
+                height={50}
+                className="h-10 w-auto rounded-md bg-white p-1"
+              />
               <span className="text-xl font-bold text-white">
                 SOFT<span className="text-blue-400">MAINT</span>
               </span>
