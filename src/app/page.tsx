@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
+import { useLanguage } from '@/components/LanguageProvider'
+import { translations } from '@/lib/translations'
 import {
   Menu, X, ChevronRight, ArrowRight, Phone, Mail, MapPin,
   Database, Globe, Leaf, Factory, DollarSign, Shield,
@@ -146,6 +148,8 @@ const valori = [
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { language, setLanguage } = useLanguage()
+  const t = translations[language]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
@@ -154,10 +158,10 @@ function Navbar() {
   }, [])
 
   const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'Servizi', href: '#servizi' },
-    { label: 'Chi Siamo', href: '#chi-siamo' },
-    { label: 'Dove Siamo', href: '#dove-siamo' },
+    { label: t.nav.home, href: '#home' },
+    { label: t.nav.servizi, href: '#servizi' },
+    { label: t.nav.chiSiamo, href: '#chi-siamo' },
+    { label: t.nav.doveSiamo, href: '#dove-siamo' },
   ]
 
   const scrollTo = (href: string) => {
@@ -199,7 +203,7 @@ function Navbar() {
           </button>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
                 key={link.href}
@@ -214,11 +218,38 @@ function Navbar() {
                 }`} />
               </button>
             ))}
+
+            {/* Language Switch */}
+            <div className={`flex items-center gap-2 ml-4 pl-4 border-l ${
+              scrolled ? 'border-blue-200' : 'border-white/20'
+            }`}>
+              <button
+                onClick={() => setLanguage('it')}
+                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
+                  language === 'it'
+                    ? scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'
+                    : scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'
+                }`}
+              >
+                IT
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
+                  language === 'en'
+                    ? scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'
+                    : scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+
             <Button
               onClick={() => scrollTo('#contatti')}
               className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition-all duration-200 hover:scale-105"
             >
-              Contattaci
+              {t.nav.contattaci}
             </Button>
           </div>
 
@@ -253,11 +284,36 @@ function Navbar() {
                   {link.label}
                 </button>
               ))}
+
+              {/* Mobile Language Switch */}
+              <div className="flex gap-2 pt-2 border-t border-gray-200">
+                <button
+                  onClick={() => setLanguage('it')}
+                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
+                    language === 'it'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
+                  }`}
+                >
+                  IT
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
+                    language === 'en'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+
               <Button
                 onClick={() => scrollTo('#contatti')}
                 className="bg-blue-600 hover:bg-blue-700 text-white rounded-full mt-1"
               >
-                Contattaci
+                {t.nav.contattaci}
               </Button>
             </div>
           </motion.div>
@@ -269,6 +325,9 @@ function Navbar() {
 
 // ─── Sezione Hero ─────────────────────────────────────────────────────────────
 function HeroSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
@@ -306,7 +365,7 @@ function HeroSection() {
         >
           <Badge className="mb-6 bg-blue-500/20 text-white border-blue-400/30 hover:bg-blue-500/30 text-sm px-4 py-1.5 ">
             <Star className="w-3.5 h-3.5 mr-1.5" />
-            Software House Italiana
+            {t.hero.badge}
           </Badge>
         </motion.div>
 
@@ -316,10 +375,10 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.35 }}
           className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-6"
         >
-          Tecnologia al Servizio
+          {t.hero.title1}
           <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-sky-300">
-            del tuo Business
+            {t.hero.title2}
           </span>
         </motion.h1>
 
@@ -329,8 +388,7 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="text-lg sm:text-xl text-blue-100/80 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Soluzioni software innovative per la gestione aziendale:
-          WMS, DocFinance, WebApp personalizzate e percorsi verso l&apos;Azienda 4.0.
+          {t.hero.subtitle}
         </motion.p>
 
         <motion.div
@@ -343,14 +401,14 @@ function HeroSection() {
             onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })}
             className="group flex items-center gap-2 bg-white text-blue-900 font-semibold px-8 py-3.5 rounded-full hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
-            Scopri i Servizi
+            {t.hero.btnServizi}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
           <button
             onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
             className="flex items-center gap-2 text-white border border-white/30 font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
           >
-            Contattaci
+            {t.hero.btnContatti}
             <ChevronRight className="w-4 h-4" />
           </button>
         </motion.div>
@@ -363,9 +421,9 @@ function HeroSection() {
           className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
         >
           {[
-            { value: '20+', label: 'Anni di Esperienza' },
-            { value: '200+', label: 'Clienti Soddisfatti' },
-            { value: '10+', label: 'Soluzioni Software' },
+            { value: t.hero.stat1, label: t.hero.stat1Label },
+            { value: t.hero.stat2, label: t.hero.stat2Label },
+            { value: t.hero.stat3, label: t.hero.stat3Label },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl sm:text-4xl font-bold text-white">{stat.value}</div>
@@ -396,20 +454,74 @@ function HeroSection() {
 
 // ─── Sezione Servizi ─────────────────────────────────────────────────────────
 function ServiziSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const servizi = [
+    {
+      id: 1,
+      icon: DollarSign,
+      title: t.serviziDetails.docfinance.title,
+      subtitle: t.serviziDetails.docfinance.subtitle,
+      description: t.serviziDetails.docfinance.description,
+      color: 'from-blue-600 to-blue-800',
+      badge: t.serviziDetails.docfinance.badge,
+      isWeb: false,
+    },
+    {
+      id: 2,
+      icon: Truck,
+      title: t.serviziDetails.wms.title,
+      subtitle: t.serviziDetails.wms.subtitle,
+      description: t.serviziDetails.wms.description,
+      color: 'from-indigo-600 to-indigo-800',
+      badge: t.serviziDetails.wms.badge,
+      isWeb: false,
+    },
+    {
+      id: 3,
+      icon: Globe,
+      title: t.serviziDetails.webapp.title,
+      subtitle: t.serviziDetails.webapp.subtitle,
+      description: t.serviziDetails.webapp.description,
+      color: 'from-sky-600 to-sky-800',
+      badge: t.serviziDetails.webapp.badge,
+      isWeb: true,
+    },
+    {
+      id: 4,
+      icon: Leaf,
+      title: t.serviziDetails.greenproject.title,
+      subtitle: t.serviziDetails.greenproject.subtitle,
+      description: t.serviziDetails.greenproject.description,
+      color: 'from-teal-600 to-teal-800',
+      badge: t.serviziDetails.greenproject.badge,
+      isWeb: false,
+    },
+    {
+      id: 5,
+      icon: Factory,
+      title: t.serviziDetails.azienda40.title,
+      subtitle: t.serviziDetails.azienda40.subtitle,
+      description: t.serviziDetails.azienda40.description,
+      color: 'from-violet-600 to-violet-800',
+      badge: t.serviziDetails.azienda40.badge,
+      isWeb: false,
+    }
+  ]
 
   return (
     <section id="servizi" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">Le nostre soluzioni</span>
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.servizi.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-            I Nostri Software
+            {t.servizi.title}
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
-            Soluzioni complete e personalizzabili per ogni esigenza aziendale.
-            Dalla tesoreria alla logistica, dalla produzione al web.
+            {t.servizi.subtitle}
           </p>
         </AnimatedSection>
 
@@ -426,7 +538,7 @@ function ServiziSection() {
               variants={cardVariant}
               className="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
             >
-            <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${s.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${s.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                 <s.icon className="w-6 h-6 text-white" />
               </div>
               <Badge variant="outline" className="w-fit text-xs mb-3 text-blue-700 border-blue-200 bg-blue-50">
@@ -435,12 +547,12 @@ function ServiziSection() {
               <h3 className="text-xl font-bold text-gray-900 mb-1">{s.title}</h3>
               <p className="text-sm text-blue-600 font-medium mb-3">{s.subtitle}</p>
               <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
-              {s.title === 'Web Application' ? (
+              {s.isWeb ? (
                 <Link
                   href="/webapp"
                   className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
-                  Scopri le soluzioni web
+                  {t.servizi.scopriWeb}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               ) : (
@@ -448,7 +560,7 @@ function ServiziSection() {
                   onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
                   className="mt-5 flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
-                  Richiedi info
+                  {t.servizi.richiediInfo}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               )}
@@ -464,16 +576,16 @@ function ServiziSection() {
               <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
                 <Send className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Hai un&apos;esigenza specifica?</h3>
+              <h3 className="text-xl font-bold mb-3">{t.servizi.ctaTitle}</h3>
               <p className="text-blue-100/80 text-sm leading-relaxed">
-                Il nostro team di esperti è pronto ad analizzare le tue necessità e proporre la soluzione più adatta al tuo business.
+                {t.servizi.ctaText}
               </p>
             </div>
             <button
               onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
               className="mt-6 flex items-center justify-center gap-2 bg-white text-blue-900 font-semibold px-5 py-2.5 rounded-full hover:bg-blue-50 transition-colors text-sm"
             >
-              Parliamone <ArrowRight className="w-4 h-4" />
+              {t.servizi.ctaBtn} <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
         </motion.div>
@@ -484,6 +596,8 @@ function ServiziSection() {
 
 // ─── Sezione Chi Siamo ────────────────────────────────────────────────────────
 function ChiSiamoSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
 
   useEffect(() => {
@@ -509,23 +623,18 @@ function ChiSiamoSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Testo */}
           <AnimatedSection variants={fadeInLeft}>
-            <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">La nostra storia</span>
+            <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.chiSiamo.label}</span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-              Chi è Softmaint?
+              {t.chiSiamo.title}
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              <strong className="text-gray-900">Dinamismo, professionalità, costante aggiornamento,
-              ricerca di soluzioni personalizzate per il tuo business</strong>: tutto questo è SOFTMAINT.
+              <strong className="text-gray-900">{t.chiSiamo.p1}</strong>
             </p>
             <p className="text-gray-500 leading-relaxed mb-6">
-              Siamo professionisti dell&apos;informatica, dell&apos;innovazione tecnologica e della comunicazione
-              a tua disposizione. Da anni affianchiamo aziende di ogni dimensione nel loro percorso
-              di digitalizzazione e trasformazione digitale.
+              {t.chiSiamo.p2}
             </p>
             <p className="text-gray-500 leading-relaxed mb-8">
-              La nostra missione è semplice: creare software che fa la differenza.
-              Ascoltiamo i tuoi processi, ne comprendiamo le criticità e progettiamo
-              soluzioni su misura che aumentano l&apos;efficienza e la competitività della tua azienda.
+              {t.chiSiamo.p3}
             </p>
             <div className="flex flex-wrap gap-3">
               {['WMS', 'DocFinance', 'WebApp', 'Green Project', 'Azienda 4.0'].map((tag) => (
@@ -566,8 +675,8 @@ function ChiSiamoSection() {
                     <CheckCircle className="w-5 h-5 text-green-600" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-500">Progetti completati</div>
-                    <div className="text-lg font-bold text-gray-900">100+ clienti</div>
+                    <div className="text-xs text-gray-500">{t.chiSiamo.floatingCard}</div>
+                    <div className="text-lg font-bold text-gray-900">{t.chiSiamo.floatingCardValue}</div>
                   </div>
                 </div>
               </motion.div>
@@ -577,8 +686,8 @@ function ChiSiamoSection() {
                 transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', delay: 0.5 }}
                 className="absolute -top-4 -right-4 bg-blue-900 text-white rounded-xl shadow-xl p-4"
               >
-                <div className="text-xs text-blue-300 mb-1">Specializzati in</div>
-                <div className="text-sm font-bold">Industry 4.0</div>
+                <div className="text-xs text-blue-300 mb-1">{t.chiSiamo.specializzati}</div>
+                <div className="text-sm font-bold">{t.chiSiamo.specializzatiValue}</div>
               </motion.div>
             </div>
             <AnimatePresence>
@@ -629,8 +738,33 @@ function ChiSiamoSection() {
 
 // ─── Sezione Valori ───────────────────────────────────────────────────────────
 function ValoriSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const valori = [
+    {
+      icon: Award,
+      title: t.valori.val1Title,
+      description: t.valori.val1,
+    },
+    {
+      icon: Zap,
+      title: t.valori.val2Title,
+      description: t.valori.val2,
+    },
+    {
+      icon: Users,
+      title: t.valori.val3Title,
+      description: t.valori.val3,
+    },
+    {
+      icon: HeadphonesIcon,
+      title: t.valori.val4Title,
+      description: t.valori.val4,
+    }
+  ]
 
   return (
     <section className="py-24 bg-linear-to-br from-blue-950 via-blue-900 to-indigo-900 relative overflow-hidden">
@@ -646,13 +780,12 @@ function ValoriSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-300 font-semibold text-sm uppercase tracking-widest">Il nostro impegno</span>
+          <span className="text-blue-300 font-semibold text-sm uppercase tracking-widest">{t.valori.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
-            Perché Scegliere Softmaint
+            {t.valori.title}
           </h2>
           <p className="mt-4 text-lg text-blue-200/70 max-w-2xl mx-auto">
-            Non vendiamo solo software. Costruiamo partnership durature basate sulla fiducia
-            e sui risultati concreti.
+            {t.valori.subtitle}
           </p>
         </AnimatedSection>
 
@@ -684,6 +817,8 @@ function ValoriSection() {
 
 // ─── Sezione Contatti ─────────────────────────────────────────────────────────
 function ContattiSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
   const [formData, setFormData] = useState({ nome: '', email: '', telefono: '', messaggio: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -716,22 +851,21 @@ function ContattiSection() {
   }
 
   const contatti = [
-    { icon: Phone, label: 'Telefono', value: '+39 0000 000000', href: 'tel:+390000000000' },
-    { icon: Mail, label: 'Email', value: 'info@softmaint.it', href: 'mailto:info@softmaint.it' },
-    { icon: MapPin, label: 'Sede', value: 'Italia', href: '#' },
+    { icon: Phone, label: t.contatti.telefono, value: '+39 0000 000000', href: 'tel:+390000000000' },
+    { icon: Mail, label: t.contatti.email, value: 'info@softmaint.it', href: 'mailto:info@softmaint.it' },
+    { icon: MapPin, label: t.contatti.sede, value: 'Italia', href: '#' },
   ]
 
   return (
     <section id="contatti" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">Parliamoci</span>
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.contatti.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-            Contattaci
+            {t.contatti.title}
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
-            Hai un progetto in mente? Vuoi saperne di più sui nostri servizi?
-            Siamo qui per te.
+            {t.contatti.subtitle}
           </p>
         </AnimatedSection>
 
@@ -739,7 +873,7 @@ function ContattiSection() {
           {/* Info contatti */}
           <AnimatedSection variants={fadeInLeft} className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-linear-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-6">Informazioni di Contatto</h3>
+              <h3 className="text-xl font-bold mb-6">{t.contatti.infoTitle}</h3>
               <div className="space-y-5">
                 {contatti.map((c) => (
                   <a key={c.label} href={c.href} className="flex items-center gap-4 group">
@@ -757,15 +891,15 @@ function ContattiSection() {
 
             {/* Orari */}
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-              <h4 className="font-bold text-gray-900 mb-4">Orari di disponibilità</h4>
+              <h4 className="font-bold text-gray-900 mb-4">{t.contatti.orariTitle}</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Lunedì – Venerdì</span>
-                  <span className="font-semibold text-gray-700">9:00 – 13:00 | 14:00 – 18:00</span>
+                  <span className="text-gray-500">{t.contatti.orariLunVen}</span>
+                  <span className="font-semibold text-gray-700">{t.contatti.orariOrari}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Sabato e Domenica</span>
-                  <span className="text-red-400">Chiuso</span>
+                  <span className="text-gray-500">{t.contatti.orariSabDom}</span>
+                  <span className="text-red-400">{t.contatti.orariChiuso}</span>
                 </div>
               </div>
             </div>
@@ -774,17 +908,17 @@ function ContattiSection() {
           {/* Form */}
           <AnimatedSection variants={fadeInRight} className="lg:col-span-3">
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Invia un messaggio</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-6">{t.contatti.formTitle}</h3>
 
               {status === 'success' ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-8 h-8 text-green-600" />
                   </div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Messaggio Inviato!</h4>
-                  <p className="text-gray-500 mb-6">Ti risponderemo al più presto. Grazie per averci contattato.</p>
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">{t.contatti.formSuccess}</h4>
+                  <p className="text-gray-500 mb-6">{t.contatti.formSuccessText}</p>
                   <Button onClick={() => setStatus('idle')} variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50">
-                    Invia un altro messaggio
+                    {t.contatti.formAltro}
                   </Button>
                 </div>
               ) : (
@@ -792,7 +926,7 @@ function ContattiSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Nome e Cognome <span className="text-red-500">*</span>
+                        {t.contatti.formNome} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         name="nome"
@@ -805,7 +939,7 @@ function ContattiSection() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Email <span className="text-red-500">*</span>
+                        {t.contatti.formEmail} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         name="email"
@@ -821,7 +955,7 @@ function ContattiSection() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Telefono
+                      {t.contatti.formTelefono}
                     </label>
                     <Input
                       name="telefono"
@@ -835,13 +969,13 @@ function ContattiSection() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Messaggio <span className="text-red-500">*</span>
+                      {t.contatti.formMessaggio} <span className="text-red-500">*</span>
                     </label>
                     <Textarea
                       name="messaggio"
                       value={formData.messaggio}
                       onChange={handleChange}
-                      placeholder="Descrivici le tue esigenze..."
+                      placeholder={t.contatti.formDesc}
                       required
                       rows={5}
                       className="border-gray-200 focus:border-blue-400 focus:ring-blue-200 resize-none"
@@ -849,7 +983,7 @@ function ContattiSection() {
                   </div>
 
                   {status === 'error' && (
-                    <p className="text-sm text-red-500">Compila tutti i campi obbligatori (*) e riprova.</p>
+                    <p className="text-sm text-red-500">{t.contatti.formError}</p>
                   )}
 
                   <Button
@@ -863,12 +997,12 @@ function ContattiSection() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                         </svg>
-                        Invio in corso...
+                        {t.contatti.formLoading}
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
                         <Send className="w-4 h-4" />
-                        Invia Messaggio
+                        {t.contatti.formBtn}
                       </span>
                     )}
                   </Button>
@@ -884,16 +1018,19 @@ function ContattiSection() {
 
 // ─── Sezione Mappa ────────────────────────────────────────────────────────────
 function MapSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
+
   return (
     <section id="dove-siamo" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">La nostra sede</span>
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.doveSiamo.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-            Ti Aspettiamo a Nola
+            {t.doveSiamo.title}
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
-            Visita la nostra sede in Campania. Siamo facilmente raggiungibili e pronti ad accoglierti.
+            {t.doveSiamo.subtitle}
           </p>
         </AnimatedSection>
 
@@ -924,17 +1061,16 @@ function MapSection() {
                 viewport={{ once: true }}
                 className="bg-linear-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white shadow-xl"
               >
-                <h3 className="text-2xl font-bold mb-8">Sede Principale</h3>
+                <h3 className="text-2xl font-bold mb-8">{t.doveSiamo.sedeTitle}</h3>
                 <div className="space-y-8">
                   <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
                       <MapPin className="w-6 h-6 text-blue-300" />
                     </div>
                     <div>
-                      <div className="text-sm text-blue-300 mb-2 font-semibold uppercase tracking-small">Indirizzo</div>
-                      <div className="text-base font-medium leading-relaxed">
-                        Via On. Francesco Napoletano, 185<br />
-                        80035 Nola (NA), Italia
+                      <div className="text-sm text-blue-300 mb-2 font-semibold uppercase tracking-small">{t.doveSiamo.indirizzo}</div>
+                      <div className="text-base font-medium leading-relaxed whitespace-pre-line">
+                        {t.doveSiamo.indirizzoValue}
                       </div>
                     </div>
                   </div>
@@ -944,7 +1080,7 @@ function MapSection() {
                     onClick={() => window.open('https://maps.google.com/maps?q=40.9321462,14.5257608', '_blank')}
                     className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group border border-white/10"
                   >
-                    Visualizza su Mappe
+                    {t.doveSiamo.mapBtn}
                     <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </motion.button>
                 </div>
@@ -959,11 +1095,28 @@ function MapSection() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
+  const { language } = useLanguage()
+  const t = translations[language]
   const year = new Date().getFullYear()
   const scrollTo = (href: string) => {
     const el = document.querySelector(href)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
+
+  const navLinks = [
+    { label: t.nav.home, href: '#home' },
+    { label: t.nav.servizi, href: '#servizi' },
+    { label: t.nav.chiSiamo, href: '#chi-siamo' },
+    { label: t.nav.contattaci, href: '#contatti' },
+  ]
+
+  const solutions = [
+    'DocFinance',
+    'WMS',
+    'Web Application',
+    'Green Project',
+    language === 'it' ? 'Azienda 4.0' : 'Industry 4.0'
+  ]
 
   return (
     <footer className="bg-gray-950 text-gray-400">
@@ -984,8 +1137,7 @@ function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs">
-              Professionisti dell&apos;informatica, dell&apos;innovazione tecnologica
-              e della comunicazione. Software su misura per il tuo business.
+              {t.footer.descrizione}
             </p>
             <div className="flex gap-3 mt-5">
               {[ExternalLink, Globe, Mail].map((Icon, i) => (
@@ -1002,14 +1154,9 @@ function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Navigazione</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.navigazione}</h4>
             <ul className="space-y-2 text-sm">
-              {[
-                { label: 'Home', href: '#home' },
-                { label: 'Servizi', href: '#servizi' },
-                { label: 'Chi Siamo', href: '#chi-siamo' },
-                { label: 'Contatti', href: '#contatti' },
-              ].map(link => (
+              {navLinks.map(link => (
                 <li key={link.href}>
                   <button
                     onClick={() => scrollTo(link.href)}
@@ -1024,9 +1171,9 @@ function Footer() {
 
           {/* Soluzioni */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Soluzioni</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.soluzioni}</h4>
             <ul className="space-y-2 text-sm">
-              {['DocFinance', 'WMS', 'Web Application', 'Green Project', 'Azienda 4.0'].map(s => (
+              {solutions.map(s => (
                 <li key={s}>
                   <button
                     onClick={() => scrollTo('#servizi')}
@@ -1042,11 +1189,11 @@ function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>&copy; {year} Softmaint S.r.l. – Tutti i diritti riservati</p>
+          <p>&copy; {year} {t.footer.copyright}</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">Cookie Policy</a>
-            <span className="text-gray-600">P.IVA: 00000000000</span>
+            <a href="#" className="hover:text-blue-400 transition-colors">{t.footer.privacy}</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">{t.footer.cookie}</a>
+            <span className="text-gray-600">{t.footer.piva}</span>
           </div>
         </div>
       </div>
