@@ -157,7 +157,7 @@ function Navbar() {
     { label: 'Home', href: '#home' },
     { label: 'Servizi', href: '#servizi' },
     { label: 'Chi Siamo', href: '#chi-siamo' },
-    // { label: 'Contatti', href: '#contatti' },
+    { label: 'Dove Siamo', href: '#dove-siamo' },
   ]
 
   const scrollTo = (href: string) => {
@@ -882,6 +882,81 @@ function ContattiSection() {
   )
 }
 
+// ─── Sezione Mappa ────────────────────────────────────────────────────────────
+function MapSection() {
+  return (
+    <section id="dove-siamo" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="text-center mb-16">
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">La nostra sede</span>
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+            Ti Aspettiamo a Nola
+          </h2>
+          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+            Visita la nostra sede in Campania. Siamo facilmente raggiungibili e pronti ad accoglierti.
+          </p>
+        </AnimatedSection>
+
+        <AnimatedSection variants={fadeInUp}>
+          <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+            {/* Mappa */}
+            <div className="lg:flex-1">
+              <div className="rounded-2xl overflow-hidden shadow-2xl h-96 lg:h-full min-h-96">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2985.7548934369386!2d14.5257608!3d40.9321462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb3d03ad6366f:0xb48cebe1154bb378!2sSoftmaint%20%7C%20Software%20House!5e0!3m2!1sit!2sit!4v1712345678901"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+
+            {/* Info Sede */}
+            <div className="lg:flex-1 flex flex-col justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-linear-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white shadow-xl"
+              >
+                <h3 className="text-2xl font-bold mb-8">Sede Principale</h3>
+                <div className="space-y-8">
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-blue-300" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-blue-300 mb-2 font-semibold uppercase tracking-small">Indirizzo</div>
+                      <div className="text-base font-medium leading-relaxed">
+                        Via On. Francesco Napoletano, 185<br />
+                        80035 Nola (NA), Italia
+                      </div>
+                    </div>
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    onClick={() => window.open('https://maps.google.com/maps?q=40.9321462,14.5257608', '_blank')}
+                    className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group border border-white/10"
+                  >
+                    Visualizza su Mappe
+                    <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </motion.button>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  )
+}
+
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
   const year = new Date().getFullYear()
@@ -989,6 +1064,7 @@ export default function App() {
       <ChiSiamoSection />
       <ValoriSection />
       <ContattiSection />
+      <MapSection />
       <Footer />
     </main>
   )
