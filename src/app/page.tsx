@@ -175,11 +175,10 @@ function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-blue-100'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -191,14 +190,12 @@ function Navbar() {
               width={170}
               height={50}
               priority
-              className={`h-9 w-auto rounded-md transition-all duration-300 ${
-                scrolled ? 'bg-white p-0' : 'bg-white/95 p-1'
-              }`}
+              className={`h-9 w-auto rounded-md transition-all duration-300 ${scrolled ? 'bg-white p-0' : 'bg-white/95 p-1'
+                }`}
             />
-            <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-              scrolled ? 'text-blue-900' : 'text-white'
-            }`}>
-              SOFT<span className={scrolled ? 'text-blue-600' : 'text-blue-300'}>MAINT</span>
+            <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${scrolled ? 'text-blue-900' : 'text-white'
+              }`}>
+              SOFTMAINT | Software House
             </span>
           </button>
 
@@ -208,38 +205,33 @@ function Navbar() {
               <button
                 key={link.href}
                 onClick={() => scrollTo(link.href)}
-                className={`text-sm font-medium transition-all duration-200 hover:opacity-80 relative group ${
-                  scrolled ? 'text-gray-700' : 'text-white/90'
-                }`}
+                className={`text-sm font-medium transition-all duration-200 hover:opacity-80 relative group ${scrolled ? 'text-gray-700' : 'text-white/90'
+                  }`}
               >
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  scrolled ? 'bg-blue-600' : 'bg-white'
-                }`} />
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${scrolled ? 'bg-blue-600' : 'bg-white'
+                  }`} />
               </button>
             ))}
 
             {/* Language Switch */}
-            <div className={`flex items-center gap-2 ml-4 pl-4 border-l ${
-              scrolled ? 'border-blue-200' : 'border-white/20'
-            }`}>
+            <div className={`flex items-center gap-2 ml-4 pl-4 border-l ${scrolled ? 'border-blue-200' : 'border-white/20'
+              }`}>
               <button
                 onClick={() => setLanguage('it')}
-                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
-                  language === 'it'
+                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${language === 'it'
                     ? scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'
                     : scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'
-                }`}
+                  }`}
               >
                 IT
               </button>
               <button
                 onClick={() => setLanguage('en')}
-                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
-                  language === 'en'
+                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${language === 'en'
                     ? scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'
                     : scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'
-                }`}
+                  }`}
               >
                 EN
               </button>
@@ -256,9 +248,8 @@ function Navbar() {
           {/* Mobile burger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
-            }`}
+            className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+              }`}
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -289,21 +280,19 @@ function Navbar() {
               <div className="flex gap-2 pt-2 border-t border-gray-200">
                 <button
                   onClick={() => setLanguage('it')}
-                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
-                    language === 'it'
+                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${language === 'it'
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
-                  }`}
+                    }`}
                 >
                   IT
                 </button>
                 <button
                   onClick={() => setLanguage('en')}
-                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
-                    language === 'en'
+                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${language === 'en'
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
-                  }`}
+                    }`}
                 >
                   EN
                 </button>
@@ -363,10 +352,10 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <Badge className="mb-6 bg-blue-500/20 text-white border-blue-400/30 hover:bg-blue-500/30 text-sm px-4 py-1.5 ">
+          {/* <Badge className="mb-6 bg-blue-500/20 text-white border-blue-400/30 hover:bg-blue-500/30 text-sm px-4 py-1.5 ">
             <Star className="w-3.5 h-3.5 mr-1.5" />
             {t.hero.badge}
-          </Badge>
+          </Badge> */}
         </motion.div>
 
         <motion.h1
@@ -386,9 +375,12 @@ function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-lg sm:text-xl text-blue-100/80 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-blue-100/80 w-full mb-10 leading-relaxed"
         >
-          {t.hero.subtitle}
+          {t.hero.subtitle1}
+          <br />
+          {t.hero.subtitle2}
+
         </motion.p>
 
         <motion.div
@@ -460,24 +452,24 @@ function ServiziSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const servizi = [
-    {
+        {
       id: 1,
-      icon: DollarSign,
-      title: t.serviziDetails.docfinance.title,
-      subtitle: t.serviziDetails.docfinance.subtitle,
-      description: t.serviziDetails.docfinance.description,
-      color: 'from-blue-600 to-blue-800',
-      badge: t.serviziDetails.docfinance.badge,
-      isWeb: false,
-    },
-    {
-      id: 2,
       icon: Truck,
       title: t.serviziDetails.wms.title,
       subtitle: t.serviziDetails.wms.subtitle,
       description: t.serviziDetails.wms.description,
       color: 'from-indigo-600 to-indigo-800',
       badge: t.serviziDetails.wms.badge,
+      isWeb: false,
+    },
+    {
+      id: 2,
+      icon: DollarSign,
+      title: t.serviziDetails.docfinance.title,
+      subtitle: t.serviziDetails.docfinance.subtitle,
+      description: t.serviziDetails.docfinance.description,
+      color: 'from-blue-600 to-blue-800',
+      badge: t.serviziDetails.docfinance.badge,
       isWeb: false,
     },
     {
@@ -492,16 +484,6 @@ function ServiziSection() {
     },
     {
       id: 4,
-      icon: Leaf,
-      title: t.serviziDetails.greenproject.title,
-      subtitle: t.serviziDetails.greenproject.subtitle,
-      description: t.serviziDetails.greenproject.description,
-      color: 'from-teal-600 to-teal-800',
-      badge: t.serviziDetails.greenproject.badge,
-      isWeb: false,
-    },
-    {
-      id: 5,
       icon: Factory,
       title: t.serviziDetails.azienda40.title,
       subtitle: t.serviziDetails.azienda40.subtitle,
@@ -509,17 +491,18 @@ function ServiziSection() {
       color: 'from-violet-600 to-violet-800',
       badge: t.serviziDetails.azienda40.badge,
       isWeb: false,
-    }
+    },
+
   ]
 
   return (
     <section id="servizi" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.servizi.label}</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+          <h2 className="text-blue-600 font-semibold text-3xl uppercase tracking-widest">{t.servizi.label}</h2>
+          {/* <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
             {t.servizi.title}
-          </h2>
+          </h2> */}
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
             {t.servizi.subtitle}
           </p>
@@ -539,12 +522,14 @@ function ServiziSection() {
               className="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
             >
               <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${s.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <s.icon className="w-6 h-6 text-white" />
+                <s.icon className="w-6 h-6 text-white" /> 
               </div>
-              <Badge variant="outline" className="w-fit text-xs mb-3 text-blue-700 border-blue-200 bg-blue-50">
+              <h3 className="text-xl font-bold text-gray-900 mb-1">{s.title}</h3> 
+              {/* da mettere accanto  */}
+              {/* <Badge variant="outline" className="w-fit text-xs mb-3 text-blue-700 border-blue-200 bg-blue-50">
                 {s.badge}
-              </Badge>
-              <h3 className="text-xl font-bold text-gray-900 mb-1">{s.title}</h3>
+              </Badge> */}
+              
               <p className="text-sm text-blue-600 font-medium mb-3">{s.subtitle}</p>
               <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
               {s.isWeb ? (

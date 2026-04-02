@@ -15,7 +15,8 @@ export const translations = {
       badge: 'Softmaint | Software House',
       title1: 'Tecnologia al Servizio',
       title2: 'del tuo Business',
-      subtitle: 'Soluzioni software innovative per la gestione aziendale: WMS, DocFinance, WebApp personalizzate e percorsi verso l\'Azienda 4.0.',
+      subtitle1: 'Soluzioni software innovative per la gestione aziendale',
+      subtitle2: 'ERP | Tesoreria | WebApp: Produzione, Logistica, Agenti, Mail e Connettori B2B.',
       btnServizi: 'Scopri i Servizi',
       btnContatti: 'Contattaci',
       stat1: '20+',
@@ -27,9 +28,9 @@ export const translations = {
     },
     // Servizi
     servizi: {
-      label: 'Le nostre soluzioni',
+      label: 'Le nostre soluzioni software',
       title: 'I Nostri Software',
-      subtitle: 'Soluzioni complete e personalizzabili per ogni esigenza aziendale. Dalla tesoreria alla logistica, dalla produzione al web.',
+      subtitle: 'Soluzioni complete e personalizzabili per ogni esigenza aziendale. Dal Gestionale aziendale al controllo della produzione, logistica, agenti e tesoreria.',
       ctaTitle: 'Hai un\'esigenza specifica?',
       ctaText: 'Il nostro team di esperti è pronto ad analizzare le tue necessità e proporre la soluzione più adatta al tuo business.',
       ctaBtn: 'Parliamone',
@@ -42,13 +43,13 @@ export const translations = {
         title: 'DocFinance',
         subtitle: 'Tesoreria & Finanza',
         description: 'Gestione completa della tesoreria aziendale. Controllo dei flussi di cassa, previsioni finanziarie, riconciliazione bancaria e reportistica avanzata.',
-        badge: 'Finanza',
+        badge: 'Tesoreria',
       },
       wms: {
-        title: 'WMS',
-        subtitle: 'Warehouse Management System',
-        description: 'Sistema di gestione magazzino avanzato per ottimizzare picking, stoccaggio, inventario e tracciabilità dei prodotti in tempo reale.',
-        badge: 'Logistica',
+        title: 'ERP',
+        subtitle: 'Enterprise Resource Planning',
+        description: 'Sistema Gestionale completo per snellire i processi aziendali, gestire le risorse e migliorare l\'efficienza operativa, Contabilità, Documenti, Magazzino, Produzione, Vendite al banco, Archiviazione documentale e molto altro.',
+        badge: 'Enterprise Resource Planning',
       },
       webapp: {
         title: 'Web Application',
@@ -253,7 +254,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: 'Softmaint | Software House',
+      badge: 'Italian Software House',
       title1: 'Technology at the Service',
       title2: 'of Your Business',
       subtitle: 'Innovative software solutions for business management: WMS, DocFinance, custom WebApps and Industry 4.0 solutions.',
@@ -286,10 +287,10 @@ export const translations = {
         badge: 'Finance',
       },
       wms: {
-        title: 'WMS',
-        subtitle: 'Warehouse Management System',
-        description: 'Advanced warehouse management system to optimize picking, storage, inventory and real-time product traceability.',
-        badge: 'Logistics',
+        title: 'ERP',
+        subtitle: 'Enterprise Resource Planning',
+        description: 'Comprehensive management system to streamline business processes, manage resources and improve operational efficiency, Accounting, Documents, Warehouse, Production, Counter sales, Document archiving and much more.',
+        badge: 'Management',
       },
       webapp: {
         title: 'Web Application',
