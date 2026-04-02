@@ -385,6 +385,7 @@ export default function WebAppPageContent() {
 												alt={app.alt}
 												width={1366}
 												height={768}
+												loading={app.id === 'smart-mail' ? 'lazy' : 'eager'}
 												className="h-full w-full object-contain"
 											/>
 										</div>
