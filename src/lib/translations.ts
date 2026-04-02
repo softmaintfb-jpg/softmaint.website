@@ -12,7 +12,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: 'Software House Italiana',
+      badge: 'Softmaint | Software House',
       title1: 'Tecnologia al Servizio',
       title2: 'del tuo Business',
       subtitle: 'Soluzioni software innovative per la gestione aziendale: WMS, DocFinance, WebApp personalizzate e percorsi verso l\'Azienda 4.0.',
@@ -253,7 +253,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: 'Italian Software House',
+      badge: 'Softmaint | Software House',
       title1: 'Technology at the Service',
       title2: 'of Your Business',
       subtitle: 'Innovative software solutions for business management: WMS, DocFinance, custom WebApps and Industry 4.0 solutions.',

@@ -275,12 +275,13 @@ export default function WebAppPageContent() {
 	const { language } = useLanguage()
 	const t = translations[language]
 	const [selectedAppId, setSelectedAppId] = useState<string | null>(null)
+	const assetVersion = '20260402'
 
 	const webApps = [
 		{
 			id: 'smart-logistica',
 			route: '/smartlogistica',
-			image: '/assets/logistica.png',
+			image: `/assets/logistica.png?v=${assetVersion}`,
 			alt: 'Panoramica Smart Logistica con flussi OVC OAF, LP LPF e DDT RCF',
 			name: t.webappPage.smartLogistica.name,
 			subtitle: t.webappPage.smartLogistica.subtitle,
@@ -294,7 +295,7 @@ export default function WebAppPageContent() {
 		{
 			id: 'smart-agenti',
 			route: '/smartagenti',
-			image: '/assets/agenti.png',
+			image: `/assets/agenti.png?v=${assetVersion}`,
 			alt: 'Schermata Smart Agenti con ordini, CRM, storico e monitoraggio credito',
 			name: t.webappPage.smartAgenti.name,
 			subtitle: t.webappPage.smartAgenti.subtitle,
@@ -308,7 +309,7 @@ export default function WebAppPageContent() {
 		{
 			id: 'smart-mail',
 			route: '/smartmail',
-			image: '/assets/smartmail.png',
+			image: `/assets/smartmail.png?v=${assetVersion}`,
 			alt: 'Panoramica Smart Mail con regole automatiche, trigger e comunicazioni personalizzate',
 			name: t.webappPage.smartMail.name,
 			subtitle: t.webappPage.smartMail.subtitle,

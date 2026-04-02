@@ -655,7 +655,7 @@ function ChiSiamoSection() {
                 aria-label="Apri immagine in modale"
               >
                 <Image
-                  src="/assets/softmaint_info.png"
+                  src="/assets/softmaint_info.png?v=20260402"
                   alt="Team Softmaint al lavoro"
                   width={1000}
                   height={450}
@@ -718,7 +718,7 @@ function ChiSiamoSection() {
 
                     <div className="rounded-2xl overflow-hidden shadow-2xl bg-slate-900">
                       <Image
-                        src="/assets/softmaint_info.png"
+                        src="/assets/softmaint_info.png?v=20260402"
                         alt="Team Softmaint al lavoro - ingrandita"
                         width={1600}
                         height={720}
