@@ -64,7 +64,7 @@ export const translations = {
         badge: 'Green',
       },
       azienda40: {
-        title: 'Azienda 4.0',
+        title: 'Azienda 4.0 | 5.0',
         subtitle: 'Industria del Futuro',
         description: 'Digitalizzazione dei processi produttivi. IoT, automazione, MES e integrazione con sistemi ERP per una fabbrica intelligente e connessa.',
         badge: 'Industria',
@@ -85,7 +85,7 @@ export const translations = {
     // Valori
     valori: {
       label: 'Il nostro impegno',
-      title: 'Perché Scegliere Softmaint',
+      title: 'Perché scegliere Softmaint',
       subtitle: 'Non vendiamo solo software. Costruiamo partnership durature basate sulla fiducia e sui risultati concreti.',
       val1Title: 'Esperienza Consolidata',
       val1: 'Anni di esperienza nel settore IT al servizio di aziende di ogni dimensione. Conosciamo le sfide reali del business.',
@@ -98,10 +98,10 @@ export const translations = {
     },
     // Contatti
     contatti: {
-      label: 'Parliamoci',
+      // label: 'Parliamoci',
       title: 'Contattaci',
-      subtitle: 'Hai un progetto in mente? Vuoi saperne di più sui nostri servizi? Siamo qui per te.',
-      infoTitle: 'Informazioni di Contatto',
+      subtitle: 'Vuoi saperne di più sui nostri servizi? Siamo qui per te.',
+      // infoTitle: 'Informazioni di Contatto',
       telefono: 'Telefono',
       email: 'Email',
       sede: 'Sede',
@@ -128,10 +128,10 @@ export const translations = {
     doveSiamo: {
       label: 'La nostra sede',
       title: 'Ti Aspettiamo a Nola',
-      subtitle: 'Visita la nostra sede in Campania. Siamo facilmente raggiungibili e pronti ad accoglierti.',
+      subtitle: 'Siamo facilmente raggiungibili e pronti ad accoglierti.',
       sedeTitle: 'Sede Principale',
       indirizzo: 'Indirizzo',
-      indirizzoValue: 'Via On. Francesco Napoletano, 185\n80035 Nola (NA), Italia',
+      indirizzoValue: 'Via On. Francesco Napoletano, 185\n80035 Nola Città Metropolitana di Napoli, Italy',
       mapBtn: 'Visualizza su Mappe',
     },
     // Footer
@@ -142,16 +142,16 @@ export const translations = {
       copyright: 'Softmaint S.r.l. – Tutti i diritti riservati',
       privacy: 'Privacy Policy',
       cookie: 'Cookie Policy',
-      piva: 'P.IVA: 00000000000',
+      piva: 'P.IVA: IT 07374571219',
     },
     // WebApp Page
     webappPage: {
       tornaServizi: 'Torna ai servizi',
-      title: 'Soluzioni Web Custom Softmaint',
-      subtitle: 'Tre applicazioni verticali pensate per migliorare operativita, controllo e produttivita: logistica intelligente, rete vendita connessa e automazione amministrativa.',
+      title: 'Le nostre Web Application',
+      subtitle: 'WebAPP pensate per migliorare operatività, controllo e produttivita: \nLogistica, Agenti, Mailer, Produzione, Connector e B2B .',
       badge: 'Web Application',
       clickEnlarge: 'Clicca per ingrandire',
-      requestQuote: 'Effettua richiesta di preventivo',
+      requestQuote: 'Richiedi informazioni',
       closeImage: 'Chiudi immagine ingrandita',
       enlargeImage: 'Ingrandisci immagine',
       smartLogistica: {
@@ -171,9 +171,9 @@ export const translations = {
         h3: 'Dematerializzazione documentale e controllo puntuale delle scadenze',
       },
       smartMail: {
-        name: 'Smart Mail',
+        name: 'Smart @MAIL',
         subtitle: 'Automazione comunicazioni amministrative e solleciti',
-        description: 'Smart Mail automatizza le comunicazioni amministrative partendo dai dati gestionali. Permette di impostare regole per eventi e scadenze, attivare invii periodici o condizionati e personalizzare messaggi per cliente, migliorando il recupero crediti e riducendo il tempo dedicato ad attivita ripetitive.',
+        description: 'Smart @MAIL automatizza le comunicazioni amministrative partendo dai dati gestionali. Permette di impostare regole per eventi e scadenze, attivare invii periodici o condizionati e personalizzare messaggi per cliente, migliorando il recupero crediti e riducendo il tempo dedicato ad attivita ripetitive.',
         h1: 'Motore regole flessibile con trigger temporali e per evento',
         h2: 'Invio automatico di estratti conto, promemoria e solleciti',
         h3: 'Maggiore efficacia nella comunicazione e riduzione dei tempi manuali',
@@ -191,7 +191,7 @@ export const translations = {
       presentazioneLabel: 'Presentazione applicativo',
       presentazioneDesc: 'Consulta il PDF per una panoramica approfondita del prodotto.',
       apriPDF: 'Apri PDF in nuova scheda',
-      preventivoTitle: 'Richiedi un preventivo',
+      preventivoTitle: 'Richiedi Informazioni',
       preventivoDesc: 'Compila il form per ricevere una proposta su misura.',
       successPre: 'Richiesta inviata con successo. Ti ricontatteremo presto con un preventivo per',
       formNome: 'Nome e cognome',
@@ -201,8 +201,8 @@ export const translations = {
       formMessaggioPre: 'Descrivi la tua esigenza su',
       formError: 'Controlla i campi obbligatori e riprova.',
       formLoading: 'Invio in corso...',
-      formBtn: 'Invia richiesta di preventivo',
-      payloadMsgPre: 'Richiesta preventivo prodotto',
+      formBtn: 'Invia richiesta',
+      payloadMsgPre: 'Richiesta informazioni prodotto',
       payloadAziendaLabel: 'Azienda',
       payloadAziendaFallback: 'Non indicata',
     },
@@ -231,9 +231,9 @@ export const translations = {
         ],
       },
       smartMail: {
-        name: 'Smart Mail',
+        name: 'Smart @MAIL',
         subtitle: 'Automazione comunicazioni amministrative e solleciti',
-        description: 'Smart Mail automatizza le comunicazioni amministrative partendo dai dati del gestionale. Definisci regole personalizzate, trigger temporali e contenuti dinamici per inviare avvisi, estratti conto e solleciti in modo preciso, riducendo attività manuali e tempi di gestione.',
+        description: 'Smart @MAIL automatizza le comunicazioni amministrative partendo dai dati del gestionale. Definisci regole personalizzate, trigger temporali e contenuti dinamici per inviare avvisi, estratti conto e solleciti in modo preciso, riducendo attività manuali e tempi di gestione.',
         highlights: [
           'Motore regole configurabile per cliente, evento e scadenza',
           'Invio automatico di comunicazioni periodiche o condizionate',
@@ -305,7 +305,7 @@ export const translations = {
         badge: 'Green',
       },
       azienda40: {
-        title: 'Industry 4.0',
+        title: 'Industry 4.0 | 5.0',
         subtitle: 'Industry of the Future',
         description: 'Digitalization of production processes. IoT, automation, MES and ERP system integration for an intelligent and connected factory.',
         badge: 'Industry',
@@ -339,9 +339,9 @@ export const translations = {
     },
     // Contatti
     contatti: {
-      label: 'Get in Touch',
+      // label: 'Get in Touch',
       title: 'Contact Us',
-      subtitle: 'Do you have a project in mind? Want to know more about our services? We\'re here for you.',
+      subtitle: 'Want to know more about our services? We\'re here for you.',
       infoTitle: 'Contact Information',
       telefono: 'Phone',
       email: 'Email',
@@ -369,10 +369,10 @@ export const translations = {
     doveSiamo: {
       label: 'Our headquarters',
       title: 'We\'re Waiting for You in Nola',
-      subtitle: 'Visit our headquarters in Campania. We are easily accessible and ready to welcome you.',
+      subtitle: 'We are easily accessible and ready to welcome you.',
       sedeTitle: 'Headquarters',
       indirizzo: 'Address',
-      indirizzoValue: 'Via On. Francesco Napoletano, 185\n80035 Nola (NA), Italy',
+      indirizzoValue: 'Via On. Francesco Napoletano, 185\n80035 Nola Città Metropolitana di Napoli, Italy',
       mapBtn: 'View on Maps',
     },
     // Footer
@@ -388,7 +388,7 @@ export const translations = {
     // WebApp Page
     webappPage: {
       tornaServizi: 'Back to Services',
-      title: 'Softmaint Custom Web Solutions',
+      title: 'Our Web Applications',
       subtitle: 'Three vertical applications designed to improve operations, control and productivity: intelligent logistics, connected sales network and administrative automation.',
       badge: 'Web Application',
       clickEnlarge: 'Click to enlarge',
@@ -412,9 +412,9 @@ export const translations = {
         h3: 'Document dematerialization and timely deadline control',
       },
       smartMail: {
-        name: 'Smart Mail',
+        name: 'Smart @MAIL',
         subtitle: 'Automation of administrative communications and reminders',
-        description: 'Smart Mail automates administrative communications starting from management data. It allows you to set rules for events and deadlines, activate periodic or conditional shipments and customize messages by customer, improving credit recovery and reducing time spent on repetitive activities.',
+        description: 'Smart @MAIL automates administrative communications starting from management data. It allows you to set rules for events and deadlines, activate periodic or conditional shipments and customize messages by customer, improving credit recovery and reducing time spent on repetitive activities.',
         h1: 'Flexible rule engine with temporal and event triggers',
         h2: 'Automatic sending of statements, reminders and collection notices',
         h3: 'Greater communication effectiveness and reduction of manual time',
@@ -432,9 +432,9 @@ export const translations = {
       presentazioneLabel: 'Application Presentation',
       presentazioneDesc: 'Consult the PDF for a detailed overview of the product.',
       apriPDF: 'Open PDF in new tab',
-      preventivoTitle: 'Request a Quote',
+      preventivoTitle: 'Request Information',
       preventivoDesc: 'Fill out the form to receive a customized proposal.',
-      successPre: 'Request sent successfully. We will contact you soon with a quote for',
+      successPre: 'Request sent successfully.',
       formNome: 'Full Name',
       formEmail: 'Business Email',
       formTelefono: 'Phone',
@@ -442,8 +442,8 @@ export const translations = {
       formMessaggioPre: 'Describe your needs for',
       formError: 'Check the required fields and try again.',
       formLoading: 'Sending...',
-      formBtn: 'Send Quote Request',
-      payloadMsgPre: 'Product quote request',
+      formBtn: 'Send Request',
+      payloadMsgPre: 'Product request',
       payloadAziendaLabel: 'Company',
       payloadAziendaFallback: 'Not provided',
     },
@@ -472,9 +472,9 @@ export const translations = {
         ],
       },
       smartMail: {
-        name: 'Smart Mail',
+        name: 'Smart @MAIL',
         subtitle: 'Automation of administrative communications and reminders',
-        description: 'Smart Mail automates administrative communications starting from management system data. Define custom rules, time triggers and dynamic content to send alerts, statements and reminders precisely, reducing manual activities and management time.',
+        description: 'Smart @MAIL automates administrative communications starting from management system data. Define custom rules, time triggers and dynamic content to send alerts, statements and reminders precisely, reducing manual activities and management time.',
         highlights: [
           'Configurable rule engine by customer, event and deadline',
           'Automatic sending of periodic or conditional communications',

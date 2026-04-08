@@ -8,13 +8,17 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
+import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 import {
-  Menu, X, ChevronRight, ArrowRight, Phone, Mail, MapPin,
+  ChevronRight, ArrowRight, Phone, Mail, MapPin,
   Database, Globe, Leaf, Factory, DollarSign, Shield,
   Zap, Users, Award, HeadphonesIcon, CheckCircle, Star,
-  BarChart3, Truck, Send, ExternalLink
+  BarChart3, Truck, Send, ExternalLink,
+  Euro,
+  X
 } from 'lucide-react'
 
 // ─── Varianti Animazioni ─────────────────────────────────────────────────────
@@ -144,173 +148,6 @@ const valori = [
   }
 ]
 
-// ─── Componente Navbar ───────────────────────────────────────────────────────
-function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const { language, setLanguage } = useLanguage()
-  const t = translations[language]
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const navLinks = [
-    { label: t.nav.home, href: '#home' },
-    { label: t.nav.servizi, href: '#servizi' },
-    { label: t.nav.chiSiamo, href: '#chi-siamo' },
-    { label: t.nav.doveSiamo, href: '#dove-siamo' },
-  ]
-
-  const scrollTo = (href: string) => {
-    setMobileOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-blue-100'
-          : 'bg-transparent'
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <button onClick={() => scrollTo('#home')} className="flex items-center gap-2 group">
-            <Image
-              src="/assets/logo.jpg"
-              alt="Logo Softmaint"
-              width={170}
-              height={50}
-              priority
-              className={`h-9 w-auto rounded-md transition-all duration-300 ${scrolled ? 'bg-white p-0' : 'bg-white/95 p-1'
-                }`}
-            />
-            <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${scrolled ? 'text-blue-900' : 'text-white'
-              }`}>
-              SOFTMAINT | Software House
-            </span>
-          </button>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                className={`text-sm font-medium transition-all duration-200 hover:opacity-80 relative group ${scrolled ? 'text-gray-700' : 'text-white/90'
-                  }`}
-              >
-                {link.label}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${scrolled ? 'bg-blue-600' : 'bg-white'
-                  }`} />
-              </button>
-            ))}
-
-            {/* Language Switch */}
-            <div className={`flex items-center gap-2 ml-4 pl-4 border-l ${scrolled ? 'border-blue-200' : 'border-white/20'
-              }`}>
-              <button
-                onClick={() => setLanguage('it')}
-                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${language === 'it'
-                    ? scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'
-                    : scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'
-                  }`}
-              >
-                IT
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${language === 'en'
-                    ? scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'
-                    : scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'
-                  }`}
-              >
-                EN
-              </button>
-            </div>
-
-            <Button
-              onClick={() => scrollTo('#contatti')}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition-all duration-200 hover:scale-105"
-            >
-              {t.nav.contattaci}
-            </Button>
-          </div>
-
-          {/* Mobile burger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
-              }`}
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-200 shadow-lg"
-          >
-            <div className="px-4 py-4 flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollTo(link.href)}
-                  className="text-left text-gray-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors"
-                >
-                  {link.label}
-                </button>
-              ))}
-
-              {/* Mobile Language Switch */}
-              <div className="flex gap-2 pt-2 border-t border-gray-200">
-                <button
-                  onClick={() => setLanguage('it')}
-                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${language === 'it'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
-                    }`}
-                >
-                  IT
-                </button>
-                <button
-                  onClick={() => setLanguage('en')}
-                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${language === 'en'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
-                    }`}
-                >
-                  EN
-                </button>
-              </div>
-
-              <Button
-                onClick={() => scrollTo('#contatti')}
-                className="bg-blue-600 hover:bg-blue-700 text-white rounded-full mt-1"
-              >
-                {t.nav.contattaci}
-              </Button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
-  )
-}
 
 // ─── Sezione Hero ─────────────────────────────────────────────────────────────
 function HeroSection() {
@@ -454,7 +291,7 @@ function ServiziSection() {
   const servizi = [
         {
       id: 1,
-      icon: Truck,
+      icon: Database,
       title: t.serviziDetails.wms.title,
       subtitle: t.serviziDetails.wms.subtitle,
       description: t.serviziDetails.wms.description,
@@ -464,7 +301,7 @@ function ServiziSection() {
     },
     {
       id: 2,
-      icon: DollarSign,
+      icon: Euro,
       title: t.serviziDetails.docfinance.title,
       subtitle: t.serviziDetails.docfinance.subtitle,
       description: t.serviziDetails.docfinance.description,
@@ -622,10 +459,10 @@ function ChiSiamoSection() {
               {t.chiSiamo.p3}
             </p>
             <div className="flex flex-wrap gap-3">
-              {['WMS', 'DocFinance', 'WebApp', 'Green Project', 'Azienda 4.0'].map((tag) => (
-                <span key={tag} className="bg-blue-50 text-blue-700 border border-blue-100 rounded-full px-4 py-1.5 text-sm font-medium">
+              {['ERP', 'DocFinance', 'WebApp', 'Azienda 4.0 | 5.0'].map((tag) => (
+                <a key={tag} href="#servizi" onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })} className="bg-blue-50 text-blue-700 border border-blue-100 rounded-full px-4 py-1.5 text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer">
                   {tag}
-                </span>
+                </a>
               ))}
             </div>
           </AnimatedSection>
@@ -666,14 +503,14 @@ function ChiSiamoSection() {
                 </div>
               </motion.div>
               {/* Badge tecnologia */}
-              <motion.div
+              {/* <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', delay: 0.5 }}
                 className="absolute -top-4 -right-4 bg-blue-900 text-white rounded-xl shadow-xl p-4"
               >
                 <div className="text-xs text-blue-300 mb-1">{t.chiSiamo.specializzati}</div>
                 <div className="text-sm font-bold">{t.chiSiamo.specializzatiValue}</div>
-              </motion.div>
+              </motion.div> */}
             </div>
             <AnimatePresence>
               {isImageModalOpen && (
@@ -836,17 +673,18 @@ function ContattiSection() {
   }
 
   const contatti = [
-    { icon: Phone, label: t.contatti.telefono, value: '+39 0000 000000', href: 'tel:+390000000000' },
+    { icon: Phone, label: t.contatti.telefono, value: '+39 081 8232059', href: 'tel:+390818232059' },
+    { icon: Phone, label: 'Mobile', value: '+39 320 8519307', href: 'tel:+393208519307' },
     { icon: Mail, label: t.contatti.email, value: 'info@softmaint.it', href: 'mailto:info@softmaint.it' },
-    { icon: MapPin, label: t.contatti.sede, value: 'Italia', href: '#' },
+    { icon: MapPin, label: t.contatti.sede, value: t.doveSiamo.indirizzoValue, href: '' },
   ]
 
   return (
     <section id="contatti" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.contatti.label}</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+          {/* <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.contatti.label}</span> */}
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-800">
             {t.contatti.title}
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
@@ -858,7 +696,7 @@ function ContattiSection() {
           {/* Info contatti */}
           <AnimatedSection variants={fadeInLeft} className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-linear-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-6">{t.contatti.infoTitle}</h3>
+              {/* <h3 className="text-xl font-bold mb-6">{t.contatti.infoTitle}</h3> */}
               <div className="space-y-5">
                 {contatti.map((c) => (
                   <a key={c.label} href={c.href} className="flex items-center gap-4 group">
@@ -1010,10 +848,10 @@ function MapSection() {
     <section id="dove-siamo" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.doveSiamo.label}</span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+          <h3 className="text-blue-600 font-semibold text-3xl uppercase tracking-widest">{t.doveSiamo.label}</h3>
+          {/* <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
             {t.doveSiamo.title}
-          </h2>
+          </h2> */}
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
             {t.doveSiamo.subtitle}
           </p>
@@ -1078,119 +916,12 @@ function MapSection() {
   )
 }
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
-function Footer() {
-  const { language } = useLanguage()
-  const t = translations[language]
-  const year = new Date().getFullYear()
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const navLinks = [
-    { label: t.nav.home, href: '#home' },
-    { label: t.nav.servizi, href: '#servizi' },
-    { label: t.nav.chiSiamo, href: '#chi-siamo' },
-    { label: t.nav.contattaci, href: '#contatti' },
-  ]
-
-  const solutions = [
-    'DocFinance',
-    'WMS',
-    'Web Application',
-    'Green Project',
-    language === 'it' ? 'Azienda 4.0' : 'Industry 4.0'
-  ]
-
-  return (
-    <footer className="bg-gray-950 text-gray-400">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <Image
-                src="/assets/logo.jpg"
-                alt="Logo Softmaint"
-                width={170}
-                height={50}
-                className="h-10 w-auto rounded-md bg-white p-1"
-              />
-              <span className="text-xl font-bold text-white">
-                SOFT<span className="text-blue-400">MAINT</span>
-              </span>
-            </div>
-            <p className="text-sm leading-relaxed max-w-xs">
-              {t.footer.descrizione}
-            </p>
-            <div className="flex gap-3 mt-5">
-              {[ExternalLink, Globe, Mail].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">{t.footer.navigazione}</h4>
-            <ul className="space-y-2 text-sm">
-              {navLinks.map(link => (
-                <li key={link.href}>
-                  <button
-                    onClick={() => scrollTo(link.href)}
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Soluzioni */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">{t.footer.soluzioni}</h4>
-            <ul className="space-y-2 text-sm">
-              {solutions.map(s => (
-                <li key={s}>
-                  <button
-                    onClick={() => scrollTo('#servizi')}
-                    className="hover:text-blue-400 transition-colors text-left"
-                  >
-                    {s}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>&copy; {year} {t.footer.copyright}</p>
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-blue-400 transition-colors">{t.footer.privacy}</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">{t.footer.cookie}</a>
-            <span className="text-gray-600">{t.footer.piva}</span>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
 
 // ─── App Principale ───────────────────────────────────────────────────────────
 export default function App() {
   return (
     <main className="min-h-screen">
-      <Navbar />
+      <Navbar isHomepage={true} />
       <HeroSection />
       <ServiziSection />
       <ChiSiamoSection />
