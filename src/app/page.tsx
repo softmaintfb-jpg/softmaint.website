@@ -297,6 +297,7 @@ function ServiziSection() {
       description: t.serviziDetails.wms.description,
       color: 'from-indigo-600 to-indigo-800',
       badge: t.serviziDetails.wms.badge,
+      href: '/erp',
       isWeb: false,
     },
     {
@@ -375,6 +376,14 @@ function ServiziSection() {
                   className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
                   {t.servizi.scopriWeb}
+                  <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              ) : s.href ? (
+                <Link
+                  href={s.href}
+                  className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
+                >
+                  {t.servizi.richiediInfo}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               ) : (
