@@ -13,12 +13,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 
-type ProductKey = 'smartLogistica' | 'smartAgenti' | 'smartMail'
+type ProductKey = 'smartLogistica' | 'smartAgenti' | 'smartMail' | 'smartProduzione'
 
 type ProductPageData = {
   productKey: ProductKey
   image: string
-  pdfPath: string
+  pdfPath?: string
   alt: string
 }
 
@@ -115,8 +115,11 @@ export function WebAppProductPage({
     <>
       <Navbar />
       <main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 text-slate-900 pt-16 lg:pt-20">
-        <section className="border-b border-slate-200 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+          <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-blue-100 blur-3xl" />
+          <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-cyan-100 blur-3xl" />
+
+          <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
             <Link
               href="/webapp"
               className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50"
@@ -128,13 +131,13 @@ export function WebAppProductPage({
             <div className="mt-6">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">{ui.badge}</p>
               <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-5xl">{product.name}</h1>
-              <p className="mt-3 text-base font-medium text-blue-700 sm:text-lg">{product.subtitle}</p>
+              <p className="mt-3 max-w-4xl text-base font-medium text-blue-700 sm:text-lg">{product.subtitle}</p>
             </div>
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:px-6 lg:grid-cols-5 lg:px-8">
-          <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:col-span-3">
+        <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:px-6 lg:grid-cols-12 lg:items-start lg:px-8">
+          <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:col-span-8">
             <div className="border-b border-slate-200 bg-slate-50 p-3">
               <button
                 type="button"
@@ -170,34 +173,36 @@ export function WebAppProductPage({
                 ))}
               </ul>
 
-              <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h3 className="text-base font-bold text-slate-900 sm:text-lg">{ui.presentazioneLabel}</h3>
-                    <p className="text-sm text-slate-600">{ui.presentazioneDesc}</p>
+              {pdfPath && (
+                <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 sm:text-lg">{ui.presentazioneLabel}</h3>
+                      <p className="text-sm text-slate-600">{ui.presentazioneDesc}</p>
+                    </div>
+                    <a
+                      href={pdfPath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
+                    >
+                      {ui.apriPDF}
+                    </a>
                   </div>
-                  <a
-                    href={pdfPath}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
-                  >
-                    {ui.apriPDF}
-                  </a>
-                </div>
 
-                <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
-                  <iframe
-                    title={`${ui.presentazioneLabel} ${product.name}`}
-                    src={pdfPath}
-                    className="h-135 w-full"
-                  />
+                  <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
+                    <iframe
+                      title={`${ui.presentazioneLabel} ${product.name}`}
+                      src={pdfPath}
+                      className="h-135 w-full"
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </article>
 
-          <aside className="rounded-3xl border border-blue-100 bg-linear-to-br from-blue-50 to-cyan-50 p-6 shadow-sm lg:col-span-2 sm:p-8">
+          <aside className="rounded-3xl border border-blue-100 bg-linear-to-br from-blue-50 to-cyan-50 p-6 shadow-sm sm:p-8 lg:col-span-4 lg:sticky lg:top-24">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-700">
                 <Send className="h-5 w-5" />

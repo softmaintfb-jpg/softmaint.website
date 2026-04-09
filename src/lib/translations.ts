@@ -82,7 +82,7 @@ export const translations = {
       modules: [
         { title: 'Controllo Economico' },
         { title: 'Flussi Operativi' },
-        { title: 'Contabilita Integrata' },
+        { title: 'Contabilità' },
         { title: 'Finanza e Tesoreria' },
         { title: 'Monitoraggio Indicatori' },
         { title: 'Bilancio e Consolidato' },
@@ -92,7 +92,7 @@ export const translations = {
         { title: 'Gestione Documentale' },
         { title: 'Logistica Operativa' },
         { title: 'Gestione Magazzino' },
-        { title: 'Varianti e Distinte' },
+        { title: 'Distinta Base' },
         { title: 'Produzione e Tempi' },
         { title: 'Canali E-Commerce' },
         { title: 'CRM Relazionale' },
@@ -216,6 +216,14 @@ export const translations = {
         h2: 'Invio automatico di estratti conto, promemoria e solleciti',
         h3: 'Maggiore efficacia nella comunicazione e riduzione dei tempi manuali',
       },
+      smartProduzione: {
+        name: 'Smart Produzione',
+        subtitle: 'Controllo ODL, avanzamenti e tracciabilita del ciclo produttivo',
+        description: 'Smart Produzione coordina e monitora il ciclo produttivo in tempo reale: pianificazione ordini di lavoro, avanzamento reparti, gestione materiali e controllo qualita su ogni fase. Riduce sprechi, migliora i tempi e garantisce una tracciabilita completa del processo.',
+        h1: 'Centro di comando ODL con stati e alert sempre aggiornati',
+        h2: 'Gestione operativa di logistica e imballaggio anche in modalita offline',
+        h3: 'Tracciabilita completa per conformita, qualita e analisi scarti',
+      },
     },
     // Product Page UI
     productPageUI: {
@@ -277,6 +285,17 @@ export const translations = {
           'Invio automatico di comunicazioni periodiche o condizionate',
           'Riduzione del tempo operativo nelle attività ripetitive',
           'Migliore efficacia nel recupero crediti con messaggi puntuali',
+        ],
+      },
+      smartProduzione: {
+        name: 'Smart Produzione',
+        subtitle: 'Controllo ODL, avanzamenti e tracciabilita del ciclo produttivo',
+        description: 'Smart Produzione offre una vista unificata del reparto produttivo: monitora ordini di lavoro, avanzamenti e saturazione risorse in tempo reale, supporta le operazioni di imballaggio e integra controlli qualita per ricostruire l intera storia del prodotto.',
+        highlights: [
+          'Dashboard ODL con monitoraggio continuo di avanzamenti e criticita',
+          'Ottimizzazione di materiali, tempi e carichi macchina',
+          'Supporto operativo a logistica e imballaggio guidato',
+          'Tracciabilita end-to-end per conformita e riduzione degli scarti',
         ],
       },
     },
@@ -465,7 +484,7 @@ export const translations = {
     webappPage: {
       tornaServizi: 'Back to Services',
       title: 'Our Web Applications',
-      subtitle: 'Three vertical applications designed to improve operations, control and productivity: intelligent logistics, connected sales network and administrative automation.',
+      subtitle: 'Four vertical applications designed to improve operations, control and productivity: intelligent logistics, connected sales network, administrative automation and production flow orchestration.',
       badge: 'Web Application',
       clickEnlarge: 'Click to enlarge',
       requestQuote: 'Request a Quote',
@@ -494,6 +513,14 @@ export const translations = {
         h1: 'Flexible rule engine with temporal and event triggers',
         h2: 'Automatic sending of statements, reminders and collection notices',
         h3: 'Greater communication effectiveness and reduction of manual time',
+      },
+      smartProduzione: {
+        name: 'Smart Production',
+        subtitle: 'ODL control, progress tracking and end-to-end production traceability',
+        description: 'Smart Production coordinates and monitors the manufacturing lifecycle in real time: work-order planning, department progress, material management and quality control at each stage. It reduces waste, improves lead times and guarantees full process traceability.',
+        h1: 'ODL control center with always-updated statuses and alerts',
+        h2: 'Operational support for logistics and guided packing, including offline mode',
+        h3: 'Complete traceability for compliance, quality and scrap analysis',
       },
     },
     // Product Page UI
@@ -556,6 +583,17 @@ export const translations = {
           'Automatic sending of periodic or conditional communications',
           'Reduction of operational time in repetitive activities',
           'Greater effectiveness in credit recovery with timely messages',
+        ],
+      },
+      smartProduzione: {
+        name: 'Smart Production',
+        subtitle: 'ODL control, progress tracking and end-to-end production traceability',
+        description: 'Smart Production provides a unified shop-floor view: it tracks work orders, execution progress and resource saturation in real time, supports packing operations, and integrates quality checks to rebuild the complete product history.',
+        highlights: [
+          'ODL dashboard with continuous monitoring of progress and critical points',
+          'Optimization of materials, timing and machine workloads',
+          'Operational support for logistics and guided packing activities',
+          'End-to-end traceability for compliance and scrap reduction',
         ],
       },
     },

@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, ArrowRight, CheckCircle2, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { PDFDocument } from 'pdf-lib'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { useLanguage } from '@/components/LanguageProvider'
@@ -15,13 +16,16 @@ export default function WebAppPageContent() {
 	const { language } = useLanguage()
 	const t = translations[language]
 	const [selectedAppId, setSelectedAppId] = useState<string | null>(null)
+	const [pdfPageCounts, setPdfPageCounts] = useState<Record<string, number>>({})
+	const [activeSlideByApp, setActiveSlideByApp] = useState<Record<string, number>>({})
 	const assetVersion = '20260402'
 
-	const webApps = [
+	const webApps = useMemo(() => [
 		{
 			id: 'smart-logistica',
 			route: '/smartlogistica',
 			image: `/assets/logistica.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/logistica.pdf',
 			alt: 'Panoramica Smart Logistica con flussi OVC OAF, LP LPF e DDT RCF',
 			name: t.webappPage.smartLogistica.name,
 			subtitle: t.webappPage.smartLogistica.subtitle,
@@ -36,6 +40,7 @@ export default function WebAppPageContent() {
 			id: 'smart-agenti',
 			route: '/smartagenti',
 			image: `/assets/agenti.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/agenti.pdf',
 			alt: 'Schermata Smart Agenti con ordini, CRM, storico e monitoraggio credito',
 			name: t.webappPage.smartAgenti.name,
 			subtitle: t.webappPage.smartAgenti.subtitle,
@@ -50,6 +55,7 @@ export default function WebAppPageContent() {
 			id: 'smart-mail',
 			route: '/smartmail',
 			image: `/assets/smartmail.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/mail.pdf',
 			alt: 'Panoramica Smart Mail con regole automatiche, trigger e comunicazioni personalizzate',
 			name: t.webappPage.smartMail.name,
 			subtitle: t.webappPage.smartMail.subtitle,
@@ -60,9 +66,70 @@ export default function WebAppPageContent() {
 				t.webappPage.smartMail.h3,
 			],
 		},
-	]
+		{
+			id: 'smart-produzione',
+			route: '/smartproduzione',
+			image: `/assets/smartproduzione.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/produzione.pdf',
+			alt: 'Panoramica Smart Produzione con ODL, monitoraggio avanzamento e tracciabilita qualita',
+			name: t.webappPage.smartProduzione.name,
+			subtitle: t.webappPage.smartProduzione.subtitle,
+			description: t.webappPage.smartProduzione.description,
+			highlights: [
+				t.webappPage.smartProduzione.h1,
+				t.webappPage.smartProduzione.h2,
+				t.webappPage.smartProduzione.h3,
+			],
+		},
+	], [assetVersion, t])
 
 	const selectedApp = webApps.find((app) => app.id === selectedAppId) ?? null
+
+	useEffect(() => {
+		let cancelled = false
+
+		const loadPdfPageCounts = async () => {
+			const results = await Promise.all(
+				webApps.map(async (app) => {
+					try {
+						const response = await fetch(app.pdfPath)
+						if (!response.ok) throw new Error('PDF not available')
+
+						const data = await response.arrayBuffer()
+						const pdf = await PDFDocument.load(data, { ignoreEncryption: true })
+						return [app.id, Math.max(1, pdf.getPageCount())] as const
+					} catch {
+						return [app.id, 1] as const
+					}
+				}),
+			)
+
+			if (cancelled) return
+
+			const nextPageCounts = Object.fromEntries(results)
+			setPdfPageCounts(nextPageCounts)
+			setActiveSlideByApp((prev) => {
+				const next = { ...prev }
+				for (const app of webApps) {
+					const totalSlides = 1 + (nextPageCounts[app.id] ?? 1)
+					if ((next[app.id] ?? 0) >= totalSlides) next[app.id] = 0
+				}
+				return next
+			})
+		}
+
+		void loadPdfPageCounts()
+
+		return () => {
+			cancelled = true
+		}
+	}, [webApps])
+
+	const getTotalSlides = (appId: string) => 1 + (pdfPageCounts[appId] ?? 1)
+	const getCurrentSlide = (appId: string) => activeSlideByApp[appId] ?? 0
+	const goToSlide = (appId: string, index: number) => {
+		setActiveSlideByApp((prev) => ({ ...prev, [appId]: index }))
+	}
 
 	useEffect(() => {
 		if (!selectedAppId) return
@@ -108,31 +175,76 @@ export default function WebAppPageContent() {
 
 				<section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						{webApps.map((app) => (
+						{webApps.map((app) => {
+							const totalSlides = getTotalSlides(app.id)
+							const currentSlide = getCurrentSlide(app.id)
+							const isImageSlide = currentSlide === 0
+							const currentPdfPage = currentSlide
+
+							return (
 							<article
 								key={app.id}
 								className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
 							>
-								<button
-									type="button"
-									onClick={() => setSelectedAppId(app.id)}
-									className="group block w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-									aria-label={`${t.webappPage.enlargeImage} ${app.name}`}
-								>
-									<div className="relative aspect-video w-full overflow-hidden bg-slate-50">
-										<Image
-											src={app.image}
-											alt={app.alt}
-											width={1366}
-											height={768}
-											loading={app.id === 'smart-mail' ? 'lazy' : 'eager'}
-											className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
+								<div className="relative aspect-video w-full overflow-hidden border-b border-slate-200 bg-slate-50">
+									{isImageSlide ? (
+										<button
+											type="button"
+											onClick={() => setSelectedAppId(app.id)}
+											className="group block h-full w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+											aria-label={`${t.webappPage.enlargeImage} ${app.name}`}
+										>
+											<Image
+												src={app.image}
+												alt={app.alt}
+												width={1366}
+												height={768}
+												loading={app.id === 'smart-mail' ? 'lazy' : 'eager'}
+												className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+											/>
+										</button>
+									) : (
+										<iframe
+											title={`${app.name} PDF page ${currentPdfPage}`}
+											src={`${app.pdfPath}#page=${currentPdfPage}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+											className="h-full w-full bg-white"
 										/>
+									)}
+
+									<div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-slate-900/20 to-transparent" />
+
+									<div className="absolute left-3 top-3 rounded-full bg-slate-900/80 px-3 py-1 text-[11px] font-semibold text-white">
+										{isImageSlide ? 'PNG' : `PDF ${currentPdfPage}/${totalSlides - 1}`}
 									</div>
-									<span className="px-6 pt-2 pb-4 inline-block text-xs font-medium text-slate-500 transition-colors group-hover:text-blue-700">
-										{t.webappPage.clickEnlarge}
-									</span>
-								</button>
+
+									<div className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white/95 p-1 shadow-sm">
+										<button
+											type="button"
+											onClick={() =>
+												goToSlide(app.id, currentSlide === 0 ? totalSlides - 1 : currentSlide - 1)
+											}
+											className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100"
+											aria-label={language === 'it' ? 'Slide precedente' : 'Previous slide'}
+										>
+											<ChevronLeft className="h-4 w-4" />
+										</button>
+										<span className="px-2 text-xs font-semibold text-slate-700">
+											{currentSlide + 1}/{totalSlides}
+										</span>
+										<button
+											type="button"
+											onClick={() => goToSlide(app.id, currentSlide === totalSlides - 1 ? 0 : currentSlide + 1)}
+											className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100"
+											aria-label={language === 'it' ? 'Slide successiva' : 'Next slide'}
+										>
+											<ChevronRight className="h-4 w-4" />
+										</button>
+									</div>
+								</div>
+
+								<div className="px-6 pt-3 pb-4 text-xs font-medium text-slate-500">
+									{isImageSlide ? t.webappPage.clickEnlarge : language === 'it' ? 'Scorri le pagine PDF con il carosello' : 'Use the carousel to browse PDF pages'}
+								</div>
 
 								<div className="px-6 pb-7 sm:pb-8 flex-1 flex flex-col">
 									<p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">
@@ -165,7 +277,8 @@ export default function WebAppPageContent() {
 									</div>
 								</div>
 							</article>
-						))}
+							)
+						})}
 					</div>
 				</section>
 
