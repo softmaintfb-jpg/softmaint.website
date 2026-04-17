@@ -18,7 +18,9 @@ import {
   Zap, Users, Award, HeadphonesIcon, CheckCircle, Star,
   BarChart3, Truck, Send, ExternalLink,
   Euro,
-  X
+  X,
+  PieChart,
+  Gauge
 } from 'lucide-react'
 
 // ─── Varianti Animazioni ─────────────────────────────────────────────────────
@@ -242,22 +244,32 @@ function HeroSection() {
           </button>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats with indicators */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
-          className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
+          className="mt-20 grid grid-cols-3 gap-8 max-w-3xl mx-auto"
         >
           {[
-            { value: t.hero.stat1, label: t.hero.stat1Label },
-            { value: t.hero.stat2, label: t.hero.stat2Label },
-            { value: t.hero.stat3, label: t.hero.stat3Label },
+            { value: t.hero.stat1, label: t.hero.stat1Label, icon: Gauge },
+            { value: t.hero.stat2, label: t.hero.stat2Label, icon: Gauge },
+            { value: t.hero.stat3, label: t.hero.stat3Label, icon: Gauge },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-white">{stat.value}</div>
-              <div className="text-xs sm:text-sm text-blue-200/70 mt-1">{stat.label}</div>
-            </div>
+            <motion.div 
+              key={stat.label} 
+              className="text-center group"
+              whileHover={{ scale: 1.08 }}
+            >
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                  <stat.icon className="w-8 h-8 text-blue-300" />
+                </div>
+              </div>
+              <div className="text-4xl sm:text-5xl font-bold text-white">{stat.value}</div>
+              <div className="text-sm sm:text-base text-blue-200/70 mt-3">{stat.label}</div>
+              <div className="mt-4 h-1.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
+            </motion.div>
           ))}
         </motion.div>
       </div>

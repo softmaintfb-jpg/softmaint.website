@@ -19,6 +19,7 @@ type ProductPageData = {
   productKey: ProductKey
   image: string
   pdfPath?: string
+  videoPath?: string
   alt: string
 }
 
@@ -37,6 +38,7 @@ export function WebAppProductPage({
   productKey,
   image,
   pdfPath,
+  videoPath,
   alt,
 }: ProductPageData) {
   const { language } = useLanguage()
@@ -159,6 +161,26 @@ export function WebAppProductPage({
                 </span>
               </button>
             </div>
+
+            {videoPath && (
+              <div className="border-b border-slate-200 bg-white p-4 sm:p-6">
+                <div className="mb-3">
+                  <h2 className="text-lg font-bold text-slate-900 sm:text-xl">{ui.videoLabel}</h2>
+                  <p className="mt-1 text-sm text-slate-600">{ui.videoDesc}</p>
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-950">
+                  <video
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="aspect-video w-full"
+                  >
+                    <source src={videoPath} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            )}
 
             <div className="p-6 sm:p-8">
               <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">{ui.descrizioneLabel}</h2>

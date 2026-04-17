@@ -4,23 +4,18 @@ import Link from 'next/link'
 import {
 	ArrowLeft,
 	ArrowRight,
-	BarChart3,
 	Briefcase,
 	Calculator,
 	ChartNoAxesCombined,
 	ClipboardList,
 	FileArchive,
-	FileStack,
 	FileText,
 	Handshake,
 	LayoutGrid,
 	Package,
-	Receipt,
 	Scale,
 	Settings2,
 	ShoppingCart,
-	Store,
-	Truck,
 	Users,
 	Wallet,
 	Workflow,
@@ -29,29 +24,28 @@ import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
+import {
+	getErpModuleIconKey,
+	getErpModuleSlug,
+	type ErpIconKey,
+} from '@/lib/erp-modules'
 
-const moduleIcons = [
-	BarChart3,
-	Workflow,
-	Calculator,
-	Wallet,
-	ChartNoAxesCombined,
-	Scale,
-	ShoppingCart,
-	Store,
-	FileArchive,
-	FileStack,
-	Truck,
-	Package,
-	Settings2,
-	ClipboardList,
-	LayoutGrid,
-	Users,
-	Briefcase,
-	Handshake,
-	FileText,
-	Receipt,
-] as const
+const moduleIcons: Record<ErpIconKey, typeof Briefcase> = {
+	calculator: Calculator,
+	wallet: Wallet,
+	scale: Scale,
+	fileText: FileText,
+	shoppingCart: ShoppingCart,
+	package: Package,
+	workflow: Workflow,
+	settings2: Settings2,
+	chartNoAxesCombined: ChartNoAxesCombined,
+	handshake: Handshake,
+	fileArchive: FileArchive,
+	users: Users,
+	clipboardList: ClipboardList,
+	briefcase: Briefcase,
+}
 
 export default function ErpPageContent() {
 	const { language } = useLanguage()
@@ -104,11 +98,14 @@ export default function ErpPageContent() {
 					</h2>
 
 					<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-						{modules.map((module, index) => {
-							const Icon = moduleIcons[index % moduleIcons.length]
+						{modules.map((module) => {
+							const moduleSlug = getErpModuleSlug(module.title)
+							const iconKey = getErpModuleIconKey(module.title)
+							const Icon = moduleIcons[iconKey]
 							return (
-								<article
+								<Link
 									key={module.title}
+									href={`/erp/${moduleSlug}`}
 									className="group border-t border-blue-500 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
 								>
 									<h3 className="min-h-12 text-[15px] font-semibold text-slate-700">
@@ -125,7 +122,7 @@ export default function ErpPageContent() {
 											<ArrowRight className="h-3.5 w-3.5" />
 										</span>
 									</div>
-								</article>
+								</Link>
 							)
 						})}
 					</div>
