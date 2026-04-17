@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import {
-  ArrowLeft,
   ArrowRight,
   Briefcase,
   Calculator,
@@ -12,10 +12,14 @@ import {
   FileArchive,
   FileText,
   Handshake,
+  Lightbulb,
+  Network,
   Package,
+  Rocket,
   Scale,
   Settings2,
   ShoppingCart,
+  Target,
   Users,
   Wallet,
   Workflow,
@@ -88,18 +92,11 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
   if (!resolvedModule) {
     return (
       <>
-        <Navbar />
+        <Navbar backHref="/erp" backLabel={ui.backToErp} />
         <main className="min-h-screen bg-slate-100 pt-16 lg:pt-20">
           <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
               <p className="text-slate-600">{ui.notFound}</p>
-              <Link
-                href="/erp"
-                className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                {ui.backToErp}
-              </Link>
             </div>
           </section>
         </main>
@@ -136,122 +133,150 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
     .filter((module) => getErpModuleCategory(module.title) === category)
     .slice(0, 4)
 
+  const storySections = [
+    {
+      key: 'goal',
+      title: ui.sectionGoal,
+      intro: detail.goals[0],
+      body: [detail.goals[1], detail.goals[2]],
+      icon: Target,
+    },
+    {
+      key: 'features',
+      title: ui.sectionFeatures,
+      intro: language === 'it'
+        ? 'Queste sono le funzionalità operative che permettono al team di lavorare con maggiore precisione e continuità.'
+        : 'These core capabilities help teams execute with more consistency and operational accuracy.',
+      body: detail.features,
+      icon: Lightbulb,
+    },
+    {
+      key: 'integrations',
+      title: ui.sectionIntegrations,
+      intro: narrativeIntro.integrations,
+      body: detail.integrations,
+      icon: Network,
+    },
+    {
+      key: 'rollout',
+      title: ui.sectionRollout,
+      intro: narrativeIntro.rollout,
+      body: detail.rollout,
+      icon: Rocket,
+    },
+  ]
+
   return (
     <>
-      <Navbar />
+      <Navbar backHref="/erp" backLabel={ui.backToErp} />
 
-      <main className="min-h-screen bg-slate-100 pt-16 lg:pt-20">
-        <section className="border-b border-slate-200 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-            <Link
-              href="/erp"
-              className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
+      <main className="min-h-screen bg-linear-to-b from-slate-100 via-slate-100 to-white pt-16 lg:pt-20">
+        <section className="border-b border-slate-200 bg-slate-200/80">
+          <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.05 }}
+              className="mt-2"
             >
-              <ArrowLeft className="h-4 w-4" />
-              {t.erpPage.backToServices}
-            </Link>
-
-            <div className="mt-6 overflow-hidden rounded-2xl bg-linear-to-r from-blue-900 via-blue-800 to-blue-700 px-6 py-8 text-white shadow-lg sm:px-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
-                {t.erpPage.heroBadge}
-              </p>
-              <div className="mt-4 grid gap-6 lg:grid-cols-[auto,1fr] lg:items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/15">
-                  <Icon className="h-7 w-7" />
+              <div className="flex items-start gap-4 sm:gap-5">
+                <div className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-800 text-white shadow-sm ring-1 ring-blue-200/50">
+                  <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-extrabold leading-tight sm:text-4xl">{moduleTitle}</h1>
-                  <p className="mt-4 max-w-4xl text-sm leading-relaxed text-blue-100 sm:text-base">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">
+                    {t.erpPage.heroBadge}
+                  </p>
+                  <h1 className="mt-2 text-3xl font-semibold leading-tight text-blue-900 sm:text-5xl">
+                    {moduleTitle}
+                  </h1>
+                  <p className="mt-4 max-w-4xl text-base leading-relaxed text-slate-700 sm:text-lg">
                     {detail.overview}
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
-            <article className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm sm:p-10 lg:col-span-8">
-              <header className="border-b border-slate-200 pb-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">ERP Insights</p>
-                <h2 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">{moduleTitle}</h2>
-                <p className="mt-4 leading-relaxed text-slate-600">{detail.overview}</p>
-              </header>
+        <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+          <motion.article
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.4 }}
+            className="rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10"
+          >
+            <div className="space-y-10 sm:space-y-12">
+              {storySections.map((section, sectionIndex) => {
+                const SectionIcon = section.icon
 
-              <section className="pt-7">
-                <h3 className="text-xl font-bold text-slate-900">{ui.sectionGoal}</h3>
-                <p className="mt-3 leading-relaxed text-slate-600">
-                  {detail.goals[0]}.
-                </p>
-                <p className="mt-3 leading-relaxed text-slate-600">
-                  {detail.goals[1]}. {detail.goals[2]}.
-                </p>
-              </section>
+                return (
+                  <section
+                    key={section.key}
+                    className={sectionIndex > 0 ? 'border-t border-slate-200 pt-10 sm:pt-12' : ''}
+                  >
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-[64px,1fr] sm:gap-6">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-700 sm:h-12 sm:w-12">
+                        <SectionIcon className="h-5 w-5" />
+                      </div>
 
-              <section className="pt-7">
-                <h3 className="text-xl font-bold text-slate-900">{ui.sectionFeatures}</h3>
-                <div className="mt-4 space-y-4">
-                  {detail.features.map((feature) => (
-                    <p key={feature} className="flex items-start gap-3 leading-relaxed text-slate-700">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
-                      <span>{feature}</span>
-                    </p>
-                  ))}
-                </div>
-              </section>
+                      <div>
+                        <h2 className="text-base font-semibold uppercase tracking-[0.08em] text-blue-800 sm:text-lg">
+                          {section.title}
+                        </h2>
 
-              <section className="pt-7">
-                <h3 className="text-xl font-bold text-slate-900">{ui.sectionIntegrations}</h3>
-                <p className="mt-3 leading-relaxed text-slate-600">
-                  {narrativeIntro.integrations}
-                </p>
-                <ul className="mt-4 space-y-3">
-                  {detail.integrations.map((integration) => (
-                    <li key={integration} className="flex items-start gap-3 text-slate-700">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
-                      <span>{integration}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
+                        <p className="mt-4 text-xl leading-relaxed text-slate-600 sm:text-[2rem] sm:leading-[1.35]">
+                          {section.intro}
+                        </p>
 
-              <section className="pt-7">
-                <h3 className="text-xl font-bold text-slate-900">{ui.sectionRollout}</h3>
-                <p className="mt-3 leading-relaxed text-slate-600">
-                  {narrativeIntro.rollout}
-                </p>
-                <ol className="mt-4 space-y-3">
-                  {detail.rollout.map((step, index) => (
-                    <li key={step} className="flex items-start gap-3 text-slate-700">
-                      <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-semibold text-blue-700">
-                        {index + 1}
-                      </span>
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            </article>
+                        <div className="mt-6 space-y-4">
+                          {section.body.map((line, index) => (
+                            <p key={`${section.key}-${index}`} className="leading-relaxed text-slate-700 sm:text-lg">
+                              {section.key === 'rollout' ? `${index + 1}. ${line}` : line}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                )
+              })}
+            </div>
+          </motion.article>
 
-            <aside className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-4 lg:sticky lg:top-24">
-              <h3 className="text-lg font-bold text-slate-900">{ui.sectionKpis}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                {narrativeIntro.kpis}
-              </p>
-              <ul className="mt-4 space-y-3">
+          <motion.section
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.38 }}
+            className="mt-10"
+          >
+            <div className="rounded-3xl border border-slate-200 bg-white px-6 py-7 shadow-sm sm:px-8">
+              <h2 className="text-base font-semibold uppercase tracking-[0.08em] text-blue-800 sm:text-lg">
+                {ui.sectionKpis}
+              </h2>
+              <p className="mt-3 text-slate-600 sm:text-lg">{narrativeIntro.kpis}</p>
+
+              <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {detail.kpis.map((kpi) => (
-                  <li key={kpi} className="flex items-start gap-2 text-slate-700">
+                  <li key={kpi} className="flex items-start gap-2 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-slate-700">
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
                     <span>{kpi}</span>
                   </li>
                 ))}
               </ul>
-            </aside>
-          </div>
+            </div>
+          </motion.section>
 
           {relatedModules.length > 0 && (
-            <section className="mt-10">
+            <motion.section
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.38 }}
+              className="mt-10"
+            >
               <h2 className="text-lg font-bold text-slate-900">{ui.related}</h2>
               <p className="mt-1 text-sm text-slate-600">{ui.relatedSubtitle}</p>
 
@@ -265,7 +290,7 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
                     <Link
                       key={module.title}
                       href={`/erp/${relatedSlug}`}
-                      className="group flex items-center justify-between px-5 py-4 transition-colors hover:bg-slate-50"
+                      className="group flex items-center justify-between px-5 py-4 transition-all duration-200 hover:bg-slate-50"
                     >
                       <div className="flex items-center gap-3">
                         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-800 text-white">
@@ -282,7 +307,7 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
                   )
                 })}
               </div>
-            </section>
+            </motion.section>
           )}
         </section>
       </main>

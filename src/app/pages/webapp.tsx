@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { PDFDocument } from 'pdf-lib'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
@@ -150,21 +150,13 @@ export default function WebAppPageContent() {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar backHref="/#servizi" backLabel={t.webappPage.tornaServizi} />
 			<main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 text-slate-900 pt-16 lg:pt-20">
 				<section className="relative overflow-hidden border-b border-slate-200">
 					<div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-blue-100 blur-3xl" />
 					<div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-cyan-100 blur-3xl" />
 					<div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-						<Link
-							href="/#servizi"
-							className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50"
-						>
-							<ArrowLeft className="h-4 w-4" />
-							{t.webappPage.tornaServizi}
-						</Link>
-
-						<h1 className="mt-6 max-w-4xl text-3xl font-extrabold sm:text-5xl">
+						<h1 className="max-w-4xl text-3xl font-extrabold sm:text-5xl">
 							{t.webappPage.title}
 						</h1>
 						<p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">

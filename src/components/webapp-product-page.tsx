@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, CheckCircle2, Send, X } from 'lucide-react'
+import { CheckCircle2, Send, X } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
@@ -115,22 +114,14 @@ export function WebAppProductPage({
 
   return (
     <>
-      <Navbar />
+      <Navbar backHref="/webapp" backLabel={ui.tornaWebApp} />
       <main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 text-slate-900 pt-16 lg:pt-20">
         <section className="relative overflow-hidden border-b border-slate-200 bg-white">
           <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-blue-100 blur-3xl" />
           <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-cyan-100 blur-3xl" />
 
           <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-            <Link
-              href="/webapp"
-              className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              {ui.tornaWebApp}
-            </Link>
-
-            <div className="mt-6">
+            <div>
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">{ui.badge}</p>
               <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-5xl">{product.name}</h1>
               <p className="mt-3 max-w-4xl text-base font-medium text-blue-700 sm:text-lg">{product.subtitle}</p>

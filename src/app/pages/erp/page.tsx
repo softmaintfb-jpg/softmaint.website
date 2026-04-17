@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import {
-	ArrowLeft,
 	ArrowRight,
 	Briefcase,
 	Calculator,
@@ -54,19 +53,11 @@ export default function ErpPageContent() {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar backHref="/#servizi" backLabel={t.erpPage.backToServices} />
 
 			<main className="min-h-screen bg-slate-100 pt-16 lg:pt-20">
 				<section className="border-b border-slate-200 bg-white">
 					<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-						<Link
-							href="/#servizi"
-							className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
-						>
-							<ArrowLeft className="h-4 w-4" />
-							{t.erpPage.backToServices}
-						</Link>
-
 						<div className="mt-6 overflow-hidden rounded-2xl bg-linear-to-r from-blue-900 via-blue-800 to-blue-700 px-6 py-8 text-white shadow-lg sm:px-10">
 							<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
 								{t.erpPage.heroBadge}

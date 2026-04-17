@@ -1,20 +1,25 @@
 'use client'
 
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { ArrowLeft, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 
 interface NavbarProps {
   isHomepage?: boolean
+  backHref?: string
+  backLabel?: string
 }
 
-export function Navbar({ isHomepage = false }: NavbarProps) {
+export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
   const { language, setLanguage } = useLanguage()
   const t = translations[language]
 
@@ -23,6 +28,32 @@ export function Navbar({ isHomepage = false }: NavbarProps) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    const scrollToHashWithOffset = () => {
+      if (pathname !== '/' || !window.location.hash) return
+
+      const el = document.querySelector(window.location.hash)
+      if (!el) return
+
+      const navOffset = 96
+      const y = el.getBoundingClientRect().top + window.scrollY - navOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
+    }
+
+    // Ensure hash navigation works after route transitions and hydration.
+    const timer = window.setTimeout(scrollToHashWithOffset, 80)
+    window.addEventListener('hashchange', scrollToHashWithOffset)
+
+    return () => {
+      window.clearTimeout(timer)
+      window.removeEventListener('hashchange', scrollToHashWithOffset)
+    }
+  }, [pathname])
 
   const navLinks = [
     { label: t.nav.home, href: '#home' },
@@ -33,13 +64,37 @@ export function Navbar({ isHomepage = false }: NavbarProps) {
 
   const scrollTo = (href: string) => {
     setMobileOpen(false)
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    } else if (!href.startsWith('/')) {
-      // Se l'elemento non esiste e il link è un anchor, vai alla home con l'anchor
-      window.location.href = '/' + href
+
+    if (!href.startsWith('#')) {
+      window.location.href = href
+      return
     }
+
+    const scrollWithOffset = () => {
+      const el = document.querySelector(href)
+      if (!el) return false
+
+      const navOffset = 96
+      const y = el.getBoundingClientRect().top + window.scrollY - navOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
+      return true
+    }
+
+    if (pathname === '/' && scrollWithOffset()) {
+      return
+    }
+
+    // Se siamo in una pagina interna, vai sempre alla sezione in home.
+    window.location.href = `/${href}`
+  }
+
+  const goHome = () => {
+    setMobileOpen(false)
+    if (pathname === '/') {
+      scrollTo('#home')
+      return
+    }
+    window.location.href = '/#home'
   }
 
   // Determina lo stile in base se siamo sulla homepage o altrove
@@ -59,28 +114,52 @@ export function Navbar({ isHomepage = false }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <button onClick={() => scrollTo('#home')} className="flex items-center gap-2 group">
-            <Image
-              src="/assets/logo.jpg"
-              alt="Logo Softmaint"
-              width={170}
-              height={50}
-              priority
-              className={`h-9 w-auto rounded-md transition-all duration-300 ${
-                isLightBg ? 'bg-white p-0' : 'bg-white/95 p-1'
-              }`}
-            />
-            <span
-              className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-                isLightBg ? 'text-blue-900' : 'text-white'
-              }`}
-            >
-              SOFTMAINT | Software House
-            </span>
-          </button>
+          <div className="flex items-center gap-3">
+            {backHref && backLabel && (
+              <Link
+                href={backHref}
+                className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
+                  isLightBg
+                    ? 'border-blue-200 bg-white text-blue-700 hover:bg-blue-50'
+                    : 'border-white/35 bg-white/10 text-white hover:bg-white/20'
+                }`}
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className="hidden sm:inline">{backLabel}</span>
+              </Link>
+            )}
+
+            <button onClick={goHome} className="flex items-center gap-2 group">
+              <Image
+                src="/assets/logo.jpg"
+                alt="Logo Softmaint"
+                width={170}
+                height={50}
+                priority
+                className={`h-9 w-auto rounded-md transition-all duration-300 ${
+                  isLightBg ? 'bg-white p-0' : 'bg-white/95 p-1'
+                }`}
+              />
+              <span
+                className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
+                  isLightBg ? 'text-blue-900' : 'text-white'
+                }`}
+              >
+                <span className="hidden lg:inline">SOFTMAINT | Software House</span>
+              </span>
+            </button>
+          </div>
+
+          <div
+            className={`pointer-events-none absolute left-1/2 -translate-x-1/2 text-center font-semibold tracking-wide transition-colors duration-300 lg:hidden ${
+              isLightBg ? 'text-blue-900' : 'text-white'
+            }`}
+          >
+            <span className="text-[13px] sm:text-sm">Softmaint | Software House</span>
+          </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
                 key={link.href}
@@ -145,7 +224,7 @@ export function Navbar({ isHomepage = false }: NavbarProps) {
           {/* Mobile burger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${
+            className={`lg:hidden p-2 rounded-lg transition-colors ${
               isLightBg ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
             }`}
           >
@@ -161,7 +240,7 @@ export function Navbar({ isHomepage = false }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-200 shadow-lg"
+            className="lg:hidden bg-white border-t border-gray-200 shadow-lg"
           >
             <div className="px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
