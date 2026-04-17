@@ -155,6 +155,9 @@ const valori = [
 function HeroSection() {
   const { language } = useLanguage()
   const t = translations[language]
+  const heroSubtitle = 'subtitle1' in t.hero
+    ? [t.hero.subtitle1, t.hero.subtitle2]
+    : [t.hero.subtitle]
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -216,9 +219,12 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="text-lg sm:text-xl text-blue-100/80 w-full mb-10 leading-relaxed"
         >
-          {t.hero.subtitle1}
-          <br />
-          {t.hero.subtitle2}
+          {heroSubtitle.map((line, index) => (
+            <span key={`${index}-${line}`}>
+              {line}
+              {index === 0 && heroSubtitle.length > 1 ? <br /> : null}
+            </span>
+          ))}
 
         </motion.p>
 
