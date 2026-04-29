@@ -150,6 +150,12 @@ const valori = [
   }
 ]
 
+const partnerLogos = [
+  { src: '/assets/partner/docfinance.png', alt: 'DocFinance' },
+  { src: '/assets/partner/ingenia.png', alt: 'Ingenia' },
+  { src: '/assets/partner/proemdya.png', alt: 'Proemdya' },
+]
+
 
 // ─── Sezione Hero ─────────────────────────────────────────────────────────────
 function HeroSection() {
@@ -295,6 +301,38 @@ function HeroSection() {
           <div className="w-1 h-2 bg-white/60 rounded-full" />
         </motion.div>
       </motion.div>
+    </section>
+  )
+}
+
+// ─── Sezione Partner ─────────────────────────────────────────────────────────
+function PartnerSection() {
+  return (
+    <section className="border-y border-slate-200 bg-white py-10 sm:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-700">
+            Partner
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {partnerLogos.map((partner) => (
+            <div
+              key={partner.alt}
+              className="flex min-h-40 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-8 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md"
+            >
+              <Image
+                src={partner.src}
+                alt={partner.alt}
+                width={280}
+                height={140}
+                className="h-20 w-full object-contain sm:h-24"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
@@ -952,6 +990,7 @@ export default function App() {
       <HeroSection />
       <ServiziSection />
       <ChiSiamoSection />
+      <PartnerSection />
       <ValoriSection />
       <ContattiSection />
       <MapSection />
