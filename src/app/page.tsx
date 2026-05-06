@@ -354,6 +354,7 @@ function ServiziSection() {
       color: 'from-indigo-600 to-indigo-800',
       badge: t.serviziDetails.wms.badge,
       href: '/erp',
+          ctaLabel: t.servizi.erpCta,
       isWeb: false,
     },
     {
@@ -364,6 +365,8 @@ function ServiziSection() {
       description: t.serviziDetails.docfinance.description,
       color: 'from-blue-600 to-blue-800',
       badge: t.serviziDetails.docfinance.badge,
+          href: '/docfinance',
+          ctaLabel: t.servizi.docfinanceCta,
       isWeb: false,
     },
     {
@@ -439,7 +442,7 @@ function ServiziSection() {
                   href={s.href}
                   className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
-                  {t.servizi.richiediInfo}
+                  {s.ctaLabel ?? t.servizi.richiediInfo}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               ) : (
@@ -447,7 +450,7 @@ function ServiziSection() {
                   onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
                   className="mt-5 flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
-                  {t.servizi.richiediInfo}
+                  {s.ctaLabel ?? t.servizi.richiediInfo}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               )}
