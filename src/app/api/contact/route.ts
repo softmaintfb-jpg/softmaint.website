@@ -1,10 +1,86 @@
 import { NextResponse, NextRequest } from 'next/server'
+import nodemailer from 'nodemailer'
+
+export const runtime = 'nodejs'
 
 interface ContactFormData {
   nome: string
   email: string
   telefono?: string
   messaggio: string
+}
+
+type SmtpConfig = {
+  host: string
+  port: number
+  secure: boolean
+  user: string
+  pass: string
+  from: string
+  to: string
+}
+
+function getSmtpConfig(): SmtpConfig {
+  const {
+    SMTP_HOST,
+    SMTP_PORT,
+    SMTP_USER,
+    SMTP_PASS,
+    SMTP_FROM,
+    SMTP_TO,
+    SMTP_SECURE,
+  } = process.env
+
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM || !SMTP_TO) {
+    throw new Error('SMTP config missing')
+  }
+
+  const port = Number(SMTP_PORT)
+  if (!Number.isFinite(port) || port <= 0) {
+    throw new Error('SMTP port invalid')
+  }
+
+  const secure = SMTP_SECURE ? SMTP_SECURE === 'true' : port === 465
+
+  return {
+    host: SMTP_HOST,
+    port,
+    secure,
+    user: SMTP_USER,
+    pass: SMTP_PASS,
+    from: SMTP_FROM,
+    to: SMTP_TO,
+  }
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (char) => {
+    switch (char) {
+      case '&':
+        return '&amp;'
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '"':
+        return '&quot;'
+      case "'":
+        return '&#39;'
+      default:
+        return char
+    }
+  })
+}
+
+function formatTimestamp(iso: string) {
+  const date = new Date(iso)
+  if (Number.isNaN(date.getTime())) {
+    return iso
+  }
+  return new Intl.DateTimeFormat('it-IT', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+  }).format(date)
 }
 
 export async function POST(request: NextRequest) {
@@ -37,12 +113,51 @@ export async function POST(request: NextRequest) {
       messaggio: messaggio.trim(),
       timestamp: new Date().toISOString(),
     }
+    const formattedTimestamp = formatTimestamp(contact.timestamp)
 
-    // Log del contatto (in produzione, salva su DB, invia email, ecc.)
-    console.log('[Contact Form] Nuovo messaggio:', contact)
+    const smtp = getSmtpConfig()
+    const transporter = nodemailer.createTransport({
+      host: smtp.host,
+      port: smtp.port,
+      secure: smtp.secure,
+      auth: {
+        user: smtp.user,
+        pass: smtp.pass,
+      },
+    })
 
-    // TODO: Implementare salvataggio su MongoDB o altro database
-    // TODO: Inviare email di notifica
+    const plainText = [
+      'Nuovo messaggio dal sito',
+      '',
+      `Nome: ${contact.nome}`,
+      `Email: ${contact.email}`,
+      `Telefono: ${contact.telefono || '-'}`,
+      '',
+      'Messaggio:',
+      contact.messaggio,
+      '',
+      `Timestamp: ${formattedTimestamp}`,
+    ].join('\n')
+
+    const htmlBody = [
+      '<h2>Nuovo messaggio dal sito</h2>',
+      `<p><strong>Nome:</strong> ${escapeHtml(contact.nome)}</p>`,
+      `<p><strong>Email:</strong> ${escapeHtml(contact.email)}</p>`,
+      `<p><strong>Telefono:</strong> ${escapeHtml(contact.telefono || '-')}</p>`,
+      `<p><strong>Messaggio:</strong><br/>${escapeHtml(contact.messaggio).replace(/\n/g, '<br/>')}</p>`,
+      `<p><strong>Timestamp:</strong> ${escapeHtml(formattedTimestamp)}</p>`,
+    ].join('')
+
+    const info = await transporter.sendMail({
+      from: smtp.from,
+      to: smtp.to,
+      replyTo: `${contact.nome} <${contact.email}>`,
+      subject: `Nuovo messaggio dal sito: ${contact.nome}`,
+      text: plainText,
+      html: htmlBody,
+    })
+
+    console.log('[Contact Form] Email inviata:', info.messageId)
 
     return NextResponse.json(
       {
@@ -54,7 +169,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[Contact Form] Errore:', error)
     return NextResponse.json(
-      { success: false, error: 'Errore nel salvataggio del messaggio' },
+      { success: false, error: 'Errore invio email o configurazione SMTP non valida' },
       { status: 500 }
     )
   }

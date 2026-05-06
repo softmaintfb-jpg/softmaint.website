@@ -40,7 +40,7 @@ export default function DocFinancePage() {
 			<Navbar backHref="/#servizi" backLabel={t.tornaServizi} />
 			<main className="min-h-screen bg-white text-slate-900 pt-20">
 				{/* Hero Section */}
-				<section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-500 py-24 sm:py-32">
+				<section className="relative overflow-hidden bg-gradient-to-br from-blue-800 via-blue-800 to-blue-800 py-24 sm:py-32">
 					<div className="absolute inset-0 opacity-10">
 						<div className="absolute -top-40 right-0 h-80 w-80 rounded-full bg-white blur-3xl" />
 						<div className="absolute -bottom-40 left-0 h-80 w-80 rounded-full bg-white blur-3xl" />
