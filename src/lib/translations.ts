@@ -247,6 +247,15 @@ export const translations = {
         h2: 'Gestione operativa di logistica e imballaggio anche in modalita offline',
         h3: 'Tracciabilita completa per conformita, qualita e analisi scarti',
       },
+      // Smart B2B translations
+      smartB2B: {
+        name: 'Smart B2B',
+        subtitle: 'Gestione ordini, CRM, storico e monitoraggio credito',
+        description: 'Smart B2B offre una piattaforma completa per la gestione delle vendite B2B, integrando ordini, CRM, storico clienti e monitoraggio del credito in un unico strumento.',
+        h1: 'Ordini e preventivi centralizzati',
+        h2: 'CRM avanzato con storico clienti',
+        h3: 'Monitoraggio credito e reportistica',
+      },
     },
     // Product Page UI
     productPageUI: {
@@ -349,6 +358,17 @@ export const translations = {
           'Ottimizzazione di materiali, tempi e carichi macchina',
           'Supporto operativo a logistica e imballaggio guidato',
           'Tracciabilita end-to-end per conformita e riduzione degli scarti',
+        ],
+      },
+      smartB2B: {
+        name: 'Smart B2B',
+        subtitle: 'Gestione ordini, CRM, storico e monitoraggio credito',
+        description: 'Smart B2B offre una piattaforma completa per la gestione delle vendite B2B. Integra ordini, CRM, storico clienti e monitoraggio del credito in un unico strumento, migliorando efficienza e controllo amministrativo.',
+        highlights: [
+          'Ordini e preventivi centralizzati con gestione semplificata',
+          'CRM avanzato con storico clienti e interazioni',
+          'Monitoraggio credito in tempo reale e reportistica',
+          'Integrazione completa con i dati gestionali',
         ],
       },
     },
@@ -700,6 +720,17 @@ export const translations = {
           'Optimization of materials, timing and machine workloads',
           'Operational support for logistics and guided packing activities',
           'End-to-end traceability for compliance and scrap reduction',
+        ],
+      },
+      smartB2B: {
+        name: 'Smart B2B',
+        subtitle: 'B2B sales management, CRM, history and credit monitoring',
+        description: 'Smart B2B provides a complete platform for B2B sales management. It integrates orders, CRM, customer history and credit monitoring into a single tool, improving efficiency and administrative control.',
+        highlights: [
+          'Centralized orders and quotes with simplified management',
+          'Advanced CRM with customer history and interactions',
+          'Real-time credit monitoring and reporting',
+          'Complete integration with management system data',
         ],
       },
     },

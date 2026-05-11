@@ -67,6 +67,21 @@ export default function WebAppPageContent() {
 			],
 		},
 		{
+			id: 'smartb2b',
+			route: '/smartb2b',
+			image: `/assets/smartb2b.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/smartb2b.pdf',
+			alt: 'Panoramica Smart B2B con ordini, CRM, storico e monitoraggio credito',
+			name: t.webappPage.smartB2B.name,
+			subtitle: t.webappPage.smartB2B.subtitle,
+			description: t.webappPage.smartB2B.description,
+			highlights: [
+				t.webappPage.smartB2B.h1,
+				t.webappPage.smartB2B.h2,
+				t.webappPage.smartB2B.h3,
+			],
+		},
+		{
 			id: 'smart-produzione',
 			route: '/smartproduzione',
 			image: `/assets/smartproduzione.png?v=${assetVersion}`,
