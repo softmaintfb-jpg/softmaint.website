@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
+import { phonePattern } from '@/lib/validators'
 
 type ProductKey = 'smartLogistica' | 'smartAgenti' | 'smartMail' | 'smartProduzione'
 
@@ -255,6 +256,7 @@ export function WebAppProductPage({
                   value={formData.telefono}
                   onChange={handleChange}
                   placeholder={ui.formTelefono}
+                  pattern={phonePattern}
                   className="border-blue-100 bg-white"
                 />
                 <Input

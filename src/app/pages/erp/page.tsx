@@ -121,14 +121,6 @@ export default function ErpPageContent() {
 
 				<section className="border-t border-slate-200 bg-white">
 					<div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-						<h2 className="text-3xl font-light leading-tight text-slate-600 sm:text-4xl">
-							{t.erpPage.bodyTitle}
-						</h2>
-
-						<p className="mt-8 text-2xl font-light leading-relaxed text-slate-500 sm:text-4xl">
-							{t.erpPage.bodyLead}
-						</p>
-
 						<p className="mt-8 text-lg leading-relaxed text-slate-500">
 							{t.erpPage.p1}
 						</p>

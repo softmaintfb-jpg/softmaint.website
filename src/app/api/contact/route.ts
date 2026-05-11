@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import nodemailer from 'nodemailer'
+import { phoneRegex } from '@/lib/validators'
 
 export const runtime = 'nodejs'
 
@@ -105,11 +106,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const trimmedTelefono = telefono.trim()
+    if (trimmedTelefono && !phoneRegex.test(trimmedTelefono)) {
+      return NextResponse.json(
+        { success: false, error: 'Formato telefono non valido' },
+        { status: 400 }
+      )
+    }
+
     // Creazione oggetto contatto
     const contact = {
       nome: nome.trim(),
       email: email.trim().toLowerCase(),
-      telefono: telefono.trim(),
+      telefono: trimmedTelefono,
       messaggio: messaggio.trim(),
       timestamp: new Date().toISOString(),
     }

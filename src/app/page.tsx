@@ -12,6 +12,7 @@ import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
+import { phonePattern } from '@/lib/validators'
 import {
   ChevronRight, ArrowRight, Phone, Mail, MapPin,
   Database, Globe, Leaf, Factory, DollarSign, Shield,
@@ -854,6 +855,7 @@ function ContattiSection() {
                       value={formData.telefono}
                       onChange={handleChange}
                       placeholder="+39 333 1234567"
+                      pattern={phonePattern}
                       className="h-11 border-gray-200 focus:border-blue-400 focus:ring-blue-200"
                     />
                   </div>
