@@ -38,6 +38,9 @@ export const translations = {
       docfinanceCta: 'Scopri di più',
       erpCta: 'Scopri di più sull\'ERP',
       scopriWeb: 'Scopri le soluzioni web',
+      supremoTitle: 'Scarica Supremo',
+      supremoDescription: 'Strumento di supporto remoto per assistenza tecnica e condivisione dello schermo in tempo reale.',
+      supremoBtn: 'Scarica Supremo',
     },
     // Servizi dettagli
     serviziDetails: {
@@ -409,6 +412,9 @@ export const translations = {
       docfinanceCta: 'Learn more',
       erpCta: 'Learn more about the ERP',
       scopriWeb: 'Discover web solutions',
+      supremoTitle: 'Download Supremo',
+      supremoDescription: 'Remote support tool for technical assistance and real-time screen sharing.',
+      supremoBtn: 'Download Supremo',
     },
     // Servizi dettagli
     serviziDetails: {

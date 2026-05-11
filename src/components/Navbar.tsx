@@ -231,7 +231,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
           {/* Mobile burger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
+            className={`lg:hidden p-2 rounded-lg transition-colors mr-5 ${
               isLightBg ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
             }`}
           >

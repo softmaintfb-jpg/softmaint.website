@@ -17,7 +17,7 @@ import {
   ChevronRight, ArrowRight, Phone, Mail, MapPin,
   Database, Globe, Leaf, Factory, DollarSign, Shield,
   Zap, Users, Award, HeadphonesIcon, CheckCircle, Star,
-  BarChart3, Truck, Send, ExternalLink,
+  BarChart3, Truck, Send, ExternalLink, Download,
   Euro,
   X,
   PieChart,
@@ -457,6 +457,28 @@ function ServiziSection() {
               )}
             </motion.div>
           ))}
+
+          {/* Card Download Supremo */}
+          <motion.div
+            variants={cardVariant}
+            className="bg-linear-to-br from-blue-900 to-blue-700 rounded-2xl p-6 flex flex-col justify-between text-white"
+          >
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                <Download className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">{t.servizi.supremoTitle}</h3>
+              <p className="text-blue-100/80 text-sm leading-relaxed">
+                {t.servizi.supremoDescription}
+              </p>
+            </div>
+            <button
+              onClick={() => window.location.href = 'https://softmaint.it/files/Supremo.exe'}
+              className="mt-6 flex items-center justify-center gap-2 bg-white text-blue-900 font-semibold px-5 py-2.5 rounded-full hover:bg-blue-50 transition-colors text-sm"
+            >
+              {t.servizi.supremoBtn} <Download className="w-4 h-4" />
+            </button>
+          </motion.div>
 
           {/* Card CTA */}
           <motion.div
