@@ -84,8 +84,15 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
       return
     }
 
-    // Se siamo in una pagina interna, vai sempre alla sezione in home.
-    window.location.href = `/${href}`
+    // Se siamo in una pagina interna, vai alla sezione in home.
+    // Usa history.pushState per una transizione più pulita
+    if (pathname !== '/') {
+      window.location.href = `/${href}`
+      return
+    }
+
+    // Se siamo già in home ma l'elemento non è trovato, prova di nuovo dopo un breve delay
+    setTimeout(scrollWithOffset, 100)
   }
 
   const goHome = () => {
@@ -244,18 +251,20 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
           >
             <div className="px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.href}
+                  href={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="text-left text-gray-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                  className="text-left text-gray-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors block"
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
 
               {/* Mobile Language Switch */}
               <div className="flex gap-2 pt-2 border-t border-gray-200">
                 <button
+                  type="button"
                   onClick={() => setLanguage('it')}
                   className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
                     language === 'it'
@@ -266,6 +275,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   IT
                 </button>
                 <button
+                  type="button"
                   onClick={() => setLanguage('en')}
                   className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
                     language === 'en'
@@ -278,6 +288,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
               </div>
 
               <Button
+                type="button"
                 onClick={() => scrollTo('#contatti')}
                 className="bg-blue-600 hover:bg-blue-700 text-white rounded-full mt-1"
               >
