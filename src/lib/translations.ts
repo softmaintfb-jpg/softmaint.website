@@ -618,6 +618,14 @@ export const translations = {
         h2: 'Operational support for logistics and guided packing, including offline mode',
         h3: 'Complete traceability for compliance, quality and scrap analysis',
       },
+      smartB2B: {
+        name: 'Smart B2B',
+        subtitle: 'B2B order management, CRM, history and credit monitoring',
+        description: 'Smart B2B provides a complete platform for B2B sales management, integrating orders, CRM, customer history and credit monitoring into a single tool.',
+        h1: 'Centralized orders and quotes with simplified management',
+        h2: 'Advanced CRM with complete customer history',
+        h3: 'Real-time credit monitoring and reporting',
+      },
     },
     // Product Page UI
     productPageUI: {
