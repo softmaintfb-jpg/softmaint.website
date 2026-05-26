@@ -9,6 +9,7 @@ export const translations = {
       chiSiamo: 'Chi Siamo',
       doveSiamo: 'Dove Siamo',
       contattaci: 'Contattaci',
+      download: 'Download',
     },
     // Hero
     hero: {
@@ -195,7 +196,7 @@ export const translations = {
       subtitle: 'Siamo facilmente raggiungibili e pronti ad accoglierti.',
       sedeTitle: 'Sede Principale',
       indirizzo: 'Indirizzo',
-      indirizzoValue: 'Via On. Francesco Napoletano, 185\n80035 Nola Città Metropolitana di Napoli, Italy',
+      indirizzoValue: 'Via On. Francesco Napolitano, 185\n80035 Nola Città Metropolitana di Napoli, Italy',
       mapBtn: 'Visualizza su Mappe',
     },
     // Footer
@@ -569,7 +570,7 @@ export const translations = {
       subtitle: 'We are easily accessible and ready to welcome you.',
       sedeTitle: 'Headquarters',
       indirizzo: 'Address',
-      indirizzoValue: 'Via On. Francesco Napoletano, 185\n80035 Nola Città Metropolitana di Napoli, Italy',
+      indirizzoValue: 'Via On. Francesco Napolitano, 185\n80035 Nola Città Metropolitana di Napoli, Italy',
       mapBtn: 'View on Maps',
     },
     // Footer

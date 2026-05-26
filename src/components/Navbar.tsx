@@ -22,6 +22,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
   const pathname = usePathname()
   const { language, setLanguage } = useLanguage()
   const t = translations[language]
+  const supremoDownloadUrl = 'https://softmaint.it/files/Supremo.exe'
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
@@ -56,11 +57,17 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
   }, [pathname])
 
   const navLinks = [
-    { label: t.nav.home, href: '#home' },
-    { label: t.nav.servizi, href: '#servizi' },
-    { label: t.nav.chiSiamo, href: '#chi-siamo' },
-    { label: t.nav.doveSiamo, href: '#dove-siamo' },
+    { key: 'home', label: t.nav.home, href: '#home' },
+    { key: 'servizi', label: t.nav.servizi, href: '#servizi' },
+    { key: 'chi-siamo', label: t.nav.chiSiamo, href: '#chi-siamo' },
+    { key: 'dove-siamo', label: t.nav.doveSiamo, href: '#dove-siamo' },
+    { key: 'download', label: 'Download', href: '#servizi', hasMenu: true },
   ]
+
+  const installSupremo = () => {
+    setMobileOpen(false)
+    window.location.href = supremoDownloadUrl
+  }
 
   const scrollTo = (href: string) => {
     setMobileOpen(false)
@@ -168,20 +175,50 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                className={`text-sm font-medium transition-all duration-200 hover:opacity-80 relative group ${
-                  isLightBg ? 'text-gray-700' : 'text-white/90'
-                }`}
-              >
-                {link.label}
-                <span
-                  className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                    isLightBg ? 'bg-blue-600' : 'bg-white'
+              link.hasMenu ? (
+                <div key={link.key} className="relative group/download">
+                  <button
+                    onClick={() => scrollTo(link.href)}
+                    className={`text-sm font-medium transition-all duration-200 hover:opacity-80 relative group ${
+                      isLightBg ? 'text-gray-700' : 'text-white/90'
+                    }`}
+                  >
+                    {link.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                        isLightBg ? 'bg-blue-600' : 'bg-white'
+                      }`}
+                    />
+                  </button>
+
+                  <div className="pointer-events-none absolute left-1/2 top-full z-20 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover/download:pointer-events-auto group-hover/download:opacity-100 group-focus-within/download:pointer-events-auto group-focus-within/download:opacity-100">
+                    <div className="rounded-xl border border-blue-100 bg-white p-2 shadow-lg">
+                      <button
+                        type="button"
+                        onClick={installSupremo}
+                        className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50"
+                      >
+                        Installa Supremo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  key={link.key}
+                  onClick={() => scrollTo(link.href)}
+                  className={`text-sm font-medium transition-all duration-200 hover:opacity-80 relative group ${
+                    isLightBg ? 'text-gray-700' : 'text-white/90'
                   }`}
-                />
-              </button>
+                >
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                      isLightBg ? 'bg-blue-600' : 'bg-white'
+                    }`}
+                  />
+                </button>
+              )
             ))}
 
             {/* Language Switch */}
@@ -252,7 +289,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
             <div className="px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.key}
                   href={link.href}
                   onClick={() => scrollTo(link.href)}
                   className="text-left text-gray-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors block"
@@ -260,6 +297,14 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   {link.label}
                 </Link>
               ))}
+
+              <button
+                type="button"
+                onClick={installSupremo}
+                className="text-left text-blue-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors block"
+              >
+                Installa Supremo
+              </button>
 
               {/* Mobile Language Switch */}
               <div className="flex gap-2 pt-2 border-t border-gray-200">

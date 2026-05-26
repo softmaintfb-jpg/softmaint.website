@@ -346,7 +346,7 @@ function ServiziSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const servizi = [
-        {
+      {
       id: 1,
       icon: Database,
       title: t.serviziDetails.wms.title,
