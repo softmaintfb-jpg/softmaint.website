@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/web-ticket-accettazione.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/software.html',
+        destination: '/webapp',
+        permanent: true,
+      },
     ];
   },
 };
