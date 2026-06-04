@@ -13,17 +13,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/download.html',
-        destination: '/',
+        destination: '/#servizi',
         permanent: true,
       },
       {
         source: '/contatti.html',
-        destination: '/',
+        destination: '/#contatti',
         permanent: true,
       },
       {
         source: '/chi-siamo.html',
-        destination: '/',
+        destination: '/#chi-siamo',
         permanent: true,
       },
       {
