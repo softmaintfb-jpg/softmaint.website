@@ -9,6 +9,31 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/download.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/contatti.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/chi-siamo.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/web-ticket.html',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
 };
+
 
 export default nextConfig;
