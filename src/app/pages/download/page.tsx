@@ -177,7 +177,7 @@ export default function DownloadPage() {
     const categories = useMemo(() => [
         { id: 'all', label: language === 'it' ? 'Tutti' : 'All' },
         { id: 'software', label: language === 'it' ? 'Software (.exe)' : 'Software (.exe)' },
-        { id: 'documenti', label: language === 'it' ? 'Brochure (.pdf)' : 'Brochures (.pdf)' },
+        { id: 'documenti', label: language === 'it' ? 'Documenti (.pdf)' : 'Documents (.pdf)' },
         { id: 'altro', label: language === 'it' ? 'Altro' : 'Other' }
     ], [language])
 
@@ -295,8 +295,8 @@ export default function DownloadPage() {
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${activeCategory === cat.id
-                                        ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-105'
-                                        : 'bg-white text-slate-600 border border-slate-200/70 hover:bg-slate-50'
+                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-105'
+                                    : 'bg-white text-slate-600 border border-slate-200/70 hover:bg-slate-50'
                                     }`}
                             >
                                 {cat.label}
