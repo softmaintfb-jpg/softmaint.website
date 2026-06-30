@@ -86,7 +86,7 @@ const servizi = [
     title: 'DocFinance',
     subtitle: 'Tesoreria & Finanza',
     description: 'Gestione completa della tesoreria aziendale. Controllo dei flussi di cassa, previsioni finanziarie, riconciliazione bancaria e reportistica avanzata.',
-    color: 'from-blue-600 to-blue-800',
+    color: 'from-amber-500 to-amber-700',
     badge: 'Finanza'
   },
   {
@@ -95,7 +95,7 @@ const servizi = [
     title: 'WMS',
     subtitle: 'Warehouse Management System',
     description: 'Sistema di gestione magazzino avanzato per ottimizzare picking, stoccaggio, inventario e tracciabilità dei prodotti in tempo reale.',
-    color: 'from-indigo-600 to-indigo-800',
+    color: 'from-stone-600 to-stone-800',
     badge: 'Logistica'
   },
   {
@@ -104,7 +104,7 @@ const servizi = [
     title: 'Web Application',
     subtitle: 'Soluzioni Web Custom',
     description: 'Sviluppo di applicazioni web su misura, responsive e performanti. Dal portale aziendale all\'app gestionale, soluzioni personalizzate per ogni esigenza.',
-    color: 'from-sky-600 to-sky-800',
+    color: 'from-yellow-500 to-yellow-700',
     badge: 'Sviluppo'
   },
   {
@@ -113,7 +113,7 @@ const servizi = [
     title: 'Green Project',
     subtitle: 'Sostenibilità Digitale',
     description: 'Soluzioni software orientate alla sostenibilità: riduzione della carta, ottimizzazione dei processi energetici e monitoraggio delle emissioni aziendali.',
-    color: 'from-teal-600 to-teal-800',
+    color: 'from-amber-600 to-amber-800',
     badge: 'Green'
   },
   {
@@ -122,7 +122,7 @@ const servizi = [
     title: 'Azienda 4.0',
     subtitle: 'Industria del Futuro',
     description: 'Digitalizzazione dei processi produttivi. IoT, automazione, MES e integrazione con sistemi ERP per una fabbrica intelligente e connessa.',
-    color: 'from-violet-600 to-violet-800',
+    color: 'from-zinc-600 to-zinc-800',
     badge: 'Industria'
   }
 ]
@@ -169,7 +169,7 @@ function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-linear-to-br from-blue-950 via-blue-900 to-blue-800" />
+      <div className="absolute inset-0 bg-linear-to-br from-zinc-900 via-stone-800 to-zinc-800" />
 
       {/* Background image overlay */}
       <div
@@ -191,8 +191,8 @@ function HeroSection() {
       />
 
       {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -215,7 +215,7 @@ function HeroSection() {
         >
           {t.hero.title1}
           <br />
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-sky-300">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-yellow-400">
             {t.hero.title2}
           </span>
         </motion.h1>
@@ -224,7 +224,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-lg sm:text-xl text-blue-100/80 w-full mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-stone-200/80 w-full mb-10 leading-relaxed"
         >
           {heroSubtitle.map((line, index) => (
             <span key={`${index}-${line}`}>
@@ -243,7 +243,7 @@ function HeroSection() {
         >
           <button
             onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group flex items-center gap-2 bg-white text-blue-900 font-semibold px-8 py-3.5 rounded-full hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="group flex items-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-8 py-3.5 rounded-full hover:bg-amber-300 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
             {t.hero.btnServizi}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -275,13 +275,13 @@ function HeroSection() {
               whileHover={{ scale: 1.08 }}
             >
               <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <stat.icon className="w-8 h-8 text-blue-300" />
+                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-amber-400/20 transition-colors">
+                  <stat.icon className="w-8 h-8 text-amber-300" />
                 </div>
               </div>
               <div className="text-4xl sm:text-5xl font-bold text-white">{stat.value}</div>
-              <div className="text-sm sm:text-base text-blue-200/70 mt-3">{stat.label}</div>
-              <div className="mt-4 h-1.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
+              <div className="text-sm sm:text-base text-stone-300/70 mt-3">{stat.label}</div>
+              <div className="mt-4 h-1.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-full" />
             </motion.div>
           ))}
         </motion.div>
@@ -309,10 +309,10 @@ function HeroSection() {
 // ─── Sezione Partner ─────────────────────────────────────────────────────────
 function PartnerSection() {
   return (
-    <section className="border-y border-slate-200 bg-white py-10 sm:py-12">
+    <section className="border-y border-stone-200 bg-white py-10 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between gap-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-700">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">
             Partner
           </p>
         </div>
@@ -352,7 +352,7 @@ function ServiziSection() {
       title: t.serviziDetails.wms.title,
       subtitle: t.serviziDetails.wms.subtitle,
       description: t.serviziDetails.wms.description,
-      color: 'from-indigo-600 to-indigo-800',
+      color: 'from-stone-600 to-stone-800',
       badge: t.serviziDetails.wms.badge,
       href: '/erp',
           ctaLabel: t.servizi.erpCta,
@@ -364,7 +364,7 @@ function ServiziSection() {
       title: t.serviziDetails.docfinance.title,
       subtitle: t.serviziDetails.docfinance.subtitle,
       description: t.serviziDetails.docfinance.description,
-      color: 'from-blue-600 to-blue-800',
+      color: 'from-amber-500 to-amber-700',
       badge: t.serviziDetails.docfinance.badge,
           href: '/docfinance',
           ctaLabel: t.servizi.docfinanceCta,
@@ -376,7 +376,7 @@ function ServiziSection() {
       title: t.serviziDetails.webapp.title,
       subtitle: t.serviziDetails.webapp.subtitle,
       description: t.serviziDetails.webapp.description,
-      color: 'from-sky-600 to-sky-800',
+      color: 'from-yellow-500 to-yellow-700',
       badge: t.serviziDetails.webapp.badge,
       isWeb: true,
     },
@@ -386,7 +386,7 @@ function ServiziSection() {
       title: t.serviziDetails.azienda40.title,
       subtitle: t.serviziDetails.azienda40.subtitle,
       description: t.serviziDetails.azienda40.description,
-      color: 'from-violet-600 to-violet-800',
+      color: 'from-zinc-600 to-zinc-800',
       badge: t.serviziDetails.azienda40.badge,
       isWeb: false,
     },
@@ -394,10 +394,10 @@ function ServiziSection() {
   ]
 
   return (
-    <section id="servizi" className="py-24 bg-gray-50">
+    <section id="servizi" className="py-24 bg-stone-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <h2 className="text-blue-600 font-semibold text-3xl uppercase tracking-widest">{t.servizi.label}</h2>
+          <h2 className="text-amber-600 font-semibold text-3xl uppercase tracking-widest">{t.servizi.label}</h2>
           {/* <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
             {t.servizi.title}
           </h2> */}
@@ -428,12 +428,12 @@ function ServiziSection() {
                 {s.badge}
               </Badge> */}
               
-              <p className="text-sm text-blue-600 font-medium mb-3">{s.subtitle}</p>
+              <p className="text-sm text-amber-600 font-medium mb-3">{s.subtitle}</p>
               <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
               {s.isWeb ? (
                 <Link
                   href="/webapp"
-                  className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
+                  className="mt-5 inline-flex items-center gap-1.5 text-amber-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
                   {t.servizi.scopriWeb}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -441,7 +441,7 @@ function ServiziSection() {
               ) : s.href ? (
                 <Link
                   href={s.href}
-                  className="mt-5 inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
+                  className="mt-5 inline-flex items-center gap-1.5 text-amber-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
                   {s.ctaLabel ?? t.servizi.richiediInfo}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -449,7 +449,7 @@ function ServiziSection() {
               ) : (
                 <button
                   onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="mt-5 flex items-center gap-1.5 text-blue-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
+                  className="mt-5 flex items-center gap-1.5 text-amber-600 text-sm font-semibold hover:gap-2.5 transition-all duration-200 group/btn"
                 >
                   {s.ctaLabel ?? t.servizi.richiediInfo}
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -461,20 +461,20 @@ function ServiziSection() {
           {/* Card Download Supremo */}
           <motion.div
             variants={cardVariant}
-            className="bg-linear-to-br from-blue-900 to-blue-700 rounded-2xl p-6 flex flex-col justify-between text-white"
+            className="bg-linear-to-br from-zinc-800 to-zinc-900 rounded-2xl p-6 flex flex-col justify-between text-white"
           >
             <div>
-              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                <Download className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-amber-400/20 flex items-center justify-center mb-4">
+                <Download className="w-6 h-6 text-amber-400" />
               </div>
               <h3 className="text-xl font-bold mb-3">{t.servizi.supremoTitle}</h3>
-              <p className="text-blue-100/80 text-sm leading-relaxed">
+              <p className="text-stone-300/80 text-sm leading-relaxed">
                 {t.servizi.supremoDescription}
               </p>
             </div>
             <button
               onClick={() => window.location.href = 'https://softmaint.it/files/Supremo.exe'}
-              className="mt-6 flex items-center justify-center gap-2 bg-white text-blue-900 font-semibold px-5 py-2.5 rounded-full hover:bg-blue-50 transition-colors text-sm"
+              className="mt-6 flex items-center justify-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-5 py-2.5 rounded-full hover:bg-amber-300 transition-colors text-sm"
             >
               {t.servizi.supremoBtn} <Download className="w-4 h-4" />
             </button>
@@ -483,20 +483,20 @@ function ServiziSection() {
           {/* Card CTA */}
           <motion.div
             variants={cardVariant}
-            className="bg-linear-to-br from-blue-900 to-blue-700 rounded-2xl p-6 flex flex-col justify-between text-white"
+            className="bg-linear-to-br from-zinc-800 to-zinc-900 rounded-2xl p-6 flex flex-col justify-between text-white"
           >
             <div>
-              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                <Send className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-amber-400/20 flex items-center justify-center mb-4">
+                <Send className="w-6 h-6 text-amber-400" />
               </div>
               <h3 className="text-xl font-bold mb-3">{t.servizi.ctaTitle}</h3>
-              <p className="text-blue-100/80 text-sm leading-relaxed">
+              <p className="text-stone-300/80 text-sm leading-relaxed">
                 {t.servizi.ctaText}
               </p>
             </div>
             <button
               onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
-              className="mt-6 flex items-center justify-center gap-2 bg-white text-blue-900 font-semibold px-5 py-2.5 rounded-full hover:bg-blue-50 transition-colors text-sm"
+              className="mt-6 flex items-center justify-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-5 py-2.5 rounded-full hover:bg-amber-300 transition-colors text-sm"
             >
               {t.servizi.ctaBtn} <ArrowRight className="w-4 h-4" />
             </button>
@@ -536,7 +536,7 @@ function ChiSiamoSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Testo */}
           <AnimatedSection variants={fadeInLeft}>
-            <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.chiSiamo.label}</span>
+            <span className="text-amber-600 font-semibold text-sm uppercase tracking-widest">{t.chiSiamo.label}</span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
               {t.chiSiamo.title}
             </h2>
@@ -551,7 +551,7 @@ function ChiSiamoSection() {
             </p>
             <div className="flex flex-wrap gap-3">
               {['ERP', 'DocFinance', 'WebApp', 'Azienda 4.0 | 5.0'].map((tag) => (
-                <a key={tag} href="#servizi" onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })} className="bg-blue-50 text-blue-700 border border-blue-100 rounded-full px-4 py-1.5 text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer">
+                <a key={tag} href="#servizi" onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })} className="bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-4 py-1.5 text-sm font-medium hover:bg-amber-100 transition-colors cursor-pointer">
                   {tag}
                 </a>
               ))}
@@ -575,7 +575,7 @@ function ChiSiamoSection() {
                   priority
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-blue-900/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-zinc-900/40 to-transparent" />
               </button>
               {/* Floating card */}
               <motion.div
@@ -680,7 +680,7 @@ function ValoriSection() {
   ]
 
   return (
-    <section className="py-24 bg-linear-to-br from-blue-950 via-blue-900 to-indigo-900 relative overflow-hidden">
+    <section className="py-24 bg-linear-to-br from-zinc-900 via-stone-800 to-zinc-800 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-5"
         style={{
@@ -688,16 +688,16 @@ function ValoriSection() {
           backgroundSize: '40px 40px'
         }}
       />
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-blue-300 font-semibold text-sm uppercase tracking-widest">{t.valori.label}</span>
+          <span className="text-amber-300 font-semibold text-sm uppercase tracking-widest">{t.valori.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
             {t.valori.title}
           </h2>
-          <p className="mt-4 text-lg text-blue-200/70 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-stone-300/70 max-w-2xl mx-auto">
             {t.valori.subtitle}
           </p>
         </AnimatedSection>
@@ -715,11 +715,11 @@ function ValoriSection() {
               variants={cardVariant}
               className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-5 group-hover:bg-blue-500/30 transition-colors">
-                <v.icon className="w-6 h-6 text-blue-300" />
+              <div className="w-12 h-12 rounded-xl bg-amber-400/20 flex items-center justify-center mb-5 group-hover:bg-amber-400/30 transition-colors">
+                <v.icon className="w-6 h-6 text-amber-300" />
               </div>
               <h3 className="text-white font-bold text-lg mb-3">{v.title}</h3>
-              <p className="text-blue-100/60 text-sm leading-relaxed">{v.description}</p>
+              <p className="text-stone-300/60 text-sm leading-relaxed">{v.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -771,11 +771,11 @@ function ContattiSection() {
   ]
 
   return (
-    <section id="contatti" className="py-24 bg-gray-50">
+    <section id="contatti" className="py-24 bg-stone-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          {/* <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">{t.contatti.label}</span> */}
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-800">
+          {/* <span className="text-amber-600 font-semibold text-sm uppercase tracking-widest">{t.contatti.label}</span> */}
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-800">
             {t.contatti.title}
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
@@ -786,16 +786,16 @@ function ContattiSection() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Info contatti */}
           <AnimatedSection variants={fadeInLeft} className="lg:col-span-2 flex flex-col gap-6">
-            <div className="bg-linear-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white">
+            <div className="bg-linear-to-br from-zinc-800 to-zinc-900 rounded-2xl p-8 text-white">
               {/* <h3 className="text-xl font-bold mb-6">{t.contatti.infoTitle}</h3> */}
               <div className="space-y-5">
                 {contatti.map((c) => (
                   <a key={c.label} href={c.href} className="flex items-center gap-4 group">
-                    <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors shrink-0">
-                      <c.icon className="w-5 h-5 text-blue-200" />
+                    <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-amber-400/20 transition-colors shrink-0">
+                      <c.icon className="w-5 h-5 text-amber-300" />
                     </div>
                     <div>
-                      <div className="text-xs text-blue-300 mb-0.5">{c.label}</div>
+                      <div className="text-xs text-amber-300 mb-0.5">{c.label}</div>
                       <div className="text-sm font-medium">{c.value}</div>
                     </div>
                   </a>
@@ -831,7 +831,7 @@ function ContattiSection() {
                   </div>
                   <h4 className="text-xl font-bold text-gray-900 mb-2">{t.contatti.formSuccess}</h4>
                   <p className="text-gray-500 mb-6">{t.contatti.formSuccessText}</p>
-                  <Button onClick={() => setStatus('idle')} variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50">
+                  <Button onClick={() => setStatus('idle')} variant="outline" className="border-amber-200 text-amber-700 hover:bg-amber-50">
                     {t.contatti.formAltro}
                   </Button>
                 </div>
@@ -848,7 +848,7 @@ function ContattiSection() {
                         onChange={handleChange}
                         placeholder="Mario Rossi"
                         required
-                        className="h-11 border-gray-200 focus:border-blue-400 focus:ring-blue-200"
+                        className="h-11 border-gray-200 focus:border-amber-400 focus:ring-amber-200"
                       />
                     </div>
                     <div>
@@ -862,7 +862,7 @@ function ContattiSection() {
                         onChange={handleChange}
                         placeholder="mario@azienda.it"
                         required
-                        className="h-11 border-gray-200 focus:border-blue-400 focus:ring-blue-200"
+                        className="h-11 border-gray-200 focus:border-amber-400 focus:ring-amber-200"
                       />
                     </div>
                   </div>
@@ -878,7 +878,7 @@ function ContattiSection() {
                       onChange={handleChange}
                       placeholder="+39 333 1234567"
                       pattern={phonePattern}
-                      className="h-11 border-gray-200 focus:border-blue-400 focus:ring-blue-200"
+                      className="h-11 border-gray-200 focus:border-amber-400 focus:ring-amber-200"
                     />
                   </div>
 
@@ -893,7 +893,7 @@ function ContattiSection() {
                       placeholder={t.contatti.formDesc}
                       required
                       rows={5}
-                      className="border-gray-200 focus:border-blue-400 focus:ring-blue-200 resize-none"
+                      className="border-gray-200 focus:border-amber-400 focus:ring-amber-200 resize-none"
                     />
                   </div>
 
@@ -904,7 +904,7 @@ function ContattiSection() {
                   <Button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 disabled:opacity-60"
+                    className="w-full h-11 bg-amber-500 hover:bg-amber-400 text-zinc-900 rounded-lg font-semibold transition-all duration-200 disabled:opacity-60"
                   >
                     {status === 'loading' ? (
                       <span className="flex items-center gap-2">
@@ -940,7 +940,7 @@ function MapSection() {
     <section id="dove-siamo" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <h3 className="text-blue-600 font-semibold text-3xl uppercase tracking-widest">{t.doveSiamo.label}</h3>
+          <h3 className="text-amber-600 font-semibold text-3xl uppercase tracking-widest">{t.doveSiamo.label}</h3>
           {/* <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
             {t.doveSiamo.title}
           </h2> */}
@@ -974,16 +974,16 @@ function MapSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-linear-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white shadow-xl"
+                className="bg-linear-to-br from-zinc-800 to-zinc-900 rounded-2xl p-8 text-white shadow-xl"
               >
                 <h3 className="text-2xl font-bold mb-8">{t.doveSiamo.sedeTitle}</h3>
                 <div className="space-y-8">
                   <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                      <MapPin className="w-6 h-6 text-blue-300" />
+                    <div className="w-12 h-12 rounded-xl bg-amber-400/20 flex items-center justify-center shrink-0">
+                      <MapPin className="w-6 h-6 text-amber-300" />
                     </div>
                     <div>
-                      <div className="text-sm text-blue-300 mb-2 font-semibold uppercase tracking-small">{t.doveSiamo.indirizzo}</div>
+                      <div className="text-sm text-amber-300 mb-2 font-semibold uppercase tracking-small">{t.doveSiamo.indirizzo}</div>
                       <div className="text-base font-medium leading-relaxed whitespace-pre-line">
                         {t.doveSiamo.indirizzoValue}
                       </div>

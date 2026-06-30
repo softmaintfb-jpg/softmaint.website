@@ -58,8 +58,8 @@ export default function ErpPageContent() {
 			<main className="min-h-screen bg-slate-100 pt-16 lg:pt-20">
 				<section className="border-b border-slate-200 bg-white">
 					<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-						<div className="mt-6 overflow-hidden rounded-2xl bg-linear-to-r from-blue-900 via-blue-800 to-blue-700 px-6 py-8 text-white shadow-lg sm:px-10">
-							<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
+						<div className="mt-6 overflow-hidden rounded-2xl bg-linear-to-r from-zinc-800 via-zinc-800 to-stone-700 px-6 py-8 text-white shadow-lg sm:px-10">
+							<p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-300">
 								{t.erpPage.heroBadge}
 							</p>
 							<div className="mt-4 grid gap-6 lg:grid-cols-[auto,1fr] lg:items-center">
@@ -70,10 +70,10 @@ export default function ErpPageContent() {
 									<h1 className="text-2xl font-extrabold leading-tight sm:text-4xl">
 										{t.erpPage.heroTitle}
 									</h1>
-									<p className="mt-4 max-w-4xl text-sm leading-relaxed text-blue-100 sm:text-base">
+									<p className="mt-4 max-w-4xl text-sm leading-relaxed text-stone-200 sm:text-base">
 										{t.erpPage.heroSubtitle}
 									</p>
-									<p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-100">
+									<p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-amber-300">
 										{t.erpPage.heroCta}
 										<ArrowRight className="h-4 w-4" />
 									</p>
@@ -97,18 +97,18 @@ export default function ErpPageContent() {
 								<Link
 									key={module.title}
 									href={`/erp/${moduleSlug}`}
-									className="group border-t border-blue-500 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+									className="group border-t border-amber-400 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
 								>
 									<h3 className="min-h-12 text-[15px] font-semibold text-slate-700">
 										{module.title}
 									</h3>
 
 									<div className="mt-4 flex items-center justify-between">
-										<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800 text-white">
+										<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-800 text-white">
 											<Icon className="h-5 w-5" />
 										</div>
 
-										<span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 transition-all duration-200 group-hover:gap-2">
+										<span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 transition-all duration-200 group-hover:gap-2">
 											{t.erpPage.learnMore}
 											<ArrowRight className="h-3.5 w-3.5" />
 										</span>

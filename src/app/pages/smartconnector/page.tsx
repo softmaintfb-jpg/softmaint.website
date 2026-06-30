@@ -9,7 +9,7 @@ export default function SmartConnectorPage() {
 			</p>
 			<Link
 				href="/#contatti"
-				className="mt-8 inline-flex items-center rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-800"
+				className="mt-8 inline-flex items-center rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-amber-400"
 			>
 				Richiedi una demo
 			</Link>

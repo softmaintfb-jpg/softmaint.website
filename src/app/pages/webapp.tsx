@@ -168,8 +168,8 @@ export default function WebAppPageContent() {
 			<Navbar backHref="/#servizi" backLabel={t.webappPage.tornaServizi} />
 			<main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 text-slate-900 pt-16 lg:pt-20">
 				<section className="relative overflow-hidden border-b border-slate-200">
-					<div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-blue-100 blur-3xl" />
-					<div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-cyan-100 blur-3xl" />
+					<div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-amber-100 blur-3xl" />
+					<div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-yellow-100 blur-3xl" />
 					<div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
 						<h1 className="max-w-4xl text-3xl font-extrabold sm:text-5xl">
 							{t.webappPage.title}
@@ -254,11 +254,11 @@ export default function WebAppPageContent() {
 								</div>
 
 								<div className="px-6 pb-7 sm:pb-8 flex-1 flex flex-col">
-									<p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">
+									<p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">
 										{t.webappPage.badge}
 									</p>
 									<h2 className="mt-2 text-xl font-bold text-slate-900">{app.name}</h2>
-									<p className="mt-1 text-sm font-medium text-blue-700">{app.subtitle}</p>
+									<p className="mt-1 text-sm font-medium text-amber-600">{app.subtitle}</p>
 
 									<p className="mt-4 text-sm leading-relaxed text-slate-600 flex-1">
 										{app.description}
@@ -276,7 +276,7 @@ export default function WebAppPageContent() {
 									<div className="mt-6">
 										<Link
 											href={app.route}
-											className="inline-flex items-center gap-2 rounded-full bg-blue-700 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-800"
+											className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-amber-400"
 										>
 											{t.webappPage.requestQuote}
 											<ArrowRight className="h-4 w-4" />

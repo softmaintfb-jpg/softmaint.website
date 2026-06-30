@@ -5,10 +5,14 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 217 91% 30%;
-    --primary-foreground: 210 40% 98%;
-    --ring: 217 91% 30%;
+    --foreground: 0 0% 15%;
+    /* Logo amber/yellow: #F5B800 → hsl(46, 100%, 48%) */
+    --primary: 46 100% 48%;
+    --primary-foreground: 0 0% 10%;
+    --ring: 46 100% 48%;
+    /* Logo dark gray: #5A5A5A → hsl(0, 0%, 35%) */
+    --gray-dark: 0 0% 22%;
+    --gray-mid: 0 0% 35%;
   }
 
   * {
