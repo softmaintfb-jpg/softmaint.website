@@ -61,7 +61,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
     { key: 'servizi', label: t.nav.servizi, href: '#servizi' },
     { key: 'chi-siamo', label: t.nav.chiSiamo, href: '#chi-siamo' },
     { key: 'dove-siamo', label: t.nav.doveSiamo, href: '#dove-siamo' },
-    { key: 'download', label: 'Download', href: '#servizi', hasMenu: true },
+    { key: 'download', label: 'Download', href: '/download', hasMenu: true },
   ]
 
   const installSupremo = () => {
@@ -192,13 +192,20 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   </button>
 
                   <div className="pointer-events-none absolute left-1/2 top-full z-20 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover/download:pointer-events-auto group-hover/download:opacity-100 group-focus-within/download:pointer-events-auto group-focus-within/download:opacity-100">
-                    <div className="rounded-xl border border-blue-100 bg-white p-2 shadow-lg">
+                    <div className="rounded-xl border border-blue-100 bg-white p-2 shadow-lg flex flex-col gap-1">
                       <button
                         type="button"
                         onClick={installSupremo}
-                        className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50"
+                        className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50 cursor-pointer"
                       >
-                        Installa Supremo
+                        {language === 'it' ? 'Installa Supremo' : 'Install Supremo'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => scrollTo('/download')}
+                        className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 border-t border-slate-100 pt-2 cursor-pointer"
+                      >
+                        {language === 'it' ? 'Tutti i Download' : 'All Downloads'}
                       </button>
                     </div>
                   </div>
