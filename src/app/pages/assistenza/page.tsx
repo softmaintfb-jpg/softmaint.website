@@ -229,7 +229,7 @@ export default function Assistenza() {
                                         value={ragioneSociale}
                                         onChange={e => setRagioneSociale(e.target.value)}
                                         required
-                                        placeholder="Nome Azienda SRL"
+                                        placeholder="Nome Azienda"
                                         className="focus:ring-amber-400 focus:border-amber-400"
                                     />
                                 </div>

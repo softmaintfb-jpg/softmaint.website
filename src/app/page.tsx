@@ -476,7 +476,7 @@ function ServiziSection() {
               onClick={() => window.location.href = '/assistenza'}
               className="mt-6 flex items-center justify-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-5 py-2.5 rounded-full hover:bg-amber-300 transition-colors text-sm"
             >
-              {t.servizi.supremoBtn}
+              {t.servizi.supremoBtn} <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
 
@@ -495,7 +495,7 @@ function ServiziSection() {
               </p>
             </div>
             <button
-              onClick={() => document.querySelector('#contatti')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => window.location.href = '/webticket'}
               className="mt-6 flex items-center justify-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-5 py-2.5 rounded-full hover:bg-amber-300 transition-colors text-sm"
             >
               {t.servizi.ctaBtn} <ArrowRight className="w-4 h-4" />
