@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/download.html',
-        destination: '/#servizi',
+        destination: '/download',
         permanent: true,
       },
       {
@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/web-ticket.html',
-        destination: '/',
+        destination: '/webticket',
         permanent: true,
       },
       {
@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
         destination: '/webapp',
         permanent: true,
       },
+
     ];
   },
 };

@@ -151,7 +151,7 @@ export default function WebTicketPage() {
 
     return (
         <div className="bg-stone-50 min-h-screen flex flex-col justify-between">
-            <Navbar />
+            <Navbar backHref="/" backLabel={language === 'it' ? 'Torna alla Home' : 'Back to Home'} />
 
             <main className="flex-1 pt-24 lg:pt-28 pb-20">
                 {/* Background glowing decorations */}

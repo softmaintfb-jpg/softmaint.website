@@ -144,7 +144,7 @@ export default function Assistenza() {
 
     return (
         <div className="bg-stone-50 min-h-screen flex flex-col justify-between">
-            <Navbar />
+            <Navbar backHref="/" backLabel={language === 'it' ? 'Torna alla Home' : 'Back to Home'} />
 
             <main className="flex-1 pt-24 lg:pt-28 pb-20">
                 <div className="absolute top-20 right-10 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
