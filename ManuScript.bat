@@ -23,7 +23,7 @@ cd /d "%~dp0"
 
 :: Verifica che sia presente la cartella .git
 if not exist .git (
-    echo [ERRORE] Questo script deve essere eseguito nella cartella principale del progetto (dove e' presente .git).
+    echo [ERRORE] Questo script deve essere eseguito nella cartella principale del progetto ^(dove e' presente la cartella .git^).
     goto FINE
 )
 
@@ -55,7 +55,7 @@ git add "public/files/" "public/links/"
 
 :: 6. Verifica se ci sono modifiche effettive da committare
 git diff --cached --quiet "public/files/" "public/links/"
-if %errorlevel% eq 0 (
+if %errorlevel% equ 0 (
     echo.
     echo [INFO] Nessun nuovo file o link rilevato da caricare.
     echo Procedo comunque con il controllo degli aggiornamenti sul server...
