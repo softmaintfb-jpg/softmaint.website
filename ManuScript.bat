@@ -51,10 +51,11 @@ if %errorlevel% neq 0 (
 :: 5. Aggiunta dei file nelle cartelle public/files/ e public/links/
 echo.
 echo Preparazione dei file in public/files/ e public/links/...
-git add "public/files/" "public/links/"
+git add "public/files/" >nul 2>&1
+git add "public/links/" >nul 2>&1
 
 :: 6. Verifica se ci sono modifiche effettive da committare
-git diff --cached --quiet "public/files/" "public/links/"
+git diff --cached --quiet
 if %errorlevel% equ 0 (
     echo.
     echo [INFO] Nessun nuovo file o link rilevato da caricare.
