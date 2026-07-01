@@ -21,8 +21,10 @@ import {
   Euro,
   X,
   PieChart,
-  Gauge
+  Gauge,
+  Settings
 } from 'lucide-react'
+import AssistenzaPage from './assistenza/page'
 
 // ─── Varianti Animazioni ─────────────────────────────────────────────────────
 const fadeInUp = {
@@ -269,8 +271,8 @@ function HeroSection() {
             { value: t.hero.stat2, label: t.hero.stat2Label, icon: Gauge },
             { value: t.hero.stat3, label: t.hero.stat3Label, icon: Gauge },
           ].map((stat) => (
-            <motion.div 
-              key={stat.label} 
+            <motion.div
+              key={stat.label}
               className="text-center group"
               whileHover={{ scale: 1.08 }}
             >
@@ -346,7 +348,7 @@ function ServiziSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const servizi = [
-      {
+    {
       id: 1,
       icon: Database,
       title: t.serviziDetails.wms.title,
@@ -355,7 +357,7 @@ function ServiziSection() {
       color: 'from-stone-600 to-stone-800',
       badge: t.serviziDetails.wms.badge,
       href: '/erp',
-          ctaLabel: t.servizi.erpCta,
+      ctaLabel: t.servizi.erpCta,
       isWeb: false,
     },
     {
@@ -366,8 +368,8 @@ function ServiziSection() {
       description: t.serviziDetails.docfinance.description,
       color: 'from-amber-500 to-amber-700',
       badge: t.serviziDetails.docfinance.badge,
-          href: '/docfinance',
-          ctaLabel: t.servizi.docfinanceCta,
+      href: '/docfinance',
+      ctaLabel: t.servizi.docfinanceCta,
       isWeb: false,
     },
     {
@@ -420,14 +422,14 @@ function ServiziSection() {
               className="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
             >
               <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${s.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <s.icon className="w-6 h-6 text-white" /> 
+                <s.icon className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-1">{s.title}</h3> 
+              <h3 className="text-xl font-bold text-gray-900 mb-1">{s.title}</h3>
               {/* da mettere accanto  */}
               {/* <Badge variant="outline" className="w-fit text-xs mb-3 text-blue-700 border-blue-200 bg-blue-50">
                 {s.badge}
               </Badge> */}
-              
+
               <p className="text-sm text-amber-600 font-medium mb-3">{s.subtitle}</p>
               <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
               {s.isWeb ? (
@@ -465,7 +467,7 @@ function ServiziSection() {
           >
             <div>
               <div className="w-12 h-12 rounded-xl bg-amber-400/20 flex items-center justify-center mb-4">
-                <Download className="w-6 h-6 text-amber-400" />
+                <Settings className="w-6 h-6 text-amber-400" />
               </div>
               <h3 className="text-xl font-bold mb-3">{t.servizi.supremoTitle}</h3>
               <p className="text-stone-300/80 text-sm leading-relaxed">
@@ -473,10 +475,10 @@ function ServiziSection() {
               </p>
             </div>
             <button
-              onClick={() => window.location.href = 'https://softmaint.it/files/Supremo.exe'}
+              onClick={() => window.location.href = '/assistenza'}
               className="mt-6 flex items-center justify-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-5 py-2.5 rounded-full hover:bg-amber-300 transition-colors text-sm"
             >
-              {t.servizi.supremoBtn} <Download className="w-4 h-4" />
+              {t.servizi.supremoBtn}
             </button>
           </motion.div>
 
