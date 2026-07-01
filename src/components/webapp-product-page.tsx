@@ -118,14 +118,14 @@ export function WebAppProductPage({
       <Navbar backHref="/webapp" backLabel={ui.tornaWebApp} />
       <main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 text-slate-900 pt-16 lg:pt-20">
         <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-          <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-blue-100 blur-3xl" />
-          <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-cyan-100 blur-3xl" />
+          <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-amber-100 blur-3xl" />
+          <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-yellow-100 blur-3xl" />
 
           <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">{ui.badge}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">{ui.badge}</p>
               <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-5xl">{product.name}</h1>
-              <p className="mt-3 max-w-4xl text-base font-medium text-blue-700 sm:text-lg">{product.subtitle}</p>
+              <p className="mt-3 max-w-4xl text-base font-medium text-amber-600 sm:text-lg">{product.subtitle}</p>
             </div>
           </div>
         </section>
@@ -148,7 +148,7 @@ export function WebAppProductPage({
                     className="h-full w-full object-contain"
                   />
                 </div>
-                <span className="mt-2 inline-block text-xs font-medium text-slate-500 transition-colors group-hover:text-blue-700">
+                <span className="mt-2 inline-block text-xs font-medium text-slate-500 transition-colors group-hover:text-amber-600">
                   {ui.clickEnlarge}
                 </span>
               </button>
@@ -198,7 +198,7 @@ export function WebAppProductPage({
                       href={pdfPath}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
+                      className="inline-flex items-center justify-center rounded-full border border-amber-200 bg-white px-4 py-2 text-sm font-semibold text-amber-700 transition-colors hover:bg-amber-50"
                     >
                       {ui.apriPDF}
                     </a>
@@ -216,9 +216,9 @@ export function WebAppProductPage({
             </div>
           </article>
 
-          <aside className="rounded-3xl border border-blue-100 bg-linear-to-br from-blue-50 to-cyan-50 p-6 shadow-sm sm:p-8 lg:col-span-4 lg:sticky lg:top-24">
+          <aside className="rounded-3xl border border-amber-100 bg-linear-to-br from-amber-50 to-yellow-50 p-6 shadow-sm sm:p-8 lg:col-span-4 lg:sticky lg:top-24">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-700">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600">
                 <Send className="h-5 w-5" />
               </div>
               <div>
@@ -239,7 +239,7 @@ export function WebAppProductPage({
                   onChange={handleChange}
                   placeholder={ui.formNome}
                   required
-                  className="border-blue-100 bg-white"
+                  className="border-amber-100 bg-white"
                 />
                 <Input
                   name="email"
@@ -248,7 +248,7 @@ export function WebAppProductPage({
                   onChange={handleChange}
                   placeholder={ui.formEmail}
                   required
-                  className="border-blue-100 bg-white"
+                  className="border-amber-100 bg-white"
                 />
                 <Input
                   name="telefono"
@@ -257,14 +257,14 @@ export function WebAppProductPage({
                   onChange={handleChange}
                   placeholder={ui.formTelefono}
                   pattern={phonePattern}
-                  className="border-blue-100 bg-white"
+                  className="border-amber-100 bg-white"
                 />
                 <Input
                   name="azienda"
                   value={formData.azienda}
                   onChange={handleChange}
                   placeholder={ui.formAzienda}
-                  className="border-blue-100 bg-white"
+                  className="border-amber-100 bg-white"
                 />
                 <Textarea
                   name="messaggio"
@@ -273,7 +273,7 @@ export function WebAppProductPage({
                   placeholder={`${ui.formMessaggioPre} ${product.name}`}
                   required
                   rows={5}
-                  className="border-blue-100 bg-white"
+                  className="border-amber-100 bg-white"
                 />
 
                 {status === 'error' && (
@@ -283,7 +283,7 @@ export function WebAppProductPage({
                 <Button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full rounded-full bg-blue-700 text-white hover:bg-blue-800"
+                  className="w-full rounded-full bg-amber-500 text-zinc-900 hover:bg-amber-400"
                 >
                   {status === 'loading' ? ui.formLoading : ui.formBtn}
                 </Button>

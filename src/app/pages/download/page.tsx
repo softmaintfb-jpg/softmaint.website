@@ -177,7 +177,7 @@ export default function DownloadPage() {
     const categories = useMemo(() => [
         { id: 'all', label: language === 'it' ? 'Tutti' : 'All' },
         { id: 'software', label: language === 'it' ? 'Software (.exe)' : 'Software (.exe)' },
-        { id: 'documenti', label: language === 'it' ? 'Brochure (.pdf)' : 'Brochures (.pdf)' },
+        { id: 'documenti', label: language === 'it' ? 'Documenti (.pdf)' : 'Documents (.pdf)' },
         { id: 'altro', label: language === 'it' ? 'Altro' : 'Other' }
     ], [language])
 
@@ -201,7 +201,7 @@ export default function DownloadPage() {
         const baseClass = "w-6 h-6 text-white"
         switch (ext) {
             case 'exe':
-                return <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20"><Monitor className={baseClass} /></div>
+                return <div className="w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center shadow-lg shadow-amber-500/20"><Monitor className={baseClass} /></div>
             case 'pdf':
                 return <div className="w-12 h-12 rounded-xl bg-red-500 flex items-center justify-center shadow-lg shadow-red-500/20"><FileText className={baseClass} /></div>
             case 'zip':
@@ -233,11 +233,11 @@ export default function DownloadPage() {
         <>
             <Navbar backHref="/" backLabel={language === 'it' ? 'Torna alla Home' : 'Back to Home'} />
 
-            <main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 text-slate-900 pt-20 lg:pt-24 pb-20">
+            <main className="min-h-screen bg-linear-to-b from-zinc-50 via-white to-zinc-100 text-zinc-900 pt-20 lg:pt-24 pb-20">
 
                 {/* Decorative Blur Backgrounds */}
-                <div className="absolute top-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute top-1/2 left-5 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-20 right-10 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/2 left-5 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl pointer-events-none" />
 
                 {/* Hero Section */}
                 <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8 text-center">
@@ -246,7 +246,7 @@ export default function DownloadPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-4">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 mb-4">
                             <Info className="w-3.5 h-3.5" />
                             {language === 'it' ? 'Softmaint Downloads' : 'Softmaint Downloads'}
                         </span>
@@ -277,7 +277,7 @@ export default function DownloadPage() {
                         <input
                             type="text"
                             placeholder={language === 'it' ? 'Cerca un file o una brochure...' : 'Search a file or brochure...'}
-                            className="block w-full pl-12 pr-4 py-3.5 border border-slate-200/80 rounded-2xl bg-white shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm"
+                            className="block w-full pl-12 pr-4 py-3.5 border border-slate-200/80 rounded-2xl bg-white shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all text-sm"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -295,8 +295,8 @@ export default function DownloadPage() {
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${activeCategory === cat.id
-                                        ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-105'
-                                        : 'bg-white text-slate-600 border border-slate-200/70 hover:bg-slate-50'
+                                    ? 'bg-amber-500 text-white shadow-md shadow-amber-500/25 scale-105'
+                                    : 'bg-white text-slate-600 border border-slate-200/70 hover:bg-slate-50'
                                     }`}
                             >
                                 {cat.label}
@@ -385,7 +385,7 @@ export default function DownloadPage() {
                                             className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                                         >
                                             {/* Decorative corner accent */}
-                                            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-400/5 to-transparent rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                             <div>
                                                 {/* Header icon and category badge */}
@@ -397,7 +397,7 @@ export default function DownloadPage() {
                                                 </div>
 
                                                 {/* Title & Description */}
-                                                <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200 leading-snug mb-2">
+                                                <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors duration-200 leading-snug mb-2">
                                                     {details.title}
                                                 </h3>
                                                 <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6">
@@ -419,7 +419,7 @@ export default function DownloadPage() {
                                                 <a
                                                     href={file.path}
                                                     download={file.name}
-                                                    className="mt-4 w-full py-3 px-4 bg-slate-50 hover:bg-blue-600 text-slate-700 hover:text-white rounded-2xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn border border-slate-200/50 hover:border-blue-600 cursor-pointer"
+                                                    className="mt-4 w-full py-3 px-4 bg-slate-50 hover:bg-amber-500 text-slate-700 hover:text-white rounded-2xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn border border-slate-200/50 hover:border-amber-500 cursor-pointer"
                                                 >
                                                     {language === 'it' ? 'Scarica Risorsa' : 'Download Resource'}
                                                     <Download className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform duration-200" />

@@ -121,7 +121,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isLightBg
-          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-blue-100'
+          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-stone-200'
           : 'bg-transparent'
       }`}
     >
@@ -134,7 +134,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                 href={backHref}
                 className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
                   isLightBg
-                    ? 'border-blue-200 bg-white text-blue-700 hover:bg-blue-50'
+                    ? 'border-amber-200 bg-white text-amber-700 hover:bg-amber-50'
                     : 'border-white/35 bg-white/10 text-white hover:bg-white/20'
                 }`}
               >
@@ -156,7 +156,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
               />
               <span
                 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-                  isLightBg ? 'text-blue-900' : 'text-white'
+                  isLightBg ? 'text-zinc-900' : 'text-white'
                 }`}
               >
                 <span className="hidden lg:inline">SOFTMAINT | Software House</span>
@@ -166,7 +166,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
 
           <div
             className={`pointer-events-none absolute left-1/2 -translate-x-1/2 text-center font-semibold tracking-wide transition-colors duration-300 lg:hidden ${
-              isLightBg ? 'text-blue-900' : 'text-white'
+              isLightBg ? 'text-zinc-900' : 'text-white'
             }`}
           >
             <span className="text-[13px] sm:text-sm">Softmaint | Software House</span>
@@ -186,17 +186,17 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                     {link.label}
                     <span
                       className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                        isLightBg ? 'bg-blue-600' : 'bg-white'
+                        isLightBg ? 'bg-amber-500' : 'bg-white'
                       }`}
                     />
                   </button>
 
                   <div className="pointer-events-none absolute left-1/2 top-full z-20 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover/download:pointer-events-auto group-hover/download:opacity-100 group-focus-within/download:pointer-events-auto group-focus-within/download:opacity-100">
-                    <div className="rounded-xl border border-blue-100 bg-white p-2 shadow-lg flex flex-col gap-1">
+                    <div className="rounded-xl border border-stone-100 bg-white p-2 shadow-lg flex flex-col gap-1">
                       <button
                         type="button"
                         onClick={installSupremo}
-                        className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50 cursor-pointer"
+                        className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-amber-700 transition-colors hover:bg-amber-50 cursor-pointer"
                       >
                         {language === 'it' ? 'Installa Supremo' : 'Install Supremo'}
                       </button>
@@ -221,7 +221,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   {link.label}
                   <span
                     className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                      isLightBg ? 'bg-blue-600' : 'bg-white'
+                      isLightBg ? 'bg-amber-500' : 'bg-white'
                     }`}
                   />
                 </button>
@@ -231,7 +231,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
             {/* Language Switch */}
             <div
               className={`flex items-center gap-2 ml-4 pl-4 border-l ${
-                isLightBg ? 'border-blue-200' : 'border-white/20'
+                isLightBg ? 'border-stone-200' : 'border-white/20'
               }`}
             >
               <button
@@ -239,8 +239,8 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                 className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
                   language === 'it'
                     ? isLightBg
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-blue-900'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-white text-zinc-900'
                     : isLightBg
                     ? 'text-gray-700 hover:bg-gray-100'
                     : 'text-white/70 hover:bg-white/10'
@@ -253,8 +253,8 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                 className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
                   language === 'en'
                     ? isLightBg
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-blue-900'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-white text-zinc-900'
                     : isLightBg
                     ? 'text-gray-700 hover:bg-gray-100'
                     : 'text-white/70 hover:bg-white/10'
@@ -266,7 +266,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
 
             <Button
               onClick={() => scrollTo('#contatti')}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-full shadow-md transition-all duration-200 hover:scale-105"
+              className="bg-amber-500 hover:bg-amber-400 text-zinc-900 text-sm px-5 py-2 rounded-full shadow-md transition-all duration-200 hover:scale-105"
             >
               {t.nav.contattaci}
             </Button>
@@ -299,7 +299,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   key={link.key}
                   href={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="text-left text-gray-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors block"
+                  className="text-left text-gray-700 font-medium py-2 px-3 rounded-lg hover:bg-amber-50 hover:text-amber-700 transition-colors block"
                 >
                   {link.label}
                 </Link>
@@ -308,7 +308,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
               <button
                 type="button"
                 onClick={installSupremo}
-                className="text-left text-blue-700 font-medium py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors block"
+                className="text-left text-amber-700 font-medium py-2 px-3 rounded-lg hover:bg-amber-50 transition-colors block"
               >
                 Installa Supremo
               </button>
@@ -320,8 +320,8 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   onClick={() => setLanguage('it')}
                   className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
                     language === 'it'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
                   }`}
                 >
                   IT
@@ -331,8 +331,8 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                   onClick={() => setLanguage('en')}
                   className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
                     language === 'en'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-blue-50'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
                   }`}
                 >
                   EN
@@ -342,7 +342,7 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
               <Button
                 type="button"
                 onClick={() => scrollTo('#contatti')}
-                className="bg-blue-600 hover:bg-blue-700 text-white rounded-full mt-1"
+                className="bg-amber-500 hover:bg-amber-400 text-zinc-900 rounded-full mt-1"
               >
                 {t.nav.contattaci}
               </Button>

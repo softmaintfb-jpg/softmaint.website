@@ -30,7 +30,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-gray-950 text-gray-400">
+    <footer className="bg-zinc-950 text-stone-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
           {/* Brand */}
@@ -55,7 +55,7 @@ export function Footer() {
                 <a
                   key={i}
                   href="#"
-                  className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  className="w-9 h-9 rounded-lg bg-zinc-800 flex items-center justify-center hover:bg-amber-500 transition-colors"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -71,7 +71,7 @@ export function Footer() {
                 <li key={link.href}>
                   <button
                     onClick={() => scrollTo(link.href)}
-                    className="hover:text-blue-400 transition-colors"
+                    className="hover:text-amber-400 transition-colors"
                   >
                     {link.label}
                   </button>
@@ -88,7 +88,7 @@ export function Footer() {
                 <li key={s}>
                   <button
                     onClick={() => scrollTo('#servizi')}
-                    className="hover:text-blue-400 transition-colors text-left"
+                    className="hover:text-amber-400 transition-colors text-left"
                   >
                     {s}
                   </button>
@@ -102,9 +102,9 @@ export function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <p>&copy; {year} {t.footer.copyright}</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-blue-400 transition-colors">{t.footer.privacy}</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">{t.footer.cookie}</a>
-            <span className="text-gray-600">{t.footer.piva}</span>
+            <a href="#" className="hover:text-amber-400 transition-colors">{t.footer.privacy}</a>
+            <a href="#" className="hover:text-amber-400 transition-colors">{t.footer.cookie}</a>
+            <span className="text-zinc-600">{t.footer.piva}</span>
           </div>
         </div>
       </div>

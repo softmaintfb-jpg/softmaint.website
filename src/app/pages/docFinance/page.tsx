@@ -40,20 +40,20 @@ export default function DocFinancePage() {
 			<Navbar backHref="/#servizi" backLabel={t.tornaServizi} />
 			<main className="min-h-screen bg-white text-slate-900 pt-20">
 				{/* Hero Section */}
-				<section className="relative overflow-hidden bg-gradient-to-br from-blue-800 via-blue-800 to-blue-800 py-24 sm:py-32">
+				<section className="relative overflow-hidden bg-gradient-to-br from-zinc-800 via-zinc-800 to-stone-800 py-24 sm:py-32">
 					<div className="absolute inset-0 opacity-10">
 						<div className="absolute -top-40 right-0 h-80 w-80 rounded-full bg-white blur-3xl" />
 						<div className="absolute -bottom-40 left-0 h-80 w-80 rounded-full bg-white blur-3xl" />
 					</div>
 
 					<div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-						<p className="text-sm font-semibold uppercase tracking-wider text-blue-100 mb-4">
+						<p className="text-sm font-semibold uppercase tracking-wider text-amber-300 mb-4">
 							{t.heroBadge}
 						</p>
 						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
 							{t.heroTitle}
 						</h1>
-						<p className="text-lg sm:text-xl text-blue-50 max-w-2xl mb-8 leading-relaxed">
+						<p className="text-lg sm:text-xl text-stone-200 max-w-2xl mb-8 leading-relaxed">
 							{t.heroSubtitle}
 						</p>
 					</div>
@@ -65,7 +65,7 @@ export default function DocFinancePage() {
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 							{integrations.map((item) => (
 								<div key={item.label} className="text-center">
-									<p className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+									<p className="text-3xl sm:text-4xl font-bold text-amber-500 mb-2">
 										{item.label}
 									</p>
 									<p className="text-slate-600 font-medium">{item.desc}</p>
@@ -93,9 +93,9 @@ export default function DocFinancePage() {
 								return (
 									<div
 										key={item.title}
-										className="group rounded-2xl border border-slate-200 bg-white p-8 transition-all hover:border-blue-300 hover:shadow-lg hover:-translate-y-1"
+										className="group rounded-2xl border border-slate-200 bg-white p-8 transition-all hover:border-amber-300 hover:shadow-lg hover:-translate-y-1"
 									>
-										<div className="w-12 h-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+										<div className="w-12 h-12 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors">
 											<Icon className="w-6 h-6" />
 										</div>
 										<h3 className="text-lg font-semibold text-slate-900 mb-3">
@@ -120,7 +120,7 @@ export default function DocFinancePage() {
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 							<div className="bg-white rounded-2xl p-8 border border-slate-200">
 								<div className="flex items-start gap-4">
-									<Gauge className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
+									<Gauge className="w-8 h-8 text-amber-500 flex-shrink-0 mt-1" />
 									<div>
 										<h3 className="text-xl font-semibold text-slate-900 mb-2">
 											{t.planning}
@@ -133,7 +133,7 @@ export default function DocFinancePage() {
 							</div>
 							<div className="bg-white rounded-2xl p-8 border border-slate-200">
 								<div className="flex items-start gap-4">
-									<PiggyBank className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
+									<PiggyBank className="w-8 h-8 text-amber-500 flex-shrink-0 mt-1" />
 									<div>
 										<h3 className="text-xl font-semibold text-slate-900 mb-2">
 											{t.credit}
@@ -151,7 +151,7 @@ export default function DocFinancePage() {
 				{/* Why Choose */}
 				<section className="py-16 sm:py-24">
 					<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-						<div className="rounded-3xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 p-8 sm:p-12">
+						<div className="rounded-3xl bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 p-8 sm:p-12">
 							<h2 className="text-3xl font-bold text-slate-900 mb-4">
 								{t.ctaTitle}
 							</h2>
@@ -163,7 +163,7 @@ export default function DocFinancePage() {
 									href="https://www.docfinance.net/"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="inline-flex items-center justify-center rounded-full border-2 border-blue-600 text-blue-600 px-6 py-3 font-semibold transition-all hover:bg-blue-50"
+									className="inline-flex items-center justify-center rounded-full border-2 border-amber-500 text-amber-600 px-6 py-3 font-semibold transition-all hover:bg-amber-50"
 								>
 									{t.visitDocFinance}
 								</a>
