@@ -96,6 +96,21 @@ export default function WebAppPageContent() {
 				t.webappPage.smartProduzione.h3,
 			],
 		},
+		{
+			id: 'smart-tentatavendita',
+			route: '/smarttentatavendita',
+			image: `/assets/tentata_vendita.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/tentata_vendita.pdf',
+			alt: 'Panoramica Smart Tentata Vendita con ODL, monitoraggio avanzamento e tracciabilita qualita',
+			name: t.webappPage.smartTentataVendita.name,
+			subtitle: t.webappPage.smartTentataVendita.subtitle,
+			description: t.webappPage.smartTentataVendita.description,
+			highlights: [
+				t.webappPage.smartTentataVendita.h1,
+				t.webappPage.smartTentataVendita.h2,
+				t.webappPage.smartTentataVendita.h3,
+			],
+		},
 	], [assetVersion, t])
 
 	const selectedApp = webApps.find((app) => app.id === selectedAppId) ?? null
@@ -189,101 +204,101 @@ export default function WebAppPageContent() {
 							const currentPdfPage = currentSlide
 
 							return (
-							<article
-								key={app.id}
-								className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
-							>
-								<div className="relative aspect-video w-full overflow-hidden border-b border-slate-200 bg-slate-50">
-									{isImageSlide ? (
-										<button
-											type="button"
-											onClick={() => setSelectedAppId(app.id)}
-											className="group block h-full w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-											aria-label={`${t.webappPage.enlargeImage} ${app.name}`}
-										>
-											<Image
-												src={app.image}
-												alt={app.alt}
-												width={1366}
-												height={768}
-												loading={app.id === 'smart-mail' ? 'lazy' : 'eager'}
-												className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+								<article
+									key={app.id}
+									className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
+								>
+									<div className="relative aspect-video w-full overflow-hidden border-b border-slate-200 bg-slate-50">
+										{isImageSlide ? (
+											<button
+												type="button"
+												onClick={() => setSelectedAppId(app.id)}
+												className="group block h-full w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+												aria-label={`${t.webappPage.enlargeImage} ${app.name}`}
+											>
+												<Image
+													src={app.image}
+													alt={app.alt}
+													width={1366}
+													height={768}
+													loading={app.id === 'smart-mail' ? 'lazy' : 'eager'}
+													className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+												/>
+											</button>
+										) : (
+											<iframe
+												title={`${app.name} PDF page ${currentPdfPage}`}
+												src={`${app.pdfPath}#page=${currentPdfPage}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+												className="h-full w-full bg-white"
 											/>
-										</button>
-									) : (
-										<iframe
-											title={`${app.name} PDF page ${currentPdfPage}`}
-											src={`${app.pdfPath}#page=${currentPdfPage}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-											className="h-full w-full bg-white"
-										/>
-									)}
+										)}
 
-									<div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-slate-900/20 to-transparent" />
+										<div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-slate-900/20 to-transparent" />
 
-									<div className="absolute left-3 top-3 rounded-full bg-slate-900/80 px-3 py-1 text-[11px] font-semibold text-white">
-										{isImageSlide ? 'PNG' : `PDF ${currentPdfPage}/${totalSlides - 1}`}
+										<div className="absolute left-3 top-3 rounded-full bg-slate-900/80 px-3 py-1 text-[11px] font-semibold text-white">
+											{isImageSlide ? 'PNG' : `PDF ${currentPdfPage}/${totalSlides - 1}`}
+										</div>
+
+										<div className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white/95 p-1 shadow-sm">
+											<button
+												type="button"
+												onClick={() =>
+													goToSlide(app.id, currentSlide === 0 ? totalSlides - 1 : currentSlide - 1)
+												}
+												className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100"
+												aria-label={language === 'it' ? 'Slide precedente' : 'Previous slide'}
+											>
+												<ChevronLeft className="h-4 w-4" />
+											</button>
+											<span className="px-2 text-xs font-semibold text-slate-700">
+												{currentSlide + 1}/{totalSlides}
+											</span>
+											<button
+												type="button"
+												onClick={() => goToSlide(app.id, currentSlide === totalSlides - 1 ? 0 : currentSlide + 1)}
+												className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100"
+												aria-label={language === 'it' ? 'Slide successiva' : 'Next slide'}
+											>
+												<ChevronRight className="h-4 w-4" />
+											</button>
+										</div>
 									</div>
 
-									<div className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white/95 p-1 shadow-sm">
-										<button
-											type="button"
-											onClick={() =>
-												goToSlide(app.id, currentSlide === 0 ? totalSlides - 1 : currentSlide - 1)
-											}
-											className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100"
-											aria-label={language === 'it' ? 'Slide precedente' : 'Previous slide'}
-										>
-											<ChevronLeft className="h-4 w-4" />
-										</button>
-										<span className="px-2 text-xs font-semibold text-slate-700">
-											{currentSlide + 1}/{totalSlides}
-										</span>
-										<button
-											type="button"
-											onClick={() => goToSlide(app.id, currentSlide === totalSlides - 1 ? 0 : currentSlide + 1)}
-											className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100"
-											aria-label={language === 'it' ? 'Slide successiva' : 'Next slide'}
-										>
-											<ChevronRight className="h-4 w-4" />
-										</button>
+									<div className="px-6 pt-3 pb-4 text-xs font-medium text-slate-500">
+										{isImageSlide ? t.webappPage.clickEnlarge : language === 'it' ? 'Scorri le pagine PDF con la rotellina del mouse' : 'Use the mouse wheel to scroll through PDF pages'}
 									</div>
-								</div>
 
-								<div className="px-6 pt-3 pb-4 text-xs font-medium text-slate-500">
-									{isImageSlide ? t.webappPage.clickEnlarge : language === 'it' ? 'Scorri le pagine PDF con la rotellina del mouse' : 'Use the mouse wheel to scroll through PDF pages'}
-								</div>
+									<div className="px-6 pb-7 sm:pb-8 flex-1 flex flex-col">
+										<p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">
+											{t.webappPage.badge}
+										</p>
+										<h2 className="mt-2 text-xl font-bold text-slate-900">{app.name}</h2>
+										<p className="mt-1 text-sm font-medium text-amber-600">{app.subtitle}</p>
 
-								<div className="px-6 pb-7 sm:pb-8 flex-1 flex flex-col">
-									<p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">
-										{t.webappPage.badge}
-									</p>
-									<h2 className="mt-2 text-xl font-bold text-slate-900">{app.name}</h2>
-									<p className="mt-1 text-sm font-medium text-amber-600">{app.subtitle}</p>
+										<p className="mt-4 text-sm leading-relaxed text-slate-600 flex-1">
+											{app.description}
+										</p>
 
-									<p className="mt-4 text-sm leading-relaxed text-slate-600 flex-1">
-										{app.description}
-									</p>
+										<ul className="mt-4 space-y-2">
+											{app.highlights.map((item) => (
+												<li key={item} className="flex items-start gap-2 text-xs text-slate-700">
+													<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+													<span>{item}</span>
+												</li>
+											))}
+										</ul>
 
-									<ul className="mt-4 space-y-2">
-										{app.highlights.map((item) => (
-											<li key={item} className="flex items-start gap-2 text-xs text-slate-700">
-												<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-												<span>{item}</span>
-											</li>
-										))}
-									</ul>
-
-									<div className="mt-6">
-										<Link
-											href={app.route}
-											className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-amber-400"
-										>
-											{t.webappPage.requestQuote}
-											<ArrowRight className="h-4 w-4" />
-										</Link>
+										<div className="mt-6">
+											<Link
+												href={app.route}
+												className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-amber-400"
+											>
+												{t.webappPage.requestQuote}
+												<ArrowRight className="h-4 w-4" />
+											</Link>
+										</div>
 									</div>
-								</div>
-							</article>
+								</article>
 							)
 						})}
 					</div>

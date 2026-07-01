@@ -362,6 +362,7 @@ export default function WebTicketPage() {
                                                     <option value={t.webappPage.smartMail.name}>{t.webappPage.smartMail.name}</option>
                                                     <option value={t.webappPage.smartProduzione.name}>{t.webappPage.smartProduzione.name}</option>
                                                     <option value={t.webappPage.smartB2B.name}>{t.webappPage.smartB2B.name}</option>
+                                                    <option value={t.webappPage.smartTentataVendita.name}>{t.webappPage.smartTentataVendita.name}</option>
                                                 </>
                                             )}
                                         </select>

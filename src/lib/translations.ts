@@ -259,10 +259,18 @@ const itTranslations = {
       h2: 'CRM avanzato con storico clienti',
       h3: 'Monitoraggio credito e reportistica',
     },
+    smartTentataVendita: {
+      name: 'Smart Tentata Vendita',
+      subtitle: 'Fatturazione in mobilità, magazzino sul mezzo e incassi',
+      description: 'Smart Tentata Vendita consente agli operatori su strada di gestire l\'intero ciclo di vendita direttamente dal furgone. Gestisce l\'emissione di DDT, fatture e ricevute, il carico/scarico del magazzino viaggiante sul veicolo e il monitoraggio degli incassi in tempo reale.',
+      h1: 'Emissione immediata di DDT, fatture e scontrini in mobilità',
+      h2: 'Gestione e tracciabilità real-time del magazzino viaggiante',
+      h3: 'Monitoraggio incassi, scadenziari e riepiloghi giornalieri',
+    },
   },
   // Product Page UI
   productPageUI: {
-    tornaWebApp: 'Torna alle Web Application',
+    tornaWebApp: 'Torna indietro',
     badge: 'Web Application',
     clickEnlarge: 'Clicca per ingrandire',
     ingrandisciPre: 'Ingrandisci immagine',
@@ -372,6 +380,17 @@ const itTranslations = {
         'CRM avanzato con storico clienti e interazioni',
         'Monitoraggio credito in tempo reale e reportistica',
         'Integrazione completa con i dati gestionali',
+      ],
+    },
+    smartTentataVendita: {
+      name: 'Smart Tentata Vendita',
+      subtitle: 'Fatturazione in mobilità, magazzino sul mezzo e incassi',
+      description: 'Smart Tentata Vendita è l\'applicazione mobile che ottimizza il ciclo delle vendite e delle consegne su strada. Fornisce strumenti per emettere scontrini, fatture e DDT in tempo reale, controllare le scorte sul furgone e riscuotere pagamenti in loco in modo sicuro.',
+      highlights: [
+        'Fatturazione, DDT e scontrini emessi direttamente su strada',
+        'Carico e scarico del magazzino a bordo veicolo integrato',
+        'Registrazione immediata degli incassi e scadenziario clienti',
+        'Allineamento automatico dei dati con il gestionale',
       ],
     },
   },
@@ -705,6 +724,14 @@ const enTranslations: typeof itTranslations = {
       h2: 'Advanced CRM with complete customer history',
       h3: 'Real-time credit monitoring and reporting',
     },
+    smartTentataVendita: {
+      name: 'Smart Vanselling',
+      subtitle: 'Mobile invoicing, truck inventory management, and collections',
+      description: 'Smart Vanselling enables field operators to manage the entire sales cycle directly from the truck. It manages the issuance of delivery notes, invoices, and receipts, truck stock loads/unloads, and real-time payment tracking.',
+      h1: 'Immediate issuance of invoices, receipts, and delivery notes on the go',
+      h2: 'Real-time management and control of truck inventory',
+      h3: 'Collection management, payment schedules, and daily summaries',
+    },
   },
   // Product Page UI
   productPageUI: {
@@ -818,6 +845,17 @@ const enTranslations: typeof itTranslations = {
         'Advanced CRM with customer history and interactions',
         'Real-time credit monitoring and reporting',
         'Complete integration with management system data',
+      ],
+    },
+    smartTentataVendita: {
+      name: 'Smart Vanselling',
+      subtitle: 'Mobile invoicing, truck inventory management, and collections',
+      description: 'Smart Vanselling is the mobile application that optimizes field sales and delivery cycles. It provides tools to issue receipts, invoices, and delivery notes in real time, control stock levels on the vehicle, and record on-site payments securely.',
+      highlights: [
+        'Invoicing, delivery notes, and receipts issued directly on the go',
+        'Integrated vehicle stock management and replenishment tracking',
+        'Immediate recording of collections and customer payment schedules',
+        'Automatic data synchronization with the back-office ERP system',
       ],
     },
   },
