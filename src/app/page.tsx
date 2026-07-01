@@ -164,9 +164,7 @@ const partnerLogos = [
 function HeroSection() {
   const { language } = useLanguage()
   const t = translations[language]
-  const heroSubtitle = 'subtitle1' in t.hero
-    ? [t.hero.subtitle1, t.hero.subtitle2]
-    : [t.hero.subtitle]
+  const heroSubtitle = [t.hero.subtitle1, t.hero.subtitle2]
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">

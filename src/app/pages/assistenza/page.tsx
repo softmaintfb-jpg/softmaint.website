@@ -7,10 +7,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, FileText, Send, CheckCircle2, User, Building2, Mail, Phone, Smartphone, Settings, Euro, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useLanguage } from '@/components/LanguageProvider';
+import { translations } from '@/lib/translations';
 
 type GestionaleType = 'ERP' | 'SQL' | 'SQL_ERP' | 'BKP_CLOUD' | 'VPN';
 
 export default function Assistenza() {
+    const { language } = useLanguage();
+    const t = translations[language].assistenzaPage || translations['it'].assistenzaPage;
+
     const [nome, setNome] = useState('');
     const [cognome, setCognome] = useState('');
     const [ragioneSociale, setRagioneSociale] = useState('');
@@ -92,6 +97,7 @@ export default function Assistenza() {
             if (sqlErpOptions.bls) selectedOptions.push('Installazione ERP BLS');
             if (sqlErpOptions.client) selectedOptions.push('Installazione ERP CLIENT');
             if (sqlErpOptions.backupAzienda) selectedOptions.push('Restore Backup Azienda');
+            if (sqlErpOptions.backup) selectedOptions.push('Restore Azienda');
         } else if (gestionale === 'BKP_CLOUD') {
             if (backupOptions.cloud) selectedOptions.push(`Backup Cloud (${backupOptions.aziende} aziende)`);
         } else if (gestionale === 'VPN') {
@@ -149,13 +155,13 @@ export default function Assistenza() {
                     <div className="text-center mb-12">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 mb-4">
                             <Settings className="w-3.5 h-3.5 animate-spin" />
-                            Softmaint SRL | Ordine di servizio
+                            {t.badge}
                         </span>
                         <h1 className="text-3xl md:text-5xl font-extrabold text-zinc-900 tracking-tight">
-                            Richiesta Ordine di Servizio
+                            {t.title}
                         </h1>
                         <p className="text-zinc-500 text-base md:text-lg mt-2 max-w-xl mx-auto">
-                            Completa il modulo sottostante per richiedere un ordine di servizio.
+                            {t.subtitle}
                         </p>
                     </div>
 
@@ -168,15 +174,15 @@ export default function Assistenza() {
                             <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <CheckCircle2 className="w-8 h-8 text-emerald-600" />
                             </div>
-                            <h3 className="text-2xl font-bold text-zinc-900 mb-3">Richiesta Inviata con Successo!</h3>
+                            <h3 className="text-2xl font-bold text-zinc-900 mb-3">{t.successTitle}</h3>
                             <p className="text-zinc-600 mb-8 max-w-md mx-auto">
-                                Abbiamo preso in carico la tua richiesta. Un nostro tecnico si metterà in contatto con te per programmare l'intervento.
+                                {t.successDesc}
                             </p>
                             <Button
                                 onClick={() => setStatus('idle')}
                                 className="bg-amber-500 hover:bg-amber-400 text-zinc-900 rounded-full px-8 py-3 font-semibold shadow-sm transition-all"
                             >
-                                Invia un'altra richiesta
+                                {t.btnAnother}
                             </Button>
                         </motion.div>
                     ) : (
@@ -185,13 +191,13 @@ export default function Assistenza() {
                             <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-stone-200 lg:col-span-7 space-y-6">
                                 <h2 className="text-xl font-bold text-zinc-900 border-b border-stone-100 pb-3 flex items-center gap-2">
                                     <User className="w-5 h-5 text-amber-500" />
-                                    Dati del Richiedente
+                                    {t.sectionRequester}
                                 </h2>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5 flex items-center gap-1">
-                                            Nome <span className="text-red-500">*</span>
+                                            {t.labelNome} <span className="text-red-500">*</span>
                                         </label>
                                         <Input
                                             value={nome}
@@ -203,7 +209,7 @@ export default function Assistenza() {
                                     </div>
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5 flex items-center gap-1">
-                                            Cognome <span className="text-red-500">*</span>
+                                            {t.labelCognome} <span className="text-red-500">*</span>
                                         </label>
                                         <Input
                                             value={cognome}
@@ -217,7 +223,7 @@ export default function Assistenza() {
 
                                 <div>
                                     <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
-                                        Ragione Sociale <span className="text-red-500">*</span>
+                                        {t.labelRagioneSociale} <span className="text-red-500">*</span>
                                     </label>
                                     <Input
                                         value={ragioneSociale}
@@ -230,7 +236,7 @@ export default function Assistenza() {
 
                                 <div>
                                     <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
-                                        E-Mail <span className="text-red-500">*</span>
+                                        {t.labelEmail} <span className="text-red-500">*</span>
                                     </label>
                                     <Input
                                         type="email"
@@ -245,7 +251,7 @@ export default function Assistenza() {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
-                                            Telefono fisso
+                                            {t.labelTelefonoFisso}
                                         </label>
                                         <Input
                                             type="tel"
@@ -257,7 +263,7 @@ export default function Assistenza() {
                                     </div>
                                     <div>
                                         <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
-                                            Cellulare <span className="text-red-500">*</span>
+                                            {t.labelCellulare} <span className="text-red-500">*</span>
                                         </label>
                                         <Input
                                             type="tel"
@@ -276,7 +282,7 @@ export default function Assistenza() {
                                 <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
                                     <h2 className="text-xl font-bold text-zinc-900 border-b border-stone-100 pb-3 flex items-center gap-2">
                                         <Settings className="w-5 h-5 text-amber-500 animate-spin" />
-                                        Selezionare la richiesta
+                                        {t.sectionSelection}
                                     </h2>
 
                                     <div className="grid grid-cols-3 gap-2">
@@ -307,7 +313,7 @@ export default function Assistenza() {
 
                                     <div className="bg-stone-50 rounded-2xl p-4 border border-stone-200/50 space-y-2">
                                         <span className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">
-                                            Interventi Inclusi
+                                            {t.sectionIncluded}
                                         </span>
 
                                         {gestionale === 'ERP' && (
@@ -319,7 +325,7 @@ export default function Assistenza() {
                                                         onChange={e => setErpOptions(prev => ({ ...prev, bls: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione ERP Bls</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.erpBls}</span>
                                                 </label>
                                                 <label className="flex items-center gap-3 bg-white p-3 rounded-xl border border-stone-200/60 cursor-pointer">
                                                     <input
@@ -328,7 +334,7 @@ export default function Assistenza() {
                                                         onChange={e => setErpOptions(prev => ({ ...prev, client: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione ERP Client</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.erpClient}</span>
                                                 </label>
                                             </div>
                                         )}
@@ -342,10 +348,10 @@ export default function Assistenza() {
                                                         onChange={e => setBackupOptions(prev => ({ ...prev, cloud: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Backup Cloud</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.bkpCloud}</span>
                                                 </label>
                                                 <div className="flex items-center justify-between gap-3 bg-white p-3 rounded-xl border border-stone-200/60">
-                                                    <span className="text-sm font-medium text-zinc-700">Numero aziende</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.numAziende}</span>
                                                     <Input
                                                         type="number"
                                                         min={1}
@@ -373,7 +379,7 @@ export default function Assistenza() {
                                                         />
                                                         <span className="text-sm font-semibold text-zinc-700">VPN Server</span>
                                                     </div>
-                                                    <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">350,00€ una tantum</span>
+                                                    <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">{language === 'it' ? '350,00€ una tantum' : '€350.00 one-time'}</span>
                                                 </label>
 
                                                 <div className="bg-white p-3.5 rounded-xl border border-stone-200/60 space-y-3">
@@ -387,12 +393,12 @@ export default function Assistenza() {
                                                             />
                                                             <span className="text-sm font-semibold text-zinc-700">VPN Client</span>
                                                         </div>
-                                                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">20,00€ annui</span>
+                                                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">{language === 'it' ? '20,00€ annui' : '€20.00 yearly'}</span>
                                                     </label>
 
                                                     {vpnOptions.client && (
                                                         <div className="flex items-center justify-between pt-2 border-t border-stone-100">
-                                                            <span className="text-xs text-zinc-500 font-medium">Numero di Client</span>
+                                                            <span className="text-xs text-zinc-500 font-medium">{language === 'it' ? 'Numero di Client' : 'Number of Clients'}</span>
                                                             <div className="flex items-center gap-2">
                                                                 <button
                                                                     type="button"
@@ -435,7 +441,7 @@ export default function Assistenza() {
                                                         onChange={e => setSqlOptions(prev => ({ ...prev, sms: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione SQL SMS</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.sqlSms}</span>
                                                 </label>
                                             </div>
                                         )}
@@ -446,10 +452,10 @@ export default function Assistenza() {
                                                     <input
                                                         type="checkbox"
                                                         checked={sqlErpOptions.backupAzienda}
-                                                        onChange={e => setSqlErpOptions(prev => ({ ...prev, backup: e.target.checked }))}
+                                                        onChange={e => setSqlErpOptions(prev => ({ ...prev, backupAzienda: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Backup Azienda</span>                                                </label>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.backupAzienda}</span>                                                </label>
                                                 <label className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-stone-200/60 cursor-pointer">
                                                     <input
                                                         type="checkbox"
@@ -457,7 +463,7 @@ export default function Assistenza() {
                                                         onChange={e => setSqlErpOptions(prev => ({ ...prev, erp: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione ERP</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.erpInstall}</span>
                                                 </label>
                                                 <label className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-stone-200/60 cursor-pointer">
                                                     <input
@@ -466,7 +472,7 @@ export default function Assistenza() {
                                                         onChange={e => setSqlErpOptions(prev => ({ ...prev, sms: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione SQL SMS</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.sqlSmsInstall}</span>
                                                 </label>
                                                 <label className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-stone-200/60 cursor-pointer">
                                                     <input
@@ -475,7 +481,7 @@ export default function Assistenza() {
                                                         onChange={e => setSqlErpOptions(prev => ({ ...prev, bls: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione ERP Bls</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.erpBlsInstall}</span>
                                                 </label>
                                                 <label className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-stone-200/60 cursor-pointer">
                                                     <input
@@ -484,7 +490,7 @@ export default function Assistenza() {
                                                         onChange={e => setSqlErpOptions(prev => ({ ...prev, client: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Installazione ERP Client</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.erpClientInstall}</span>
                                                 </label>
                                                 <label className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-stone-200/60 cursor-pointer">
                                                     <input
@@ -493,7 +499,7 @@ export default function Assistenza() {
                                                         onChange={e => setSqlErpOptions(prev => ({ ...prev, backup: e.target.checked }))}
                                                         className="h-4.5 w-4.5 accent-amber-500"
                                                     />
-                                                    <span className="text-sm font-medium text-zinc-700">Restore Azienda</span>
+                                                    <span className="text-sm font-medium text-zinc-700">{t.options.restoreAzienda}</span>
                                                 </label>
                                             </div>
                                         )}
@@ -505,19 +511,19 @@ export default function Assistenza() {
 
                                     <h3 className="text-lg font-bold border-b border-zinc-800 pb-3 flex items-center gap-2">
                                         <Euro className="w-5 h-5 text-amber-400" />
-                                        Costo Intervento
+                                        {t.costTitle}
                                     </h3>
 
                                     <div className="flex justify-between items-baseline">
-                                        <span className="text-stone-300 text-sm">Tariffa Standard:</span>
+                                        <span className="text-stone-300 text-sm">{t.costLabel}</span>
                                         <span className="text-3xl font-extrabold text-amber-400">€{getPrice()}</span>
                                     </div>
                                     <div className="flex justify-between items-baseline">
-                                        <span className="text-xs text-stone-300 text-sm">I prezzi si intendono al netto di IVA</span>
+                                        <span className="text-xs text-stone-300 text-sm">{t.costVat}</span>
                                     </div>
 
                                     {status === 'error' && (
-                                        <p className="text-sm text-red-400">Si è verificato un errore durante l'invio. Riprova.</p>
+                                        <p className="text-sm text-red-400">{t.errorSend}</p>
                                     )}
 
                                     <Button
@@ -531,12 +537,12 @@ export default function Assistenza() {
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                                                 </svg>
-                                                Invio in corso...
+                                                {t.btnLoading}
                                             </span>
                                         ) : (
                                             <span className="flex items-center gap-2">
                                                 <Send className="w-4 h-4" />
-                                                Invia Richiesta
+                                                {t.btnSubmit}
                                             </span>
                                         )}
                                     </Button>

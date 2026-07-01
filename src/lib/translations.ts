@@ -1,7 +1,6 @@
 export type Language = 'it' | 'en'
 
-export const translations = {
-  it: {
+const itTranslations = {
     // Navbar
     nav: {
       home: 'Home',
@@ -376,8 +375,46 @@ export const translations = {
         ],
       },
     },
-  },
-  en: {
+    assistenzaPage: {
+      badge: 'Softmaint SRL | Ordine di servizio',
+      title: 'Richiesta Ordine di Servizio',
+      subtitle: 'Completa il modulo sottostante per richiedere un ordine di servizio.',
+      successTitle: 'Richiesta Inviata con Successo!',
+      successDesc: 'Abbiamo preso in carico la tua richiesta. Un nostro tecnico si metterà in contatto con te per programmare l\'intervento.',
+      btnAnother: 'Invia un\'altra richiesta',
+      sectionRequester: 'Dati del Richiedente',
+      labelNome: 'Nome',
+      labelCognome: 'Cognome',
+      labelRagioneSociale: 'Ragione Sociale',
+      labelEmail: 'E-Mail',
+      labelTelefonoFisso: 'Telefono fisso',
+      labelCellulare: 'Cellulare',
+      sectionSelection: 'Selezionare la richiesta',
+      sectionIncluded: 'Interventi Inclusi',
+      costTitle: 'Costo Intervento',
+      costLabel: 'Tariffa Standard:',
+      costVat: 'I prezzi si intendono al netto di IVA',
+      errorSend: 'Si è verificato un errore durante l\'invio. Riprova.',
+      btnLoading: 'Invio in corso...',
+      btnSubmit: 'Invia Richiesta',
+      options: {
+        erpBls: 'Installazione ERP Bls',
+        erpClient: 'Installazione ERP Client',
+        bkpCloud: 'Backup Cloud',
+        numAziende: 'Numero aziende',
+        vpnConfig: 'Configurazione VPN',
+        sqlSms: 'Installazione SQL SMS',
+        backupAzienda: 'Backup Azienda',
+        erpInstall: 'Installazione ERP',
+        sqlSmsInstall: 'Installazione SQL SMS',
+        erpBlsInstall: 'Installazione ERP Bls',
+        erpClientInstall: 'Installazione ERP Client',
+        restoreAzienda: 'Restore Azienda'
+      }
+    },
+  };
+
+  const enTranslations: typeof itTranslations = {
     // Navbar
     nav: {
       home: 'Home',
@@ -385,13 +422,15 @@ export const translations = {
       chiSiamo: 'About Us',
       doveSiamo: 'Location',
       contattaci: 'Contact',
+      download: 'Download',
     },
     // Hero
     hero: {
       badge: 'Italian Software House',
       title1: 'Technology at the Service',
       title2: 'of Your Business',
-      subtitle: 'Innovative software solutions for business management: WMS, DocFinance, custom WebApps and Industry 4.0 solutions.',
+      subtitle1: 'Innovative software solutions for business management',
+      subtitle2: 'WMS, DocFinance, custom WebApps and Industry 4.0 solutions.',
       btnServizi: 'Discover Services',
       btnContatti: 'Contact Us',
       stat1: '20+',
@@ -540,7 +579,7 @@ export const translations = {
       // label: 'Get in Touch',
       title: 'Contact Us',
       subtitle: 'Want to know more about our services? We\'re here for you.',
-      infoTitle: 'Contact Information',
+      // infoTitle: 'Contact Information',
       telefono: 'Phone',
       email: 'Email',
       sede: 'Headquarters',
@@ -749,5 +788,46 @@ export const translations = {
         ],
       },
     },
-  },
-}
+    assistenzaPage: {
+      badge: 'Softmaint SRL | Service Order',
+      title: 'Service Order Request',
+      subtitle: 'Complete the form below to request a service order.',
+      successTitle: 'Request Submitted Successfully!',
+      successDesc: 'We have received your request. One of our technicians will contact you to schedule the intervention.',
+      btnAnother: 'Submit another request',
+      sectionRequester: 'Requester Details',
+      labelNome: 'First Name',
+      labelCognome: 'Last Name',
+      labelRagioneSociale: 'Company Name',
+      labelEmail: 'Email',
+      labelTelefonoFisso: 'Landline Phone',
+      labelCellulare: 'Mobile Phone',
+      sectionSelection: 'Select the Request Type',
+      sectionIncluded: 'Included Interventions',
+      costTitle: 'Intervention Cost',
+      costLabel: 'Standard Rate:',
+      costVat: 'Prices are net of VAT',
+      errorSend: 'An error occurred during submission. Please try again.',
+      btnLoading: 'Sending...',
+      btnSubmit: 'Submit Request',
+      options: {
+        erpBls: 'Install ERP Bls',
+        erpClient: 'Install ERP Client',
+        bkpCloud: 'Cloud Backup',
+        numAziende: 'Number of companies',
+        vpnConfig: 'VPN Configuration',
+        sqlSms: 'Install SQL SMS',
+        backupAzienda: 'Company Backup',
+        erpInstall: 'Install ERP',
+        sqlSmsInstall: 'Install SQL SMS',
+        erpBlsInstall: 'Install ERP Bls',
+        erpClientInstall: 'Install ERP Client',
+        restoreAzienda: 'Restore Company'
+      }
+    },
+  };
+
+  export const translations = {
+    it: itTranslations,
+    en: enTranslations,
+  };
