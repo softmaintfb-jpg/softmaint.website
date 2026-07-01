@@ -369,6 +369,8 @@ const itTranslations = {
         'Ottimizzazione di materiali, tempi e carichi macchina',
         'Supporto operativo a logistica e imballaggio guidato',
         'Tracciabilita end-to-end per conformita e riduzione degli scarti',
+        'Applicativo utilizzato per la produzione di plastica, nocciole e molto altro',
+
       ],
     },
     smartB2B: {
@@ -834,6 +836,7 @@ const enTranslations: typeof itTranslations = {
         'Optimization of materials, timing and machine workloads',
         'Operational support for logistics and guided packing activities',
         'End-to-end traceability for compliance and scrap reduction',
+        'Application used for the production of plastic, hazelnuts and much more',
       ],
     },
     smartB2B: {
