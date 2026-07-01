@@ -45,8 +45,8 @@ export default function Assistenza() {
         aziende: 1
     });
     const [vpnOptions, setVpnOptions] = useState({
-        server: true,
-        client: true,
+        server: false,
+        client: false,
         clientCount: 1
     });
 
@@ -60,7 +60,7 @@ export default function Assistenza() {
         } else if (gestionale === 'BKP_CLOUD') {
             setBackupOptions({ cloud: true, aziende: 1 });
         } else if (gestionale === 'VPN') {
-            setVpnOptions({ server: true, client: true, clientCount: 1 });
+            setVpnOptions({ server: false, client: false, clientCount: 1 });
         }
     }, [gestionale]);
 
@@ -397,37 +397,47 @@ export default function Assistenza() {
                                                     </label>
 
                                                     {vpnOptions.client && (
-                                                        <div className="flex items-center justify-between pt-2 border-t border-stone-100">
-                                                            <span className="text-xs text-zinc-500 font-medium">{language === 'it' ? 'Numero di Client' : 'Number of Clients'}</span>
-                                                            <div className="flex items-center gap-2">
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => setVpnOptions(prev => ({ ...prev, clientCount: Math.max(1, prev.clientCount - 1) }))}
-                                                                    className="w-8 h-8 rounded-lg border border-stone-200 flex items-center justify-center text-stone-600 hover:bg-stone-50 hover:border-stone-300 font-bold transition-all"
-                                                                >
-                                                                    -
-                                                                </button>
-                                                                <Input
-                                                                    type="number"
-                                                                    min={1}
-                                                                    step={1}
-                                                                    value={vpnOptions.clientCount}
-                                                                    onChange={e => {
-                                                                        const val = parseInt(e.target.value, 10);
-                                                                        setVpnOptions(prev => ({ ...prev, clientCount: isNaN(val) ? 1 : val }));
-                                                                    }}
-                                                                    className="w-16 h-8 text-center text-sm font-semibold border-stone-200 focus:ring-amber-400 focus:border-amber-400 p-0"
-                                                                />
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => setVpnOptions(prev => ({ ...prev, clientCount: prev.clientCount + 1 }))}
-                                                                    className="w-8 h-8 rounded-lg border border-stone-200 flex items-center justify-center text-stone-600 hover:bg-stone-50 hover:border-stone-300 font-bold transition-all"
-                                                                >
-                                                                    +
-                                                                </button>
+                                                        <>
+                                                            <div className="flex items-center justify-between pt-2 border-t border-stone-100">
+                                                                <span className="text-xs text-zinc-500 font-medium">{language === 'it' ? 'Numero di Client' : 'Number of Clients'}</span>
+                                                                <div className="flex items-center gap-2">
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => setVpnOptions(prev => ({ ...prev, clientCount: Math.max(1, prev.clientCount - 1) }))}
+                                                                        className="w-8 h-8 rounded-lg border border-stone-200 flex items-center justify-center text-stone-600 hover:bg-stone-50 hover:border-stone-300 font-bold transition-all"
+                                                                    >
+                                                                        -
+                                                                    </button>
+                                                                    <Input
+                                                                        type="number"
+                                                                        min={1}
+                                                                        step={1}
+                                                                        value={vpnOptions.clientCount}
+                                                                        onChange={e => {
+                                                                            const val = parseInt(e.target.value, 10);
+                                                                            setVpnOptions(prev => ({ ...prev, clientCount: isNaN(val) ? 1 : val }));
+                                                                        }}
+                                                                        className="w-16 h-8 text-center text-sm font-semibold border-stone-200 focus:ring-amber-400 focus:border-amber-400 p-0"
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => setVpnOptions(prev => ({ ...prev, clientCount: prev.clientCount + 1 }))}
+                                                                        className="w-8 h-8 rounded-lg border border-stone-200 flex items-center justify-center text-stone-600 hover:bg-stone-50 hover:border-stone-300 font-bold transition-all"
+                                                                    >
+                                                                        +
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                            <div className="flex justify-center pt-2 border-t border-stone-100">
+                                                                <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">
+                                                                    {language === 'it'
+                                                                        ? `Totale VPN Client: ${(20 * vpnOptions.clientCount).toLocaleString('it-IT', { minimumFractionDigits: 2 })}€ annui`
+                                                                        : `Total VPN Client: €${(20 * vpnOptions.clientCount).toFixed(2)} yearly`}
+                                                                </span>
+                                                            </div>
+                                                        </>
                                                     )}
+
                                                 </div>
                                             </div>
                                         )}
