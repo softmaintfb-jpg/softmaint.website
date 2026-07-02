@@ -379,7 +379,7 @@ export default function Assistenza() {
                                                         />
                                                         <span className="text-sm font-semibold text-zinc-700">VPN Server</span>
                                                     </div>
-                                                    <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">{language === 'it' ? '350,00€ una tantum' : '€350.00 one-time'}</span>
+                                                    <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">{language === 'it' ? '350,00 € / una tantum' : '€350.00 one-time'}</span>
                                                 </label>
 
                                                 <div className="bg-white p-3.5 rounded-xl border border-stone-200/60 space-y-3">
@@ -393,7 +393,7 @@ export default function Assistenza() {
                                                             />
                                                             <span className="text-sm font-semibold text-zinc-700">VPN Client</span>
                                                         </div>
-                                                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">{language === 'it' ? '20,00€ annui' : '€20.00 yearly'}</span>
+                                                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">{language === 'it' ? '70,00 € / annui' : '€70.00 yearly'}</span>
                                                     </label>
 
                                                     {vpnOptions.client && (
@@ -431,8 +431,8 @@ export default function Assistenza() {
                                                             <div className="flex justify-center pt-2 border-t border-stone-100">
                                                                 <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">
                                                                     {language === 'it'
-                                                                        ? `Totale VPN Client: ${(20 * vpnOptions.clientCount).toLocaleString('it-IT', { minimumFractionDigits: 2 })}€ annui`
-                                                                        : `Total VPN Client: €${(20 * vpnOptions.clientCount).toFixed(2)} yearly`}
+                                                                        ? `Totale VPN Client: ${(70 * vpnOptions.clientCount).toLocaleString('it-IT', { minimumFractionDigits: 2 })}€ annui`
+                                                                        : `Total VPN Client: €${(70 * vpnOptions.clientCount).toFixed(2)} yearly`}
                                                                 </span>
                                                             </div>
                                                         </>

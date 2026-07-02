@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
           const match = opt.match(/\((\d+)\s+client\)/)
           if (match) {
             const count = parseInt(match[1], 10)
-            return `<li>VPN Client -- <strong>20,00€ x ${count} client (Totale: ${count * 20},00€ annui)</strong></li>`
+            return `<li>VPN Client -- <strong>70,00€ x ${count} client (Totale: ${count * 70},00€ annui)</strong></li>`
           }
         } else if (opt.startsWith('Backup Cloud')) {
           const match = opt.match(/\((\d+)\s+aziende\)/)
