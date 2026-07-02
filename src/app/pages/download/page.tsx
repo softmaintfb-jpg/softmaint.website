@@ -12,7 +12,8 @@ import {
     RefreshCw,
     HelpCircle,
     ArrowRight,
-    Info
+    Info,
+    ExternalLink
 } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
@@ -112,6 +113,7 @@ export default function DownloadPage() {
     const t = translations[language]
 
     const [files, setFiles] = useState<DownloadFile[]>([])
+    const [links, setLinks] = useState<any[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
     const [searchQuery, setSearchQuery] = useState<string>('')
@@ -124,7 +126,8 @@ export default function DownloadPage() {
                 const res = await fetch('/api/downloads')
                 if (!res.ok) throw new Error('Impossibile caricare i file.')
                 const data = await res.json()
-                setFiles(data)
+                setFiles(data.files || [])
+                setLinks(data.links || [])
             } catch (err: any) {
                 console.error('Failed to load files:', err)
                 setError(err.message || 'Errore imprevisto nel recupero dei file.')
@@ -178,6 +181,7 @@ export default function DownloadPage() {
         { id: 'all', label: language === 'it' ? 'Tutti' : 'All' },
         { id: 'software', label: language === 'it' ? 'Software (.exe)' : 'Software (.exe)' },
         { id: 'documenti', label: language === 'it' ? 'Documenti (.pdf)' : 'Documents (.pdf)' },
+        { id: 'links', label: language === 'it' ? 'Link' : 'Links' },
         { id: 'altro', label: language === 'it' ? 'Altro' : 'Other' }
     ], [language])
 
@@ -190,11 +194,27 @@ export default function DownloadPage() {
                 details.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 file.name.toLowerCase().includes(searchQuery.toLowerCase())
 
-            const matchesCategory = activeCategory === 'all' || details.category === activeCategory
+            const matchesCategory = activeCategory === 'all' || (activeCategory !== 'links' && details.category === activeCategory)
 
             return matchesSearch && matchesCategory
         })
     }, [files, searchQuery, activeCategory, language])
+
+    // Filtered links
+    const filteredLinks = useMemo(() => {
+        return links.filter(link => {
+            const title = language === 'it' ? link.titleIT : link.titleEN
+            const description = language === 'it' ? link.descriptionIT : link.descriptionEN
+            const matchesSearch =
+                title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                link.name.toLowerCase().includes(searchQuery.toLowerCase())
+
+            const matchesCategory = activeCategory === 'all' || activeCategory === 'links' || link.category === activeCategory
+
+            return matchesSearch && matchesCategory
+        })
+    }, [links, searchQuery, activeCategory, language])
 
     // Icon selector based on extension
     const renderIcon = (ext: string) => {
@@ -342,7 +362,7 @@ export default function DownloadPage() {
                         </div>
                     )}
 
-                    {!loading && !error && filteredFiles.length === 0 && (
+                    {!loading && !error && filteredFiles.length === 0 && filteredLinks.length === 0 && (
                         <div className="max-w-md mx-auto text-center py-16">
                             <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-400">
                                 <HelpCircle className="w-8 h-8" />
@@ -366,6 +386,7 @@ export default function DownloadPage() {
                         </div>
                     )}
 
+                    {/* Files Section */}
                     {!loading && !error && filteredFiles.length > 0 && (
                         <motion.div
                             variants={containerVariants}
@@ -430,6 +451,101 @@ export default function DownloadPage() {
                                 })}
                             </AnimatePresence>
                         </motion.div>
+                    )}
+
+                    {/* Links Section */}
+                    {!loading && !error && filteredLinks.length > 0 && (
+                        <div className={filteredFiles.length > 0 ? "mt-16 border-t border-slate-200/60 pt-16" : ""}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="mb-8"
+                            >
+                                <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                                    {language === 'it' ? 'Collegamenti e Risorse Esterne' : 'Links & External Resources'}
+                                </h2>
+                                <p className="text-slate-500 text-sm">
+                                    {language === 'it'
+                                        ? 'Accesso rapido a utility di supporto, portali esterni e altre risorse utili.'
+                                        : 'Quick access to support utilities, external portals, and other useful resources.'}
+                                </p>
+                            </motion.div>
+
+                            <motion.div
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="show"
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                            >
+                                <AnimatePresence mode="popLayout">
+                                    {filteredLinks.map((link) => {
+                                        const title = language === 'it' ? link.titleIT : link.titleEN
+                                        const description = language === 'it' ? link.descriptionIT : link.descriptionEN
+                                        const badge = language === 'it' ? link.badgeIT : link.badgeEN
+
+                                        return (
+                                            <motion.article
+                                                key={link.name}
+                                                variants={cardVariants}
+                                                layout
+                                                exit={{ opacity: 0, scale: 0.95 }}
+                                                className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                                            >
+                                                {/* Decorative corner accent */}
+                                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-400/5 to-transparent rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                                <div>
+                                                    <div className="flex justify-between items-start mb-4">
+                                                        {renderIcon(link.ext)}
+                                                        <span className="text-[10px] font-bold tracking-wider uppercase bg-slate-100/90 text-slate-600 px-2.5 py-1 rounded-md border border-slate-200/30">
+                                                            {badge}
+                                                        </span>
+                                                    </div>
+
+                                                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors duration-200 leading-snug mb-2">
+                                                        {title}
+                                                    </h3>
+                                                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6">
+                                                        {description}
+                                                    </p>
+                                                </div>
+
+                                                <div>
+                                                    <div className="flex items-center justify-between text-xs text-slate-400 pb-4 border-b border-slate-100">
+                                                        <span className="font-semibold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                                                            {link.ext}
+                                                        </span>
+                                                        {link.size > 0 && (
+                                                            <span className="font-medium">
+                                                                {formatSize(link.size)}
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    <a
+                                                        href={link.path}
+                                                        target={link.isExternal ? "_blank" : undefined}
+                                                        rel={link.isExternal ? "noopener noreferrer" : undefined}
+                                                        className="mt-4 w-full py-3 px-4 bg-slate-50 hover:bg-amber-500 text-slate-700 hover:text-white rounded-2xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn border border-slate-200/50 hover:border-amber-500 cursor-pointer"
+                                                    >
+                                                        {link.isExternal
+                                                            ? (language === 'it' ? 'Apri Collegamento' : 'Open Link')
+                                                            : (language === 'it' ? 'Scarica Risorsa' : 'Download Resource')
+                                                        }
+                                                        {link.isExternal ? (
+                                                            <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform duration-200" />
+                                                        ) : (
+                                                            <Download className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform duration-200" />
+                                                        )}
+                                                    </a>
+                                                </div>
+                                            </motion.article>
+                                        )
+                                    })}
+                                </AnimatePresence>
+                            </motion.div>
+                        </div>
                     )}
 
                 </section>
