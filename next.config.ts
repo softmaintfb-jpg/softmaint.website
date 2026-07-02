@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  outputFileTracingExcludes: {
+    '*': [
+      'public/files/**/*',
+    ],
+  },
   async redirects() {
     return [
       {
