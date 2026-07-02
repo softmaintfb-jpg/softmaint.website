@@ -34,35 +34,29 @@ export async function GET(request: NextRequest) {
     const linksDir = path.join(process.cwd(), 'public', 'links')
     const lnkPath = path.resolve(linksDir, name)
 
-    // Security check: prevent directory traversal
     const relative = path.relative(linksDir, lnkPath)
     if (relative.startsWith('..') || path.isAbsolute(relative)) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 })
     }
 
-    // Check if the shortcut file exists
     try {
       await fsPromises.access(lnkPath)
     } catch {
       return NextResponse.json({ error: 'Shortcut not found' }, { status: 404 })
     }
 
-    // Resolve the target path of the shortcut
     const targetPath = await resolveLnkShortcut(lnkPath)
     if (!targetPath) {
       return NextResponse.json({ error: 'Could not resolve shortcut target' }, { status: 404 })
     }
-
-    // Check if target file exists and is accessible
     try {
       const stats = await fsPromises.stat(targetPath)
       if (stats.isDirectory()) {
         return NextResponse.json({ error: 'Target is a directory' }, { status: 400 })
       }
 
-      // Read file and stream it
       const filename = path.basename(targetPath)
-      
+
       const fileStream = new ReadableStream({
         start(controller) {
           const nodeStream = fs.createReadStream(targetPath)

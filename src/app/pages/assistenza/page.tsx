@@ -69,13 +69,13 @@ export default function Assistenza() {
         if (gestionale === 'SQL') return ' 150,00';
         if (gestionale === 'SQL_ERP') return ' 350,00';
         if (gestionale === 'BKP_CLOUD') {
-            const price = 50 * backupOptions.aziende;
+            const price = 100 * backupOptions.aziende;
             return ` ${price},00`;
         }
         if (gestionale === 'VPN') {
             let total = 0;
             if (vpnOptions.server) total += 350;
-            if (vpnOptions.client) total += 20 * vpnOptions.clientCount;
+            if (vpnOptions.client) total += 70 * vpnOptions.clientCount;
             return ` ${total},00`;
         }
         return ' 0,00';

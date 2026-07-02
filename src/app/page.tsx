@@ -242,7 +242,7 @@ function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
-            onClick={() => location.href = '/webapp'}
+            onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })}
             className="group flex items-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-8 py-3.5 rounded-full hover:bg-amber-300 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
             {t.hero.btnServizi}
