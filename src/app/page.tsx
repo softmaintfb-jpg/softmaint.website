@@ -164,7 +164,7 @@ const partnerLogos = [
 function HeroSection() {
   const { language } = useLanguage()
   const t = translations[language]
-  const heroSubtitle = [t.hero.subtitle1, t.hero.subtitle2]
+  const heroSubtitle = [t.hero.subtitle1]
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -242,10 +242,17 @@ function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
-            onClick={() => document.querySelector('#servizi')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => location.href = '/webapp'}
             className="group flex items-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-8 py-3.5 rounded-full hover:bg-amber-300 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
             {t.hero.btnServizi}
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+          <button
+            onClick={() => location.href = '/webticket'}
+            className="group flex items-center gap-2 bg-amber-400 text-zinc-900 font-semibold px-8 py-3.5 rounded-full hover:bg-amber-300 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          >
+            {t.hero.btnWebTicket}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
           <button
@@ -779,7 +786,7 @@ function ContattiSection() {
             {t.contatti.title}
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
-            {t.contatti.subtitle}
+            {t.contatti.subtitle} <br /> {t.contatti.redirect} <a href="/webticket" className="text-amber-500 hover:text-amber-600">WebTicket</a>
           </p>
         </AnimatedSection>
 
