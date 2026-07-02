@@ -10,8 +10,12 @@ const nextConfig: NextConfig = {
     ],
   },
   outputFileTracingExcludes: {
-    '*': [
+    'api/downloads/download-link': [
       'public/files/**/*',
+      'public/assets/**/*',
+    ],
+    '*': [
+      'public/assets/**/*',
     ],
   },
   async redirects() {
