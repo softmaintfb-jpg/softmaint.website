@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import pregeneratedDownloads from '@/lib/pregenerated-downloads.json'
 
 const execAsync = promisify(exec)
 
@@ -33,6 +34,9 @@ async function resolveUrlShortcut(urlPath: string): Promise<string | null> {
 }
 
 export async function GET() {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json(pregeneratedDownloads)
+  }
   try {
     const filesDirPath = path.join(process.cwd(), 'public', 'files')
     const linksDirPath = path.join(process.cwd(), 'public', 'links')
