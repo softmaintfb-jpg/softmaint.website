@@ -180,14 +180,14 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
               className="mt-2"
             >
               <div className="flex items-start gap-4 sm:gap-5">
-                <div className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-800 text-white shadow-sm ring-1 ring-blue-200/50">
+                <div className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-800 text-white shadow-sm ring-1 ring-amber-200/50">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">
                     {t.erpPage.heroBadge}
                   </p>
-                  <h1 className="mt-2 text-3xl font-semibold leading-tight text-blue-900 sm:text-5xl">
+                  <h1 className="mt-2 text-3xl font-semibold leading-tight text-zinc-900 sm:text-5xl">
                     {moduleTitle}
                   </h1>
                   <p className="mt-4 max-w-4xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -217,12 +217,12 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
                     className={sectionIndex > 0 ? 'border-t border-slate-200 pt-10 sm:pt-12' : ''}
                   >
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-[64px,1fr] sm:gap-6">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-700 sm:h-12 sm:w-12">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-amber-100 bg-amber-50 text-amber-600 sm:h-12 sm:w-12">
                         <SectionIcon className="h-5 w-5" />
                       </div>
 
                       <div>
-                        <h2 className="text-base font-semibold uppercase tracking-[0.08em] text-blue-800 sm:text-lg">
+                        <h2 className="text-base font-semibold uppercase tracking-[0.08em] text-zinc-800 sm:text-lg">
                           {section.title}
                         </h2>
 
@@ -253,7 +253,7 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
             className="mt-10"
           >
             <div className="rounded-3xl border border-slate-200 bg-white px-6 py-7 shadow-sm sm:px-8">
-              <h2 className="text-base font-semibold uppercase tracking-[0.08em] text-blue-800 sm:text-lg">
+              <h2 className="text-base font-semibold uppercase tracking-[0.08em] text-zinc-800 sm:text-lg">
                 {ui.sectionKpis}
               </h2>
               <p className="mt-3 text-slate-600 sm:text-lg">{narrativeIntro.kpis}</p>
@@ -293,13 +293,13 @@ export default function ErpModuleDetailPageContent({ slug }: ErpModuleDetailPage
                       className="group flex items-center justify-between px-5 py-4 transition-all duration-200 hover:bg-slate-50"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-800 text-white">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-800 text-white">
                           <RelatedIcon className="h-4 w-4" />
                         </div>
                         <h3 className="text-sm font-semibold text-slate-700">{module.title}</h3>
                       </div>
 
-                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 transition-all duration-200 group-hover:gap-2">
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 transition-all duration-200 group-hover:gap-2">
                         {t.erpPage.learnMore}
                         <ArrowRight className="h-3.5 w-3.5" />
                       </span>

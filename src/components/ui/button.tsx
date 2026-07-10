@@ -9,7 +9,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'default', ...props }, ref) => {
     const baseStyles = 'px-4 py-2 rounded-md font-medium transition-colors'
     const variantStyles = {
-      default: 'bg-blue-600 text-white hover:bg-blue-700',
+      default: 'bg-amber-500 text-zinc-900 hover:bg-amber-400',
       outline: 'border border-gray-300 text-gray-700 hover:bg-gray-50'
     }
     
