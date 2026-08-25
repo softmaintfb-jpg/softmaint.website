@@ -101,6 +101,21 @@
   ],
   "links": [
     {
+      "name": "AE 01.2024.url",
+      "titleIT": "AE 01.2024",
+      "titleEN": "AE 01.2024",
+      "descriptionIT": "Collegamento per AE 01.2024.",
+      "descriptionEN": "Link for AE 01.2024.",
+      "category": "altro",
+      "badgeIT": "Esterno",
+      "badgeEN": "External",
+      "path": "https://promedya.it/wp-content/uploads/2024/07/ArcaEvolution3.0.72342.1411.33.zip",
+      "size": 0,
+      "ext": "url",
+      "isExternal": true,
+      "lastModified": "2026-07-02T10:33:08.356Z"
+    },
+    {
       "name": "AE 01.2025.url",
       "titleIT": "AE 01.2025",
       "titleEN": "AE 01.2025",
@@ -114,6 +129,21 @@
       "ext": "url",
       "isExternal": true,
       "lastModified": "2026-07-02T07:47:21.736Z"
+    },
+    {
+      "name": "AE 01.2026.url",
+      "titleIT": "AE 01.2026",
+      "titleEN": "AE 01.2026",
+      "descriptionIT": "Collegamento per AE 01.2026.",
+      "descriptionEN": "Link for AE 01.2026.",
+      "category": "altro",
+      "badgeIT": "Esterno",
+      "badgeEN": "External",
+      "path": "https://sftp.wki.it/public/SME_Arca/Downloads/02_Arca2000SQL/62_Versione_1-2026%20%7BEED12042-BB59-484F-A1C1-E38A1FEA5DA4%7D/08_Versione%20Ufficiale/ArcaEvolution%283.0.7911%29%282.1457.34%29.zip",
+      "size": 0,
+      "ext": "url",
+      "isExternal": true,
+      "lastModified": "2026-07-02T10:29:46.999Z"
     }
   ]
 }

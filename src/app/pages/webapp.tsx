@@ -111,6 +111,21 @@ export default function WebAppPageContent() {
 				t.webappPage.smartTentataVendita.h3,
 			],
 		},
+		{
+			id: 'smart-bi',
+			route: '/smartbi',
+			image: `/assets/smartbi.png?v=${assetVersion}`,
+			pdfPath: '/assets/pdf/smartbi.pdf',
+			alt: 'Panoramica Smart BI con dashboard, KPI e analisi dati direzionali',
+			name: t.webappPage.smartBI.name,
+			subtitle: t.webappPage.smartBI.subtitle,
+			description: t.webappPage.smartBI.description,
+			highlights: [
+				t.webappPage.smartBI.h1,
+				t.webappPage.smartBI.h2,
+				t.webappPage.smartBI.h3,
+			],
+		},
 	], [assetVersion, t])
 
 	const selectedApp = webApps.find((app) => app.id === selectedAppId) ?? null

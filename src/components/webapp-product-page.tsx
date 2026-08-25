@@ -13,7 +13,7 @@ import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 import { phonePattern } from '@/lib/validators'
 
-type ProductKey = 'smartLogistica' | 'smartAgenti' | 'smartMail' | 'smartProduzione' | 'smartB2B' | 'smartTentataVendita'
+type ProductKey = 'smartLogistica' | 'smartAgenti' | 'smartMail' | 'smartProduzione' | 'smartB2B' | 'smartTentataVendita' | 'smartBI'
 
 type ProductPageData = {
   productKey: ProductKey

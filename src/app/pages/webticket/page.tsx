@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     User, Mail, Phone, Smartphone, Settings, Send, CheckCircle2,
-    UploadCloud, Paperclip, Trash2, AlertCircle, FileText
+    UploadCloud, Paperclip, Trash2, AlertCircle, FileText, Image as ImageIcon, Plus
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +30,7 @@ export default function WebTicketPage() {
     // Ticket fields
     const [areaTematica, setAreaTematica] = useState('');
     const [descrizione, setDescrizione] = useState('');
-    const [allegato, setAllegato] = useState<File | null>(null);
+    const [allegati, setAllegati] = useState<File[]>([]);
     const [dragActive, setDragActive] = useState(false);
 
     // Status
@@ -60,48 +60,73 @@ export default function WebTicketPage() {
         e.preventDefault();
         e.stopPropagation();
         setDragActive(false);
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            validateAndSetFile(e.dataTransfer.files[0]);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            validateAndAddFiles(e.dataTransfer.files);
         }
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            validateAndSetFile(e.target.files[0]);
+        if (e.target.files && e.target.files.length > 0) {
+            validateAndAddFiles(e.target.files);
+            e.target.value = '';
         }
     };
 
-    const validateAndSetFile = (file: File) => {
+    const validateAndAddFiles = (files: FileList | File[]) => {
+        const fileList = Array.from(files);
+        if (fileList.length === 0) return;
+
         const maxSize = 5 * 1024 * 1024; // 5MB
         const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
+        const validFiles: File[] = [];
+        const errors: string[] = [];
 
-        if (!allowedTypes.includes(file.type)) {
-            setErrorMessage(language === 'it'
-                ? 'Tipo di file non supportato. Carica solo PDF, PNG o JPG.'
-                : 'Unsupported file type. Please upload PDF, PNG or JPG.'
+        for (const file of fileList) {
+            const isDuplicate = allegati.some(
+                (f) => f.name === file.name && f.size === file.size && f.lastModified === file.lastModified
             );
-            setStatus('error');
-            return;
+            if (isDuplicate) {
+                continue;
+            }
+
+            if (!allowedTypes.includes(file.type)) {
+                errors.push(
+                    language === 'it'
+                        ? `"${file.name}": Tipo di file non supportato (solo PDF, PNG, JPG).`
+                        : `"${file.name}": Unsupported file type (PDF, PNG, JPG only).`
+                );
+                continue;
+            }
+
+            if (file.size > maxSize) {
+                errors.push(
+                    language === 'it'
+                        ? `"${file.name}": Supera il limite di 5MB.`
+                        : `"${file.name}": Exceeds the 5MB size limit.`
+                );
+                continue;
+            }
+
+            validFiles.push(file);
         }
 
-        if (file.size > maxSize) {
-            setErrorMessage(language === 'it'
-                ? 'Il file supera il limite di 5MB.'
-                : 'File exceeds the 5MB size limit.'
-            );
+        if (errors.length > 0) {
+            setErrorMessage(errors.join(' '));
             setStatus('error');
-            return;
+        } else {
+            setErrorMessage('');
+            if (status === 'error') {
+                setStatus('idle');
+            }
         }
 
-        setAllegato(file);
-        setErrorMessage('');
-        if (status === 'error') {
-            setStatus('idle');
+        if (validFiles.length > 0) {
+            setAllegati((prev) => [...prev, ...validFiles]);
         }
     };
 
-    const removeFile = () => {
-        setAllegato(null);
+    const removeFile = (indexToRemove: number) => {
+        setAllegati((prev) => prev.filter((_, idx) => idx !== indexToRemove));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -119,9 +144,9 @@ export default function WebTicketPage() {
         formData.append('tipo', activeTab);
         formData.append('areaTematica', areaTematica);
         formData.append('descrizione', descrizione);
-        if (allegato) {
-            formData.append('allegato', allegato);
-        }
+        allegati.forEach((file) => {
+            formData.append('allegati', file);
+        });
 
         try {
             const response = await fetch('/api/webticket', {
@@ -142,7 +167,7 @@ export default function WebTicketPage() {
             setTelefonoFisso('');
             setCellulare('');
             setDescrizione('');
-            setAllegato(null);
+            setAllegati([]);
         } catch (error: any) {
             setErrorMessage(error.message || t.webticketPage.errorSend);
             setStatus('error');
@@ -363,6 +388,7 @@ export default function WebTicketPage() {
                                                     <option value={t.webappPage.smartProduzione.name}>{t.webappPage.smartProduzione.name}</option>
                                                     <option value={t.webappPage.smartB2B.name}>{t.webappPage.smartB2B.name}</option>
                                                     <option value={t.webappPage.smartTentataVendita.name}>{t.webappPage.smartTentataVendita.name}</option>
+                                                    <option value={t.webappPage.smartBI.name}>{t.webappPage.smartBI.name}</option>
                                                 </>
                                             )}
                                         </select>
@@ -385,65 +411,110 @@ export default function WebTicketPage() {
 
                                     {/* Attachment Section */}
                                     <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
-                                            {t.webticketPage.labelAllegato}
-                                        </label>
+                                        <div className="flex items-center justify-between mb-1.5">
+                                            <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                                                {t.webticketPage.labelAllegato}
+                                            </label>
+                                            {allegati.length > 0 && (
+                                                <span className="text-xs text-amber-700 font-medium bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60">
+                                                    {allegati.length} {allegati.length === 1 ? (language === 'it' ? 'file caricato' : 'file attached') : (language === 'it' ? 'file caricati' : 'files attached')}
+                                                </span>
+                                            )}
+                                        </div>
 
-                                        <div
-                                            onDragEnter={handleDrag}
-                                            onDragOver={handleDrag}
-                                            onDragLeave={handleDrag}
-                                            onDrop={handleDrop}
-                                            className={`relative border-2 border-dashed rounded-2xl p-6 text-center transition-all flex flex-col items-center justify-center min-h-[140px] cursor-pointer ${dragActive
-                                                ? 'border-amber-400 bg-amber-50/50'
-                                                : allegato
-                                                    ? 'border-emerald-300 bg-emerald-50/10'
+                                        {allegati.length === 0 ? (
+                                            <div
+                                                onDragEnter={handleDrag}
+                                                onDragOver={handleDrag}
+                                                onDragLeave={handleDrag}
+                                                onDrop={handleDrop}
+                                                className={`relative border-2 border-dashed rounded-2xl p-6 text-center transition-all flex flex-col items-center justify-center min-h-[140px] cursor-pointer ${dragActive
+                                                    ? 'border-amber-400 bg-amber-50/50'
                                                     : 'border-stone-200 hover:border-amber-300 bg-stone-50/40 hover:bg-stone-50/80'
-                                                }`}
-                                        >
-                                            <input
-                                                type="file"
-                                                onChange={handleFileChange}
-                                                accept=".pdf,.png,.jpg,.jpeg"
-                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                            />
-
-                                            {allegato ? (
-                                                <div className="w-full flex items-center justify-between gap-3 bg-white p-3 rounded-xl border border-emerald-100 shadow-2xs relative z-10">
-                                                    <div className="flex items-center gap-2.5 overflow-hidden text-left">
-                                                        <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg shrink-0">
-                                                            {allegato.type === 'application/pdf' ? (
-                                                                <FileText className="w-5 h-5" />
-                                                            ) : (
-                                                                <Paperclip className="w-5 h-5" />
-                                                            )}
-                                                        </div>
-                                                        <div className="overflow-hidden">
-                                                            <p className="text-sm font-semibold text-zinc-800 truncate max-w-[200px] sm:max-w-xs">{allegato.name}</p>
-                                                            <p className="text-[10px] font-bold text-zinc-400 uppercase">{(allegato.size / 1024).toFixed(0)} KB</p>
-                                                        </div>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-                                                            e.stopPropagation();
-                                                            removeFile();
-                                                        }}
-                                                        className="p-1.5 text-stone-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                                                    >
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </button>
-                                                </div>
-                                            ) : (
+                                                    }`}
+                                            >
+                                                <input
+                                                    type="file"
+                                                    multiple
+                                                    onChange={handleFileChange}
+                                                    accept=".pdf,.png,.jpg,.jpeg"
+                                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                                />
                                                 <div className="flex flex-col items-center pointer-events-none">
                                                     <UploadCloud className="w-8 h-8 text-zinc-400 mb-2" />
                                                     <p className="text-xs font-semibold text-zinc-600 max-w-[240px]">
                                                         {t.webticketPage.placeholderAllegato}
                                                     </p>
                                                 </div>
-                                            )}
-                                        </div>
+                                            </div>
+                                        ) : (
+                                            <div className="space-y-2.5">
+                                                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                                                    {allegati.map((file, idx) => (
+                                                        <div
+                                                            key={`${file.name}-${file.size}-${idx}`}
+                                                            className="w-full flex items-center justify-between gap-3 bg-white p-2.5 rounded-xl border border-stone-200 shadow-2xs hover:border-amber-200 transition-all"
+                                                        >
+                                                            <div className="flex items-center gap-2.5 overflow-hidden text-left min-w-0">
+                                                                <div className="p-2 bg-amber-50 text-amber-600 rounded-lg shrink-0">
+                                                                    {file.type === 'application/pdf' ? (
+                                                                        <FileText className="w-4 h-4" />
+                                                                    ) : file.type.startsWith('image/') ? (
+                                                                        <ImageIcon className="w-4 h-4" />
+                                                                    ) : (
+                                                                        <Paperclip className="w-4 h-4" />
+                                                                    )}
+                                                                </div>
+                                                                <div className="overflow-hidden min-w-0">
+                                                                    <p className="text-xs font-semibold text-zinc-800 truncate" title={file.name}>
+                                                                        {file.name}
+                                                                    </p>
+                                                                    <p className="text-[10px] font-bold text-zinc-400 uppercase">
+                                                                        {(file.size / 1024).toFixed(0)} KB
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    removeFile(idx);
+                                                                }}
+                                                                className="p-1.5 text-stone-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer shrink-0"
+                                                                title={language === 'it' ? 'Rimuovi file' : 'Remove file'}
+                                                            >
+                                                                <Trash2 className="w-4 h-4" />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                {/* Add more files dropzone */}
+                                                <div
+                                                    onDragEnter={handleDrag}
+                                                    onDragOver={handleDrag}
+                                                    onDragLeave={handleDrag}
+                                                    onDrop={handleDrop}
+                                                    className={`relative border border-dashed rounded-xl py-2.5 px-3 text-center transition-all flex items-center justify-center gap-2 cursor-pointer ${dragActive
+                                                        ? 'border-amber-400 bg-amber-50/50'
+                                                        : 'border-stone-200 hover:border-amber-400 hover:bg-amber-50/30 bg-stone-50/50'
+                                                        }`}
+                                                >
+                                                    <input
+                                                        type="file"
+                                                        multiple
+                                                        onChange={handleFileChange}
+                                                        accept=".pdf,.png,.jpg,.jpeg"
+                                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                                    />
+                                                    <Plus className="w-3.5 h-3.5 text-amber-600" />
+                                                    <span className="text-xs font-semibold text-zinc-600">
+                                                        {t.webticketPage.addMoreFiles || (language === 'it' ? 'Aggiungi altri file' : 'Add more files')}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Action Buttons / Error Display */}

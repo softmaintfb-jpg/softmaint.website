@@ -30,7 +30,13 @@ export async function POST(request: NextRequest) {
     const tipo = data.get('tipo') as string // 'ERP' | 'WEBAPP'
     const areaTematica = data.get('areaTematica') as string
     const descrizione = data.get('descrizione') as string
-    const file = data.get('allegato') as File | null
+    
+    // Retrieve multiple files or single file
+    const rawFiles = [
+      ...data.getAll('allegati'),
+      ...data.getAll('allegato')
+    ]
+    const files = rawFiles.filter((f): f is File => f instanceof File && f.size > 0)
 
     // Validation
     if (!nome || !cognome || !ragioneSociale || !email || !cellulare || !tipo || !areaTematica || !descrizione) {
@@ -63,9 +69,9 @@ export async function POST(request: NextRequest) {
       .filter(addr => addr.length > 0)
       .join(', ')
 
-    // Handle file attachment
+    // Handle file attachments
     const attachments = []
-    if (file && file.size > 0) {
+    for (const file of files) {
       const bytes = await file.arrayBuffer()
       const buffer = Buffer.from(bytes)
       attachments.push({
@@ -81,6 +87,21 @@ export async function POST(request: NextRequest) {
       secure: port === 465,
       auth: { user, pass },
     })
+
+    const filesText = files.length > 0
+      ? `\nAllegati (${files.length}):\n` + files.map((f, i) => `  ${i + 1}. ${f.name} (${(f.size / (1024 * 1024)).toFixed(2)} MB)`).join('\n')
+      : ''
+
+    const filesHtml = files.length > 0
+      ? `
+        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #e5e7eb;">
+          <p style="font-size: 13px; font-weight: bold; color: #4b5563; margin-bottom: 6px;">Allegati (${files.length}):</p>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #6b7280;">
+            ${files.map(f => `<li><strong>${escapeHtml(f.name)}</strong> (${(f.size / (1024 * 1024)).toFixed(2)} MB)</li>`).join('')}
+          </ul>
+        </div>
+      `
+      : ''
 
     const mailOptions = {
       from,
@@ -105,6 +126,7 @@ Area Tematica/Modulo: ${areaTematica}
 Descrizione del problema:
 -------------------------
 ${descrizione}
+${filesText}
 `,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
@@ -149,7 +171,7 @@ ${descrizione}
           <h3 style="color: #4b5563;">Descrizione del problema</h3>
           <div style="background-color: #f3f4f6; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; white-space: pre-wrap; font-family: inherit; line-height: 1.5; margin-bottom: 20px;">${escapeHtml(descrizione)}</div>
           
-          ${file && file.size > 0 ? `<p style="font-size: 13px; color: #6b7280; font-style: italic;">Nota: È presente un file allegato: <strong>${escapeHtml(file.name)}</strong> (${(file.size / 1024 / 1024).toFixed(2)} MB)</p>` : ''}
+          ${filesHtml}
         </div>
       `,
       attachments

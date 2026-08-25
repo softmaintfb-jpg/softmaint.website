@@ -269,6 +269,14 @@ const itTranslations = {
       h2: 'Gestione e tracciabilità real-time del magazzino viaggiante',
       h3: 'Monitoraggio incassi, scadenziari e riepiloghi giornalieri',
     },
+    smartBI: {
+      name: 'Smart BI',
+      subtitle: 'Business Intelligence, analisi dati e cruscotti direzionali',
+      description: 'Smart BI trasforma i dati aziendali in insight strategici immediati. Dashboard interattive, monitoraggio KPI in tempo reale e reportistica avanzata per supportare decisioni rapide ed efficaci in ogni reparto.',
+      h1: 'Dashboard e grafici interattivi con KPI aggiornati in tempo reale',
+      h2: 'Analisi avanzate per vendite, marginalità, magazzino e finanza',
+      h3: 'Integrazione completa con il gestionale ERP e massima accessibilità',
+    },
   },
   // Product Page UI
   productPageUI: {
@@ -397,6 +405,17 @@ const itTranslations = {
         'Allineamento automatico dei dati con il gestionale',
       ],
     },
+    smartBI: {
+      name: 'Smart BI',
+      subtitle: 'Business Intelligence, analisi dati e cruscotti direzionali',
+      description: 'Smart BI è la soluzione di Business Intelligence pensata per dare valore ai dati aziendali. Offre cruscotti interattivi e personalizzabili, report approfonditi e analisi multidimensionali su vendite, acquisti, magazzino e marginalità, consentendo al management di prendere decisioni strategiche tempestive e basate sui fatti.',
+      highlights: [
+        'Dashboard interattive e cruscotti KPI in tempo reale',
+        'Analisi multidimensionale di vendite, margini e flussi di magazzino',
+        'Reportistica avanzata ed esportazione dati su misura',
+        'Integrazione nativa con il gestionale ERP aziendale',
+      ],
+    },
   },
   assistenzaPage: {
     badge: 'Softmaint SRL | Ordine di servizio',
@@ -453,8 +472,10 @@ const itTranslations = {
     labelSelectArea: 'Area Tematica / Modulo',
     labelDescrizione: 'Descrizione del Problema',
     placeholderDescrizione: 'Fornisci una descrizione dettagliata del problema riscontrato...',
-    labelAllegato: 'Allegato',
-    placeholderAllegato: 'Trascina qui un file o clicca per caricarlo (PDF, PNG, JPG - max 5MB)',
+    labelAllegato: 'Allegati',
+    placeholderAllegato: 'Trascina qui uno o più file o clicca per caricarli (PDF, PNG, JPG - max 5MB ciascuno)',
+    addMoreFiles: 'Aggiungi altri file',
+    filesAttached: 'File allegati',
     errorSend: 'Si è verificato un errore durante l\'invio. Riprova.',
     btnLoading: 'Invio in corso...',
     btnSubmit: 'Invia WebTicket',
@@ -738,6 +759,14 @@ const enTranslations: typeof itTranslations = {
       h2: 'Real-time management and control of truck inventory',
       h3: 'Collection management, payment schedules, and daily summaries',
     },
+    smartBI: {
+      name: 'Smart BI',
+      subtitle: 'Business Intelligence, data analytics, and executive dashboards',
+      description: 'Smart BI turns company data into actionable strategic insights. Interactive dashboards, real-time KPI monitoring, and advanced reporting to support fast and effective decision-making across all departments.',
+      h1: 'Interactive dashboards and charts with real-time KPI updates',
+      h2: 'Advanced analytics for sales, profitability, inventory, and finance',
+      h3: 'Complete integration with ERP system and seamless accessibility',
+    },
   },
   // Product Page UI
   productPageUI: {
@@ -865,6 +894,17 @@ const enTranslations: typeof itTranslations = {
         'Automatic data synchronization with the back-office ERP system',
       ],
     },
+    smartBI: {
+      name: 'Smart BI',
+      subtitle: 'Business Intelligence, data analytics, and executive dashboards',
+      description: 'Smart BI is the Business Intelligence solution designed to unlock the true value of your business data. It provides customizable interactive dashboards, comprehensive reports, and multidimensional analytics on sales, purchases, warehouse, and profitability, empowering executives to make data-driven decisions.',
+      highlights: [
+        'Interactive dashboards and real-time KPI monitoring',
+        'Multidimensional analysis of sales, margins, and warehouse flows',
+        'Advanced reporting and customizable data export',
+        'Native integration with your ERP management system',
+      ],
+    },
   },
   assistenzaPage: {
     badge: 'Softmaint SRL | Service Order',
@@ -921,8 +961,10 @@ const enTranslations: typeof itTranslations = {
     labelSelectArea: 'Thematic Area / Module',
     labelDescrizione: 'Problem Description',
     placeholderDescrizione: 'Provide a detailed description of the problem encountered...',
-    labelAllegato: 'Attachment',
-    placeholderAllegato: 'Drag a file here or click to upload (PDF, PNG, JPG - max 5MB)',
+    labelAllegato: 'Attachments',
+    placeholderAllegato: 'Drag one or more files here or click to upload (PDF, PNG, JPG - max 5MB each)',
+    addMoreFiles: 'Add more files',
+    filesAttached: 'Attached files',
     errorSend: 'An error occurred during submission. Please try again.',
     btnLoading: 'Sending...',
     btnSubmit: 'Submit WebTicket',
