@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useId } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,6 +9,50 @@ import { ArrowLeft, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
+
+function FlagIT({ className = 'w-6 h-4' }: { className?: string }) {
+  return (
+    <svg
+      className={`${className} rounded-[3px] overflow-hidden shadow-xs ring-1 ring-black/15 shrink-0 block`}
+      viewBox="0 0 30 20"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="10" height="20" fill="#009246" />
+      <rect x="10" width="10" height="20" fill="#FFFFFF" />
+      <rect x="20" width="10" height="20" fill="#CE2B37" />
+    </svg>
+  )
+}
+
+function FlagEN({ className = 'w-6 h-4' }: { className?: string }) {
+  const id = useId()
+  const clipS = `flag-uk-s-${id}`
+  const clipT = `flag-uk-t-${id}`
+
+  return (
+    <svg
+      className={`${className} rounded-[3px] overflow-hidden shadow-xs ring-1 ring-black/15 shrink-0 block`}
+      viewBox="0 0 60 30"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <clipPath id={clipS}>
+        <path d="M0,0 v30 h60 v-30 z" />
+      </clipPath>
+      <clipPath id={clipT}>
+        <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
+      </clipPath>
+      <g clipPath={`url(#${clipS})`}>
+        <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFFFFF" strokeWidth="6" />
+        <path d="M0,0 L60,30 M60,0 L0,30" clipPath={`url(#${clipT})`} stroke="#C8102E" strokeWidth="4" />
+        <path d="M30,0 v30 M0,15 h60" stroke="#FFFFFF" strokeWidth="10" />
+        <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
+      </g>
+    </svg>
+  )
+}
 
 interface NavbarProps {
   isHomepage?: boolean
@@ -230,37 +274,43 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
 
             {/* Language Switch */}
             <div
-              className={`flex items-center gap-2 ml-4 pl-4 border-l ${
+              className={`flex items-center gap-1.5 ml-4 pl-4 border-l ${
                 isLightBg ? 'border-stone-200' : 'border-white/20'
               }`}
             >
               <button
+                type="button"
                 onClick={() => setLanguage('it')}
-                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
+                title="Italiano"
+                aria-label="Italiano"
+                className={`p-1.5 rounded-lg transition-all duration-200 flex items-center justify-center cursor-pointer ${
                   language === 'it'
                     ? isLightBg
-                      ? 'bg-amber-500 text-white'
-                      : 'bg-white text-zinc-900'
+                      ? 'bg-amber-100/80 ring-2 ring-amber-500 shadow-xs'
+                      : 'bg-white/20 ring-2 ring-amber-400 shadow-xs'
                     : isLightBg
-                    ? 'text-gray-700 hover:bg-gray-100'
-                    : 'text-white/70 hover:bg-white/10'
+                    ? 'opacity-60 hover:opacity-100 hover:bg-gray-100'
+                    : 'opacity-60 hover:opacity-100 hover:bg-white/10'
                 }`}
               >
-                IT
+                <FlagIT className="w-6 h-4" />
               </button>
               <button
+                type="button"
                 onClick={() => setLanguage('en')}
-                className={`text-xs font-semibold px-2.5 py-1.5 rounded-md transition-all duration-200 ${
+                title="English"
+                aria-label="English"
+                className={`p-1.5 rounded-lg transition-all duration-200 flex items-center justify-center cursor-pointer ${
                   language === 'en'
                     ? isLightBg
-                      ? 'bg-amber-500 text-white'
-                      : 'bg-white text-zinc-900'
+                      ? 'bg-amber-100/80 ring-2 ring-amber-500 shadow-xs'
+                      : 'bg-white/20 ring-2 ring-amber-400 shadow-xs'
                     : isLightBg
-                    ? 'text-gray-700 hover:bg-gray-100'
-                    : 'text-white/70 hover:bg-white/10'
+                    ? 'opacity-60 hover:opacity-100 hover:bg-gray-100'
+                    : 'opacity-60 hover:opacity-100 hover:bg-white/10'
                 }`}
               >
-                EN
+                <FlagEN className="w-6 h-4" />
               </button>
             </div>
 
@@ -318,24 +368,28 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                 <button
                   type="button"
                   onClick={() => setLanguage('it')}
-                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
+                  className={`flex-1 flex items-center justify-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer ${
                     language === 'it'
-                      ? 'bg-amber-500 text-white'
+                      ? 'bg-amber-500 text-white shadow-sm'
                       : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
                   }`}
+                  aria-label="Italiano"
                 >
-                  IT
+                  <FlagIT className="w-5 h-3.5" />
+                  <span>Italiano</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setLanguage('en')}
-                  className={`flex-1 text-sm font-semibold px-2 py-2 rounded-lg transition-all duration-200 ${
+                  className={`flex-1 flex items-center justify-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer ${
                     language === 'en'
-                      ? 'bg-amber-500 text-white'
+                      ? 'bg-amber-500 text-white shadow-sm'
                       : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
                   }`}
+                  aria-label="English"
                 >
-                  EN
+                  <FlagEN className="w-5 h-3.5" />
+                  <span>English</span>
                 </button>
               </div>
 
