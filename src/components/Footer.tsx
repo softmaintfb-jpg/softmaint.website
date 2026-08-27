@@ -17,7 +17,9 @@ export function Footer() {
     }
     const el = document.querySelector(href)
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
+      const navOffset = 96
+      const y = el.getBoundingClientRect().top + window.scrollY - navOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
     } else {
       window.location.href = `/${href}`
     }
@@ -33,11 +35,10 @@ export function Footer() {
   ]
 
   const solutions = [
-    { label: 'DocFinance', href: '/pages/docFinance' },
+    { label: 'DocFinance', href: '#servizi' },
     { label: 'Gestionale ERP', href: '#servizi' },
-    { label: 'Web Application', href: '/pages/webapp' },
-    { label: language === 'it' ? 'Azienda 4.0 | 5.0' : 'Industry 4.0 | 5.0', href: '/pages/azienda4' },
-    { label: 'Smart BI', href: '/pages/smartbi' },
+    { label: 'Web Application', href: '#servizi' },
+    { label: language === 'it' ? 'Azienda 4.0 | 5.0' : 'Industry 4.0 | 5.0', href: '#servizi' },
   ]
 
   const googleMapsUrl = 'https://maps.google.com/maps?q=40.9321462,14.5257608'
