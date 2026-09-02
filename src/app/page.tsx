@@ -743,7 +743,9 @@ function ContattiSection() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    const { name, value } = e.target
+    const shouldUppercase = name === 'nome'
+    setFormData(prev => ({ ...prev, [name]: shouldUppercase ? value.toUpperCase() : value }))
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -855,7 +857,7 @@ function ContattiSection() {
                         onChange={handleChange}
                         placeholder="Mario Rossi"
                         required
-                        className="h-11 border-gray-200 focus:border-amber-400 focus:ring-amber-200"
+                        className="h-11 border-gray-200 focus:border-amber-400 focus:ring-amber-200 uppercase"
                       />
                     </div>
                     <div>

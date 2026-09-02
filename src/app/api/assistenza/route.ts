@@ -32,9 +32,9 @@ export async function POST(request: NextRequest) {
   try {
     const body: AssistenzaFormData = await request.json()
     const {
-      nome,
-      cognome,
-      ragioneSociale,
+      nome: rawNome,
+      cognome: rawCognome,
+      ragioneSociale: rawRagioneSociale,
       email,
       telefonoFisso = '',
       cellulare,
@@ -42,6 +42,10 @@ export async function POST(request: NextRequest) {
       prezzoStimato,
       opzioniScelte
     } = body
+
+    const nome = (rawNome || '').trim().toUpperCase()
+    const cognome = (rawCognome || '').trim().toUpperCase()
+    const ragioneSociale = (rawRagioneSociale || '').trim().toUpperCase()
 
     // Validation
     if (!nome || !cognome || !ragioneSociale || !email || !cellulare || !gestionale) {

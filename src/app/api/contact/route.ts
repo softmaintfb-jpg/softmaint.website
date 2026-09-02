@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
 
     // Creazione oggetto contatto
     const contact = {
-      nome: nome.trim(),
+      nome: nome.trim().toUpperCase(),
       email: email.trim().toLowerCase(),
       telefono: trimmedTelefono,
       messaggio: messaggio.trim(),

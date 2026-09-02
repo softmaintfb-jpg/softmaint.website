@@ -74,7 +74,9 @@ export function WebAppProductPage({
   }, [isImageModalOpen])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }))
+    const { name, value } = event.target
+    const shouldUppercase = name === 'nome' || name === 'azienda'
+    setFormData((prev) => ({ ...prev, [name]: shouldUppercase ? value.toUpperCase() : value }))
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -239,7 +241,7 @@ export function WebAppProductPage({
                   onChange={handleChange}
                   placeholder={ui.formNome}
                   required
-                  className="border-amber-100 bg-white"
+                  className="border-amber-100 bg-white uppercase"
                 />
                 <Input
                   name="email"
@@ -264,7 +266,7 @@ export function WebAppProductPage({
                   value={formData.azienda}
                   onChange={handleChange}
                   placeholder={ui.formAzienda}
-                  className="border-amber-100 bg-white"
+                  className="border-amber-100 bg-white uppercase"
                 />
                 <Textarea
                   name="messaggio"

@@ -20,9 +20,9 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.formData()
 
-    const nome = data.get('nome') as string
-    const cognome = data.get('cognome') as string
-    const ragioneSociale = data.get('ragioneSociale') as string
+    const nome = (data.get('nome') as string || '').trim().toUpperCase()
+    const cognome = (data.get('cognome') as string || '').trim().toUpperCase()
+    const ragioneSociale = (data.get('ragioneSociale') as string || '').trim().toUpperCase()
     const email = data.get('email') as string
     const telefonoFisso = (data.get('telefonoFisso') as string) || ''
     const cellulare = data.get('cellulare') as string
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     const tipo = data.get('tipo') as string // 'ERP' | 'WEBAPP'
     const areaTematica = data.get('areaTematica') as string
     const descrizione = data.get('descrizione') as string
-    
+
     // Retrieve multiple files or single file
     const rawFiles = [
       ...data.getAll('allegati'),
@@ -51,11 +51,18 @@ export async function POST(request: NextRequest) {
     const port = Number(process.env.SMTP_PORT)
     const user = process.env.SMTP_USER
     const pass = process.env.SMTP_PASS
-    const from = process.env.SMTP_FROM_TICKET || process.env.SMTP_FROM
+    const rawFrom = process.env.SMTP_FROM_TICKET || process.env.SMTP_FROM || 'noreply@softmaint.it'
+    const fromAddressMatch = rawFrom.match(/<([^>]+)>/)
+    const fromAddress = fromAddressMatch ? fromAddressMatch[1].trim() : (rawFrom.includes('@') ? rawFrom.trim() : 'noreply@softmaint.it')
+    const senderName = tipo === 'ERP' ? 'Softmaint SRL | ERP' : 'Softmaint SRL | WebApp'
+    const from = {
+      name: senderName,
+      address: fromAddress
+    }
     const targetEmail = tipo === 'ERP' ? process.env.SMTP_ERP : process.env.SMTP_WEBAPP
     const ccnString = process.env.MAIL_CCN || ''
 
-    if (!host || !port || !user || !pass || !from || !targetEmail) {
+    if (!host || !port || !user || !pass || !fromAddress || !targetEmail) {
       return NextResponse.json(
         { success: false, error: 'Configurazione SMTP incompleta nel server.' },
         { status: 500 }
@@ -106,8 +113,9 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from,
       to,
+      replyTo: `${nome} ${cognome} <${email}>`,
       bcc: ccnAddresses || undefined,
-      subject: `Softmaint SRL | WebTicket - ${areaTematica}`,
+      subject: `${ragioneSociale} (${nome} ${cognome}) | WebTicket - ${areaTematica}`,
       text: `Nuovo ticket Ricevuto
       
 Dati del Richiedente:

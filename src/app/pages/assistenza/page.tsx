@@ -201,10 +201,10 @@ export default function Assistenza() {
                                         </label>
                                         <Input
                                             value={nome}
-                                            onChange={e => setNome(e.target.value)}
+                                            onChange={e => setNome(e.target.value.toUpperCase())}
                                             required
                                             placeholder="Mario"
-                                            className="focus:ring-amber-400 focus:border-amber-400"
+                                            className="focus:ring-amber-400 focus:border-amber-400 uppercase"
                                         />
                                     </div>
                                     <div>
@@ -213,10 +213,10 @@ export default function Assistenza() {
                                         </label>
                                         <Input
                                             value={cognome}
-                                            onChange={e => setCognome(e.target.value)}
+                                            onChange={e => setCognome(e.target.value.toUpperCase())}
                                             required
                                             placeholder="Rossi"
-                                            className="focus:ring-amber-400 focus:border-amber-400"
+                                            className="focus:ring-amber-400 focus:border-amber-400 uppercase"
                                         />
                                     </div>
                                 </div>
@@ -227,10 +227,10 @@ export default function Assistenza() {
                                     </label>
                                     <Input
                                         value={ragioneSociale}
-                                        onChange={e => setRagioneSociale(e.target.value)}
+                                        onChange={e => setRagioneSociale(e.target.value.toUpperCase())}
                                         required
                                         placeholder="Nome Azienda"
-                                        className="focus:ring-amber-400 focus:border-amber-400"
+                                        className="focus:ring-amber-400 focus:border-amber-400 uppercase"
                                     />
                                 </div>
 
