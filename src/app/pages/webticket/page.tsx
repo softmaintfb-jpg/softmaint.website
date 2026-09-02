@@ -6,7 +6,8 @@ import { Footer } from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     User, Mail, Phone, Smartphone, Settings, Send, CheckCircle2,
-    UploadCloud, Paperclip, Trash2, AlertCircle, FileText, Image as ImageIcon, Plus
+    UploadCloud, Paperclip, Trash2, AlertCircle, FileText, Image as ImageIcon, Plus,
+    Eye, X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,6 +37,22 @@ export default function WebTicketPage() {
     // Status
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+
+    // Escape listener & scroll lock for preview modal
+    useEffect(() => {
+        if (!isPreviewOpen) return;
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsPreviewOpen(false);
+        };
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', handleEscape);
+        return () => {
+            window.removeEventListener('keydown', handleEscape);
+            document.body.style.overflow = prevOverflow;
+        };
+    }, [isPreviewOpen]);
 
     // Update default selected category when activeTab or language changes
     useEffect(() => {
@@ -536,23 +553,34 @@ export default function WebTicketPage() {
                                             )}
                                         </AnimatePresence>
 
-                                        <Button
-                                            type="submit"
-                                            disabled={status === 'loading'}
-                                            className="w-full bg-amber-500 hover:bg-amber-400 text-zinc-900 font-bold py-3 rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 text-sm"
-                                        >
-                                            {status === 'loading' ? (
-                                                <>
-                                                    <Settings className="w-4 h-4 animate-spin" />
-                                                    {t.webticketPage.btnLoading}
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <Send className="w-4 h-4" />
-                                                    {t.webticketPage.btnSubmit}
-                                                </>
-                                            )}
-                                        </Button>
+                                        <div className="flex flex-col sm:flex-row items-center gap-3">
+                                            <Button
+                                                type="button"
+                                                onClick={() => setIsPreviewOpen(true)}
+                                                className="w-full sm:w-1/2 bg-stone-100 hover:bg-stone-200 text-zinc-800 font-semibold py-3 rounded-xl border border-stone-200 shadow-2xs transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
+                                            >
+                                                <Eye className="w-4 h-4 text-amber-600" />
+                                                {t.webticketPage.btnPreview}
+                                            </Button>
+
+                                            <Button
+                                                type="submit"
+                                                disabled={status === 'loading'}
+                                                className="w-full sm:w-1/2 bg-amber-500 hover:bg-amber-400 text-zinc-900 font-bold py-3 rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 text-sm"
+                                            >
+                                                {status === 'loading' ? (
+                                                    <>
+                                                        <Settings className="w-4 h-4 animate-spin" />
+                                                        {t.webticketPage.btnLoading}
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Send className="w-4 h-4" />
+                                                        {t.webticketPage.btnSubmit}
+                                                    </>
+                                                )}
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.form>
@@ -560,6 +588,188 @@ export default function WebTicketPage() {
                     </AnimatePresence>
                 </div>
             </main>
+
+            {/* Modal Anteprima Email */}
+            <AnimatePresence>
+                {isPreviewOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 sm:p-6 backdrop-blur-xs overflow-y-auto"
+                        onClick={() => setIsPreviewOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 15 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 15 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-stone-200 my-8 max-h-[90vh] flex flex-col"
+                        >
+                            {/* Modal Header */}
+                            <div className="bg-stone-900 text-white px-5 py-3.5 flex items-center justify-between shrink-0">
+                                <div className="flex items-center gap-2">
+                                    <Mail className="w-4 h-4 text-amber-400" />
+                                    <span className="font-semibold text-sm tracking-wide">
+                                        {t.webticketPage.previewTitle}
+                                    </span>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setIsPreviewOpen(false)}
+                                    className="p-1 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
+                                    title={t.webticketPage.previewClose}
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+
+                            {/* Email Metadata Bar */}
+                            <div className="bg-stone-100/90 border-b border-stone-200 px-5 py-3 text-xs text-stone-600 space-y-1.5 shrink-0">
+                                <div className="flex items-center gap-2">
+                                    <span className="font-semibold w-20 shrink-0 text-stone-500 uppercase">{t.webticketPage.previewSubject}:</span>
+                                    <span className="font-bold text-stone-900 truncate">
+                                        {ragioneSociale.trim() || '[Ragione Sociale]'} - {areaTematica || '[Area Tematica]'}
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="font-semibold w-20 shrink-0 text-stone-500 uppercase">{t.webticketPage.previewFrom}:</span>
+                                    <span className="text-stone-700 truncate">
+                                        SOFTMAINT SRL | WebTicket &lt;noreply@softmaint.it&gt;
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="font-semibold w-20 shrink-0 text-stone-500 uppercase">{t.webticketPage.previewTo}:</span>
+                                    <span className="text-stone-700 truncate">
+                                        {activeTab === 'ERP' ? 'assistenza.erp@softmaint.it' : 'assistenza.webapp@softmaint.it'}, {email.trim() || '[email richiedente]'}
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="font-semibold w-20 shrink-0 text-stone-500 uppercase">{t.webticketPage.previewReplyTo}:</span>
+                                    <span className="text-stone-700 truncate">
+                                        {(nome + ' ' + cognome).trim() || '[Nome Cognome]'} &lt;{email.trim() || '[email]'}&gt;
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Email Body */}
+                            <div className="overflow-y-auto p-4 sm:p-6 bg-stone-50 flex-1">
+                                <div className="bg-white rounded-xl p-5 sm:p-6 shadow-xs border border-stone-200 max-w-[560px] mx-auto text-zinc-800 text-sm">
+                                    <h2 className="text-lg font-bold text-amber-600 border-b-2 border-amber-500 pb-2.5 mb-4">
+                                        Nuovo WebTicket Ricevuto
+                                    </h2>
+
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                                        Dati del Richiedente
+                                    </h3>
+                                    <table className="w-full border-collapse mb-5 text-xs sm:text-sm">
+                                        <tbody>
+                                            <tr className="border-b border-stone-100">
+                                                <td className="py-1.5 font-semibold text-zinc-500 w-36">Nome e Cognome:</td>
+                                                <td className="py-1.5 font-medium text-zinc-900">
+                                                    {(nome + ' ' + cognome).trim() || '-'}
+                                                </td>
+                                            </tr>
+                                            <tr className="border-b border-stone-100">
+                                                <td className="py-1.5 font-semibold text-zinc-500">Ragione Sociale:</td>
+                                                <td className="py-1.5 font-medium text-zinc-900">
+                                                    {ragioneSociale || '-'}
+                                                </td>
+                                            </tr>
+                                            <tr className="border-b border-stone-100">
+                                                <td className="py-1.5 font-semibold text-zinc-500">Email:</td>
+                                                <td className="py-1.5 font-medium text-amber-700">
+                                                    {email || '-'}
+                                                </td>
+                                            </tr>
+                                            <tr className="border-b border-stone-100">
+                                                <td className="py-1.5 font-semibold text-zinc-500">Telefono Fisso:</td>
+                                                <td className="py-1.5 font-medium text-zinc-900">
+                                                    {telefonoFisso || '-'}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="py-1.5 font-semibold text-zinc-500">Cellulare:</td>
+                                                <td className="py-1.5 font-medium text-zinc-900">
+                                                    {cellulare || '-'}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                                        Dati del Ticket
+                                    </h3>
+                                    <table className="w-full border-collapse mb-5 text-xs sm:text-sm">
+                                        <tbody>
+                                            <tr className="border-b border-stone-100">
+                                                <td className="py-1.5 font-semibold text-zinc-500 w-36">Tipo Assistenza:</td>
+                                                <td className="py-1.5 font-bold text-amber-700">
+                                                    {activeTab}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="py-1.5 font-semibold text-zinc-500">Area/Modulo:</td>
+                                                <td className="py-1.5 font-medium text-zinc-900">
+                                                    {areaTematica || '-'}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                                        Descrizione del problema
+                                    </h3>
+                                    <div className="bg-stone-100/80 p-3.5 border-l-4 border-amber-500 rounded-sm whitespace-pre-wrap leading-relaxed text-zinc-800 text-xs sm:text-sm mb-4">
+                                        {descrizione || (
+                                            <span className="text-zinc-400 italic">
+                                                {t.webticketPage.previewNoDesc}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Allegati */}
+                                    {allegati.length > 0 ? (
+                                        <div className="mt-4 pt-3 border-t border-stone-200">
+                                            <p className="text-xs font-bold text-zinc-600 mb-2">
+                                                {t.webticketPage.previewAttachments} ({allegati.length}):
+                                            </p>
+                                            <ul className="list-disc pl-5 space-y-1 text-xs text-zinc-600">
+                                                {allegati.map((f, i) => (
+                                                    <li key={i}>
+                                                        <strong className="text-zinc-800">{f.name}</strong> ({(f.size / (1024 * 1024)).toFixed(2)} MB)
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ) : (
+                                        <div className="mt-4 pt-3 border-t border-stone-200 text-xs text-zinc-400 italic">
+                                            {t.webticketPage.previewNoAttachments}
+                                        </div>
+                                    )}
+
+                                    {/* Footer allineato a destra */}
+                                    <div className="mt-8 pt-4 border-t border-stone-200 text-right text-xs sm:text-sm text-zinc-600 leading-tight">
+                                        <strong className="text-zinc-900">SOFTMAINT SRL</strong><br />
+                                        Team Assistenza
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer Bar */}
+                            <div className="bg-white border-t border-stone-200 px-5 py-3 flex items-center justify-end gap-3 shrink-0">
+                                <Button
+                                    type="button"
+                                    onClick={() => setIsPreviewOpen(false)}
+                                    className="bg-stone-100 hover:bg-stone-200 text-zinc-800 font-semibold px-5 py-2 rounded-xl text-sm border border-stone-200 cursor-pointer"
+                                >
+                                    {t.webticketPage.previewClose}
+                                </Button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <Footer />
         </div>
