@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     const rawFrom = process.env.SMTP_FROM_TICKET || process.env.SMTP_FROM || 'noreply@softmaint.it'
     const fromAddressMatch = rawFrom.match(/<([^>]+)>/)
     const fromAddress = fromAddressMatch ? fromAddressMatch[1].trim() : (rawFrom.includes('@') ? rawFrom.trim() : 'noreply@softmaint.it')
-    const senderName = 'SOFTMAINT SRL | WebTicket'
+    const senderName = 'Softmaint SRL | WebTicket'
     const from = {
       name: senderName,
       address: fromAddress
