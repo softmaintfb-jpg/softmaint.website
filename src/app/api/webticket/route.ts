@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     const rawFrom = process.env.SMTP_FROM_TICKET || process.env.SMTP_FROM || 'noreply@softmaint.it'
     const fromAddressMatch = rawFrom.match(/<([^>]+)>/)
     const fromAddress = fromAddressMatch ? fromAddressMatch[1].trim() : (rawFrom.includes('@') ? rawFrom.trim() : 'noreply@softmaint.it')
-    const senderName = tipo === 'ERP' ? 'Softmaint SRL | ERP' : 'Softmaint SRL | WebApp'
+    const senderName = 'SOFTMAINT SRL | WebTicket'
     const from = {
       name: senderName,
       address: fromAddress
@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
       to,
       replyTo: `${nome} ${cognome} <${email}>`,
       bcc: ccnAddresses || undefined,
-      subject: `${ragioneSociale} (${nome} ${cognome}) | WebTicket - ${areaTematica}`,
+      subject: `${ragioneSociale} - ${areaTematica}`,
       text: `Nuovo ticket Ricevuto
       
 Dati del Richiedente:
@@ -135,6 +135,9 @@ Descrizione del problema:
 -------------------------
 ${descrizione}
 ${filesText}
+
+SOFTMAINT SRL
+Team Assistenza
 `,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
@@ -180,6 +183,11 @@ ${filesText}
           <div style="background-color: #f3f4f6; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; white-space: pre-wrap; font-family: inherit; line-height: 1.5; margin-bottom: 20px;">${escapeHtml(descrizione)}</div>
           
           ${filesHtml}
+
+          <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #e5e7eb; text-align: right; font-size: 13px; color: #4b5563; line-height: 1.5;">
+            <strong>SOFTMAINT SRL</strong><br />
+            Team Assistenza
+          </div>
         </div>
       `,
       attachments
