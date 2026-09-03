@@ -110,6 +110,8 @@ export async function POST(request: NextRequest) {
       `
       : ''
 
+    const teamAssistenza = tipo?.toUpperCase() === 'ERP' ? 'Team Assistenza ERP' : 'Team Assistenza Sviluppo'
+
     const mailOptions = {
       from,
       to,
@@ -120,8 +122,8 @@ export async function POST(request: NextRequest) {
       
 Dati del Richiedente:
 -------------------------
-Nome e Cognome: ${nome} ${cognome}
 Ragione Sociale: ${ragioneSociale}
+Nome e Cognome: ${nome} ${cognome}
 Email: ${email}
 Telefono Fisso: ${telefonoFisso || '-'}
 Cellulare: ${cellulare}
@@ -137,21 +139,21 @@ ${descrizione}
 ${filesText}
 
 SOFTMAINT SRL
-Team Assistenza
+${teamAssistenza}
 `,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <h2 style="color: #d97706; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">Nuovo WebTicket Ricevuto</h2>
           
-          <h3 style="color: #4b5563;">Dati del Richiedente</h3>
+          <h3 style="color: #2563eb;">Dati del Richiedente</h3>
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr>
-              <td style="padding: 6px 0; font-weight: bold; width: 180px;">Nome e Cognome:</td>
-              <td style="padding: 6px 0;">${escapeHtml(nome)} ${escapeHtml(cognome)}</td>
+              <td style="padding: 6px 0; font-weight: bold; width: 180px;">Ragione Sociale:</td>
+              <td style="padding: 6px 0;">${escapeHtml(ragioneSociale)}</td>
             </tr>
             <tr>
-              <td style="padding: 6px 0; font-weight: bold;">Ragione Sociale:</td>
-              <td style="padding: 6px 0;">${escapeHtml(ragioneSociale)}</td>
+              <td style="padding: 6px 0; font-weight: bold;">Nome e Cognome:</td>
+              <td style="padding: 6px 0;">${escapeHtml(nome)} ${escapeHtml(cognome)}</td>
             </tr>
             <tr>
               <td style="padding: 6px 0; font-weight: bold;">Email:</td>
@@ -167,7 +169,7 @@ Team Assistenza
             </tr>
           </table>
 
-          <h3 style="color: #4b5563;">Dati del Ticket</h3>
+          <h3 style="color: #2563eb;">Dati del Ticket</h3>
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr>
               <td style="padding: 6px 0; font-weight: bold; width: 180px;">Tipo Assistenza:</td>
@@ -179,14 +181,14 @@ Team Assistenza
             </tr>
           </table>
 
-          <h3 style="color: #4b5563;">Descrizione del problema</h3>
+          <h3 style="color: #2563eb;">Descrizione del problema</h3>
           <div style="background-color: #f3f4f6; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; white-space: pre-wrap; font-family: inherit; line-height: 1.5; margin-bottom: 20px;">${escapeHtml(descrizione)}</div>
           
           ${filesHtml}
 
-          <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #e5e7eb; text-align: right; font-size: 13px; color: #4b5563; line-height: 1.5;">
+          <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 13px; color: #4b5563; line-height: 1.5;">
             <strong>SOFTMAINT SRL</strong><br />
-            Team Assistenza
+            ${escapeHtml(teamAssistenza)}
           </div>
         </div>
       `,

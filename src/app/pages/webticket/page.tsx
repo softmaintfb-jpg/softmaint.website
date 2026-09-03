@@ -285,6 +285,19 @@ export default function WebTicketPage() {
                                         {t.webticketPage.sectionRequester}
                                     </h2>
 
+                                    <div>
+                                        <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
+                                            {t.webticketPage.labelRagioneSociale} <span className="text-red-500">*</span>
+                                        </label>
+                                        <Input
+                                            value={ragioneSociale}
+                                            onChange={e => setRagioneSociale(e.target.value.toUpperCase())}
+                                            required
+                                            placeholder="Nome Azienda"
+                                            className="focus:ring-amber-400 focus:border-amber-400 rounded-xl uppercase"
+                                        />
+                                    </div>
+
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
@@ -310,19 +323,6 @@ export default function WebTicketPage() {
                                                 className="focus:ring-amber-400 focus:border-amber-400 rounded-xl uppercase"
                                             />
                                         </div>
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
-                                            {t.webticketPage.labelRagioneSociale} <span className="text-red-500">*</span>
-                                        </label>
-                                        <Input
-                                            value={ragioneSociale}
-                                            onChange={e => setRagioneSociale(e.target.value.toUpperCase())}
-                                            required
-                                            placeholder="Nome Azienda"
-                                            className="focus:ring-amber-400 focus:border-amber-400 rounded-xl uppercase"
-                                        />
                                     </div>
 
                                     <div>
@@ -659,21 +659,21 @@ export default function WebTicketPage() {
                                         Nuovo WebTicket Ricevuto
                                     </h2>
 
-                                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">
                                         Dati del Richiedente
                                     </h3>
                                     <table className="w-full border-collapse mb-5 text-xs sm:text-sm">
                                         <tbody>
                                             <tr className="border-b border-stone-100">
-                                                <td className="py-1.5 font-semibold text-zinc-500 w-36">Nome e Cognome:</td>
+                                                <td className="py-1.5 font-semibold text-zinc-500 w-36">Ragione Sociale:</td>
                                                 <td className="py-1.5 font-medium text-zinc-900">
-                                                    {(nome + ' ' + cognome).trim() || '-'}
+                                                    {ragioneSociale || '-'}
                                                 </td>
                                             </tr>
                                             <tr className="border-b border-stone-100">
-                                                <td className="py-1.5 font-semibold text-zinc-500">Ragione Sociale:</td>
+                                                <td className="py-1.5 font-semibold text-zinc-500">Nome e Cognome:</td>
                                                 <td className="py-1.5 font-medium text-zinc-900">
-                                                    {ragioneSociale || '-'}
+                                                    {(nome + ' ' + cognome).trim() || '-'}
                                                 </td>
                                             </tr>
                                             <tr className="border-b border-stone-100">
@@ -697,7 +697,7 @@ export default function WebTicketPage() {
                                         </tbody>
                                     </table>
 
-                                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">
                                         Dati del Ticket
                                     </h3>
                                     <table className="w-full border-collapse mb-5 text-xs sm:text-sm">
@@ -717,7 +717,7 @@ export default function WebTicketPage() {
                                         </tbody>
                                     </table>
 
-                                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">
                                         Descrizione del problema
                                     </h3>
                                     <div className="bg-stone-100/80 p-3.5 border-l-4 border-amber-500 rounded-sm whitespace-pre-wrap leading-relaxed text-zinc-800 text-xs sm:text-sm mb-4">
@@ -748,10 +748,10 @@ export default function WebTicketPage() {
                                         </div>
                                     )}
 
-                                    {/* Footer allineato a destra */}
-                                    <div className="mt-8 pt-4 border-t border-stone-200 text-right text-xs sm:text-sm text-zinc-600 leading-tight">
+                                    {/* Footer allineato al centro */}
+                                    <div className="mt-8 pt-4 border-t border-stone-200 text-center text-xs sm:text-sm text-zinc-600 leading-tight">
                                         <strong className="text-zinc-900">SOFTMAINT SRL</strong><br />
-                                        Team Assistenza
+                                        {activeTab === 'ERP' ? 'Team Assistenza ERP' : 'Team Assistenza Sviluppo'}
                                     </div>
                                 </div>
                             </div>
