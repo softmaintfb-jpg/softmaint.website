@@ -51,18 +51,11 @@ export async function POST(request: NextRequest) {
     const port = Number(process.env.SMTP_PORT)
     const user = process.env.SMTP_USER
     const pass = process.env.SMTP_PASS
-    const rawFrom = process.env.SMTP_FROM_TICKET || process.env.SMTP_FROM || 'noreply@softmaint.it'
-    const fromAddressMatch = rawFrom.match(/<([^>]+)>/)
-    const fromAddress = fromAddressMatch ? fromAddressMatch[1].trim() : (rawFrom.includes('@') ? rawFrom.trim() : 'noreply@softmaint.it')
-    const senderName = 'Softmaint SRL | WebTicket'
-    const from = {
-      name: senderName,
-      address: fromAddress
-    }
+    const from = process.env.SMTP_FROM_TICKET || process.env.SMTP_FROM || 'Softmaint SRL | WebTicket <noreply@softmaint.it>'
     const targetEmail = tipo === 'ERP' ? process.env.SMTP_ERP : process.env.SMTP_WEBAPP
     const ccnString = process.env.MAIL_CCN || ''
 
-    if (!host || !port || !user || !pass || !fromAddress || !targetEmail) {
+    if (!host || !port || !user || !pass || !from || !targetEmail) {
       return NextResponse.json(
         { success: false, error: 'Configurazione SMTP incompleta nel server.' },
         { status: 500 }

@@ -43,6 +43,13 @@
       "lastModified": "2026-07-02T07:36:41.058Z"
     },
     {
+      "name": "Microsoft OLE DB Provider_9.0.0.3504.rar",
+      "path": "/files/Microsoft OLE DB Provider_9.0.0.3504.rar",
+      "size": 2318313,
+      "ext": "rar",
+      "lastModified": "2026-08-25T14:55:42.415Z"
+    },
+    {
       "name": "Rigenerazione Chiave.pdf",
       "path": "/files/Rigenerazione Chiave.pdf",
       "size": 67170,
@@ -83,6 +90,13 @@
       "size": 12095259,
       "ext": "pdf",
       "lastModified": "2026-05-26T10:40:19.733Z"
+    },
+    {
+      "name": "SQL_Office Tool",
+      "path": "/files/SQL_Office Tool",
+      "size": 0,
+      "ext": "",
+      "lastModified": "2026-08-27T13:36:24.711Z"
     },
     {
       "name": "SQL_Office Tool.zip",
@@ -144,6 +158,21 @@
       "ext": "url",
       "isExternal": true,
       "lastModified": "2026-07-02T10:29:46.999Z"
+    },
+    {
+      "name": "AE 03.2025SP.url",
+      "titleIT": "AE 03.2025SP",
+      "titleEN": "AE 03.2025SP",
+      "descriptionIT": "Collegamento per AE 03.2025SP.",
+      "descriptionEN": "Link for AE 03.2025SP.",
+      "category": "altro",
+      "badgeIT": "Esterno",
+      "badgeEN": "External",
+      "path": "https://sftp.wki.it/public/SME_Arca/Downloads/02_Arca2000SQL/61_Versione_3-2025%20%7B301340A1-A7C0-444C-9459-E1C8C7AA3415%7D/06_Versione%20Service%20Pack%201a/ArcaEvolution%283.0.7822%29%282.1448.27%29.zip",
+      "size": 0,
+      "ext": "url",
+      "isExternal": true,
+      "lastModified": "2026-08-25T14:55:42.416Z"
     }
   ]
 }
