@@ -188,6 +188,7 @@ export default function DownloadPage() {
     // Filtered files
     const filteredFiles = useMemo(() => {
         return files.filter(file => {
+            if (!file.ext) return false
             const details = getFileDetails(file.name)
             const matchesSearch =
                 details.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

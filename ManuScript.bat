@@ -48,13 +48,19 @@ if %errorlevel% neq 0 (
     git config --local user.email "collega@softmaint.it"
 )
 
-:: 5. Aggiunta dei file nelle cartelle public/files/ e public/links/
+:: 5. Rigenerazione lista downloads pregenerata
+echo.
+echo Rigenerazione indice file e link...
+call node scripts/generate-downloads.js
+
+:: 6. Aggiunta dei file nelle cartelle public/files/, public/links/ e catalogo downloads
 echo.
 echo Preparazione dei file in public/files/ e public/links/...
-git add "public/files/" >nul 2>&1
-git add "public/links/" >nul 2>&1
+git add -A "public/files/" >nul 2>&1
+git add -A "public/links/" >nul 2>&1
+git add "src/lib/pregenerated-downloads.json" >nul 2>&1
 
-:: 6. Verifica se ci sono modifiche effettive da committare
+:: 7. Verifica se ci sono modifiche effettive da committare
 git diff --cached --quiet
 if %errorlevel% equ 0 (
     echo.
@@ -63,7 +69,7 @@ if %errorlevel% equ 0 (
     goto PULL_PUSH
 )
 
-:: 7. Creazione del commit locale con timestamp
+:: 8. Creazione del commit locale con timestamp
 echo Creazione del commit con i nuovi file/link...
 set TIMESTAMP=%DATE% %TIME%
 set COMMIT_MSG=Aggiunti/aggiornati files e links il %TIMESTAMP%
@@ -75,7 +81,7 @@ if %errorlevel% neq 0 (
 )
 
 :PULL_PUSH
-:: 8. Sincronizzazione con il server (pull con rebase e autostash)
+:: 9. Sincronizzazione con il server (pull con rebase e autostash)
 :: Questo permette di scaricare le ultime modifiche del codice senza creare conflitti e
 :: mettendo le modifiche del collega "in cima" alla cronologia.
 echo.
@@ -88,7 +94,7 @@ if %errorlevel% neq 0 (
     goto FINE
 )
 
-:: 9. Invio delle modifiche sul server (push)
+:: 10. Invio delle modifiche sul server (push)
 echo.
 echo Invio delle modifiche sul server (Invio dati)...
 git push origin %BRANCH%

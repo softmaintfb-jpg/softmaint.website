@@ -45,9 +45,11 @@ export async function GET() {
     let fileList: any[] = []
     try {
       await fs.access(filesDirPath)
-      const files = await fs.readdir(filesDirPath)
+      const dirEntries = await fs.readdir(filesDirPath, { withFileTypes: true })
+      const fileEntries = dirEntries.filter((entry) => entry.isFile())
       fileList = await Promise.all(
-        files.map(async (filename) => {
+        fileEntries.map(async (entry) => {
+          const filename = entry.name
           const filePath = path.join(filesDirPath, filename)
           const stats = await fs.stat(filePath)
           const ext = path.extname(filename).toLowerCase().replace('.', '')
@@ -76,7 +78,7 @@ export async function GET() {
     let linkList: any[] = []
     try {
       await fs.access(linksDirPath)
-      const links = await fs.readdir(linksDirPath)
+      const linkEntries = await fs.readdir(linksDirPath, { withFileTypes: true })
       
       // Load optional metadata
       let metadata: Record<string, any> = {}
@@ -88,7 +90,9 @@ export async function GET() {
         // No metadata or invalid JSON, ignore
       }
 
-      const linkFiles = links.filter(filename => filename !== 'metadata.json')
+      const linkFiles = linkEntries
+        .filter((entry) => entry.isFile() && entry.name !== 'metadata.json')
+        .map((entry) => entry.name)
 
       linkList = await Promise.all(
         linkFiles.map(async (filename) => {
