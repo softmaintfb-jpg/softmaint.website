@@ -502,6 +502,7 @@ const itTranslations = {
       option5: 'ERP - Gestione GP',
       option6: 'ERP - Connector',
       option7: 'ERP - Installazione Client',
+      option8: 'ERP - Altro | Descrizione',
     },
   },
 };
@@ -1006,6 +1007,7 @@ const enTranslations: typeof itTranslations = {
       option5: 'ERP - Gestione GP',
       option6: 'ERP - Connector',
       option7: 'ERP - Client Installation',
+      option8: 'ERP - Other | Description',
     },
   },
 };
