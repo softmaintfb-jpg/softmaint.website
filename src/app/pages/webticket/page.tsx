@@ -395,6 +395,7 @@ export default function WebTicketPage() {
                                                     <option value={t.webticketPage.erpOptions.option5}>{t.webticketPage.erpOptions.option5}</option>
                                                     <option value={t.webticketPage.erpOptions.option6}>{t.webticketPage.erpOptions.option6}</option>
                                                     <option value={t.webticketPage.erpOptions.option7}>{t.webticketPage.erpOptions.option7}</option>
+                                                    <option value={t.webticketPage.erpOptions.option8}>{t.webticketPage.erpOptions.option8}</option>
 
                                                 </>
                                             ) : (
