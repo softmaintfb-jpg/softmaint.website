@@ -167,7 +167,7 @@ function HeroSection() {
   const heroSubtitle = [t.hero.subtitle1]
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 sm:pt-28">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-zinc-900 via-stone-800 to-zinc-800" />
 
@@ -1021,7 +1021,7 @@ function MapSection() {
 // ─── App Principale ───────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-clip">
       <Navbar isHomepage={true} />
       <HeroSection />
       <ServiziSection />

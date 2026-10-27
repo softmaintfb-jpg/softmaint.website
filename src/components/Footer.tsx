@@ -49,18 +49,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-zinc-800/80">
           {/* Brand & Dati Principali */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/assets/logo.jpg"
-                alt="Logo Softmaint"
-                width={170}
-                height={50}
-                className="h-10 w-auto rounded-md bg-white p-1"
-              />
-              <span className="text-xl font-bold text-white tracking-tight">
-                Softmaint | Software House
-              </span>
-            </div>
+            <Image
+              src="/assets/logo-softmaint-light.png"
+              alt="Softmaint Software House"
+              width={544}
+              height={98}
+              className="block h-9 sm:h-11 w-auto"
+            />
             <p className="text-sm leading-relaxed text-zinc-400 max-w-sm">
               {t.footer.descrizione}
             </p>

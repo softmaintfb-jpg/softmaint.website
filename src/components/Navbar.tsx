@@ -183,37 +183,39 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
                 }`}
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span className="hidden sm:inline">{backLabel}</span>
+                <span className="hidden sm:inline lg:hidden xl:inline">{backLabel}</span>
               </Link>
             )}
 
-            <button onClick={goHome} className="flex items-center gap-2 group">
+            {/* Due varianti trasparenti dello stesso logo (testo grigio / testo bianco):
+                quella bianca sopra l'hero scuro, quella grigia quando la navbar diventa chiara. */}
+            <button
+              onClick={goHome}
+              aria-label="Softmaint | Software House"
+              className="relative block shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500"
+            >
               <Image
-                src="/assets/logo.jpg"
-                alt="Logo Softmaint"
-                width={170}
-                height={50}
+                src="/assets/logo-softmaint-light.png"
+                alt="Softmaint Software House"
+                width={544}
+                height={98}
                 priority
-                className={`h-9 w-auto rounded-md transition-all duration-300 ${
-                  isLightBg ? 'bg-white p-0' : 'bg-white/95 p-1'
+                className={`block h-8 sm:h-9 xl:h-11 w-auto max-w-none transition-opacity duration-300 ${
+                  isLightBg ? 'opacity-0' : 'opacity-100'
                 }`}
               />
-              <span
-                className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-                  isLightBg ? 'text-zinc-900' : 'text-white'
+              <Image
+                src="/assets/logo-softmaint.png"
+                alt=""
+                aria-hidden="true"
+                width={544}
+                height={98}
+                priority
+                className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${
+                  isLightBg ? 'opacity-100' : 'opacity-0'
                 }`}
-              >
-                <span className="hidden lg:inline">SOFTMAINT | Software House</span>
-              </span>
+              />
             </button>
-          </div>
-
-          <div
-            className={`pointer-events-none absolute left-1/2 -translate-x-1/2 text-center font-semibold tracking-wide transition-colors duration-300 lg:hidden ${
-              isLightBg ? 'text-zinc-900' : 'text-white'
-            }`}
-          >
-            <span className="text-[13px] sm:text-sm">Softmaint | Software House</span>
           </div>
 
           {/* Desktop nav */}
@@ -325,7 +327,13 @@ export function Navbar({ isHomepage = false, backHref, backLabel }: NavbarProps)
           {/* Mobile burger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors mr-5 ${
+            aria-label={
+              language === 'it'
+                ? mobileOpen ? 'Chiudi menu' : 'Apri menu'
+                : mobileOpen ? 'Close menu' : 'Open menu'
+            }
+            aria-expanded={mobileOpen}
+            className={`lg:hidden -mr-2 p-2.5 rounded-lg transition-colors ${
               isLightBg ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
             }`}
           >
